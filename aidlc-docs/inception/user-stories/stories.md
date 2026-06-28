@@ -1,4 +1,4 @@
-# User Stories · Esteira estoque AWS
+    # User Stories · Esteira estoque AWS
 
 **Projeto:** datamesh-retail-inventory-insights-d1-d2-d3  
 **Fonte brownfield:** `Esteira_3Relatorios_D1_D2_D3.ipynb`  
@@ -71,13 +71,13 @@
 - **Como** esteira automatizada (P2)  
 - **Quero** extrair um dia do insumo para `origem/dt=/data.parquet`  
 - **Para** replicar `carregar_origem_dia(dt)` do notebook  
-- **Status:** backlog · **Onda:** W2 · **Depende:** E1-US02, E1-US03
+- **Status:** done · **Onda:** W2 · **Depende:** E1-US02, E1-US03
 
 **Critérios de aceite:**
-- [ ] Entrada: `dt` (YYYY-MM-DD)
-- [ ] Filtro `Date == dt` no insumo
-- [ ] Saída parquet em `origem/dt={dt}/data.parquet`
-- [ ] Idempotente: reexecução sobrescreve só essa partição
+- [x] Entrada: `dt` (YYYY-MM-DD)
+- [x] Filtro `Date == dt` no insumo
+- [x] Saída parquet em `origem/dt={dt}/data.parquet`
+- [x] Idempotente: reexecução sobrescreve só essa partição
 
 ---
 
@@ -85,12 +85,12 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** reprocessar um `dt` específico  
 - **Para** corrigir falhas sem reprocessar o histórico inteiro  
-- **Status:** backlog · **Onda:** W2 · **Depende:** E2-US01
+- **Status:** done · **Onda:** W2 · **Depende:** E2-US01
 
 **Critérios de aceite:**
-- [ ] Parâmetro `dt` isolado na execução
-- [ ] Partições `dt` diferentes permanecem intactas
-- [ ] Log com `dt`, row count, duração
+- [x] Parâmetro `dt` isolado na execução
+- [x] Partições `dt` diferentes permanecem intactas
+- [x] Log com `dt`, row count, duração
 
 ---
 
@@ -98,12 +98,12 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** comparar parquet AWS vs. `tabela_origem/dt=2022-01-01` local  
 - **Para** garantir fidelidade brownfield  
-- **Status:** backlog · **Onda:** W2 · **Depende:** E2-US01
+- **Status:** done · **Onda:** W2 · **Depende:** E2-US01
 
 **Critérios de aceite:**
-- [ ] Mesmo row count para `dt` de teste
-- [ ] Mesmas colunas e tipos
-- [ ] Evidência registrada (script ou nota em `aidlc-docs`)
+- [x] Mesmo row count para `dt` de teste
+- [x] Mesmas colunas e tipos
+- [x] Evidência registrada (script ou nota em `aidlc-docs`)
 
 ---
 

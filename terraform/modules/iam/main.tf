@@ -86,6 +86,7 @@ data "aws_iam_policy_document" "glue_s3" {
         "insumo/*",
         "origem/*",
         "enriquecido/*",
+        "glue/*",
       ]
     }
   }
@@ -101,6 +102,7 @@ data "aws_iam_policy_document" "glue_s3" {
       "${var.bucket_arn}/insumo/*",
       "${var.bucket_arn}/origem/*",
       "${var.bucket_arn}/enriquecido/*",
+      "${var.bucket_arn}/glue/*",
     ]
   }
 

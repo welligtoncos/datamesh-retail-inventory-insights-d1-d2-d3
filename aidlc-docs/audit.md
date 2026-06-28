@@ -83,3 +83,22 @@ NÃO implementar Glue, Lambda, Step Functions ainda."
 **Context**: Code Generation U1 + Build/Test instructions complete; manual apply pending
 
 ---
+
+## W2 User Request
+**Timestamp**: 2026-06-28T16:00:00Z
+**User Input**: "Siga o AI-DLC — Onda W2 (E2-US01 a E2-US03).
+Brownfield: carregar_origem_dia(dt) no notebook.
+Infra existente: bucket retail-inventory-insights-dev, role retail-inventory-glue-dev.
+Preferência: Glue Job Python/PySpark (ou Lambda se justificar).
+Não implementar enriquecimento/orquestração ainda."
+**AI Response**: Glue Python Shell job + terraform module glue + scripts validação
+**Context**: W2 Construction started
+
+---
+
+## Construction U2 Complete
+**Timestamp**: 2026-06-28T16:20:00Z
+**AI Response**: Glue job deployed; run SUCCEEDED; E2-US03 parity OK (100 rows, 15 cols); stories E2-US01..03 done
+**Context**: W2 DoD passed — origem dt=2022-01-01 em s3://retail-inventory-insights-dev/origem/
+
+---

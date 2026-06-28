@@ -52,3 +52,13 @@ output "example_paths" {
   }
   description = "Example S3 paths for analyst documentation (E1-US04)"
 }
+
+output "glue_carregar_origem_job_name" {
+  value       = module.glue.carregar_origem_dia_job_name
+  description = "Glue job: carregar_origem_dia (W2)"
+}
+
+output "glue_script_s3_uri" {
+  value       = module.glue.glue_script_s3_uri
+  description = "S3 URI of Glue job script"
+}
