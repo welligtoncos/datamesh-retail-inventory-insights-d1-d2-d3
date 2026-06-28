@@ -6,7 +6,7 @@
 
 **Status:** `backlog` | `ready` | `in_progress` | `done` | `blocked`
 
-**W1 (E1-US01–04):** `ready` — aprovado 2026-06-28 · escopo Construction U1
+**W1 (E1-US01–04):** `in_progress` — Terraform gerado 2026-06-28 · apply AWS pendente
 
 ---
 

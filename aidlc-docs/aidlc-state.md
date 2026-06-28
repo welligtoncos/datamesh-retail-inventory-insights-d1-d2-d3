@@ -8,7 +8,7 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: INCEPTION Complete — pronto para CONSTRUCTION U1
+- **Current Stage**: CONSTRUCTION U1 — Code Generation complete; Build & Test pending manual apply
 
 ## Decisões confirmadas
 - [x] Região AWS: **sa-east-1**
@@ -26,10 +26,8 @@
 | Property-Based Testing | No | Requirements Analysis 2026-06-28 |
 
 ## Execution Plan Summary
-- **Total Stages (W1 rodada):** Inception 7 + Construction 5 (U1)
-- **Stages Executed (Inception):** WD, RE, RA, US-W1, WP, AD
-- **Stages Skipped:** Units Generation, Functional Design U1
-- **Next Construction:** NFR Requirements U1 → Code Generation U1
+- **Construction U1:** NFR → Infra Design → Code Gen **done**; Build & Test **instructions ready**
+- **Next:** Manual `terraform apply` + W1 validation checklist
 
 ## Stage Progress
 
@@ -40,15 +38,16 @@
 - [x] User Stories W1 approved — 2026-06-28
 - [x] Workflow Planning — 2026-06-28
 - [x] Application Design U1 minimal — 2026-06-28
-- [ ] Units Generation — SKIP (U1 única)
+- [ ] Units Generation — SKIP
 
-### CONSTRUCTION PHASE (W1 — pendente)
+### CONSTRUCTION PHASE (W1)
 - [ ] Functional Design U1 — SKIP
-- [ ] NFR Requirements U1
-- [ ] NFR Design U1
-- [ ] Infrastructure Design U1
-- [ ] Code Generation U1
-- [ ] Build and Test
+- [x] NFR Requirements U1 — 2026-06-28
+- [x] NFR Design U1 — 2026-06-28
+- [x] Infrastructure Design U1 — 2026-06-28
+- [x] Code Generation U1 — 2026-06-28
+- [x] Build and Test (instructions) — 2026-06-28
+- [ ] W1 deploy validation (manual apply + checklist)
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -56,7 +55,7 @@
 ## Entrega por onda
 | Onda | Épico | Stories | Status entrega |
 |------|-------|---------|----------------|
-| W1 | E1 Fundação | 4 | **ready** (inception done) |
+| W1 | E1 Fundação | 4 | **in_progress** (Terraform gerado; apply pendente) |
 | W2 | E2 Origem | 3 | backlog |
 | W3 | E3 Enriquecimento | 3 | backlog |
 | W4 | E4 Orquestração | 3 | backlog |
@@ -64,10 +63,10 @@
 | W6 | E6 + E7 D-2/D-3/Ops | 5 | backlog |
 
 ## Current Status
-- **Lifecycle Phase**: INCEPTION complete → CONSTRUCTION next
-- **Current Stage**: Application Design U1 complete
-- **Next Stage**: NFR Requirements U1 (Construction)
-- **Status**: Aguardando início Construction W1
+- **Lifecycle Phase**: CONSTRUCTION
+- **Current Stage**: Build and Test instructions complete
+- **Next Stage**: Manual terraform apply + W1 DoD validation
+- **Status**: Código Terraform pronto em `terraform/`; aguardando deploy AWS
 
 ## Última atualização
-- 2026-06-28 — Inception W1 completo (WD → AD); stories E1-US01…04 ready
+- 2026-06-28 — Construction U1: Terraform S3/IAM + build/test docs

@@ -68,3 +68,18 @@ NÃO implementar Glue, Lambda, Step Functions ainda."
 **Context**: Application Design U1 minimal complete
 
 ---
+
+## Inception W1 Approval — Construction Start
+**Timestamp**: 2026-06-28T14:00:00Z
+**User Input**: "Approve & Continue"
+**AI Response**: Construction U1 iniciado — NFR, Infra Design, Terraform gerado
+**Context**: User approved inception; proceeding to Construction W1 S3/IAM only
+
+---
+
+## Construction U1 Complete
+**Timestamp**: 2026-06-28T14:30:00Z
+**AI Response**: terraform/modules/s3, terraform/modules/iam, environments/dev; build-and-test docs
+**Context**: Code Generation U1 + Build/Test instructions complete; manual apply pending
+
+---
