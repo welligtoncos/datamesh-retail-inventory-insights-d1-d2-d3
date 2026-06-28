@@ -54,9 +54,10 @@ module "iam" {
 module "glue" {
   source = "../../modules/glue"
 
-  project_name  = var.project_name
-  environment   = var.environment
-  bucket_name   = module.s3.bucket_name
-  glue_role_arn = module.iam.glue_role_arn
-  script_path   = abspath("${path.module}/../../../glue/jobs/carregar_origem_dia.py")
+  project_name           = var.project_name
+  environment            = var.environment
+  bucket_name            = module.s3.bucket_name
+  glue_role_arn          = module.iam.glue_role_arn
+  script_path            = abspath("${path.module}/../../../glue/jobs/carregar_origem_dia.py")
+  enriquecer_script_path = abspath("${path.module}/../../../glue/jobs/enriquecer_dia.py")
 }

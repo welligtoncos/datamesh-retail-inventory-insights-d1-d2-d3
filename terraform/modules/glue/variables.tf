@@ -15,7 +15,12 @@ variable "glue_role_arn" {
 }
 
 variable "script_path" {
-  description = "Local path to Glue job script"
+  description = "Local path to carregar_origem_dia Glue script"
+  type        = string
+}
+
+variable "enriquecer_script_path" {
+  description = "Local path to enriquecer_dia Glue script"
   type        = string
 }
 

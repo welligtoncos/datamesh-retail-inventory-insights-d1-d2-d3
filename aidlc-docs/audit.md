@@ -118,3 +118,22 @@ Não implementar enriquecimento/orquestração ainda."
 **Context**: Bucket name global — recriação em Virginia via novo nome
 
 ---
+
+## W3 User Request
+**Timestamp**: 2026-06-28T19:00:00Z
+**User Input**: "Siga o AI-DLC — Onda W3 (E3-US01 a E3-US03).
+Brownfield: enriquecer_dia(dt) no notebook.
+Infra existente: bucket retail-inventory-insights-dev-use1, role retail-inventory-glue-dev, região us-east-1.
+Preferência: Glue Job Python Shell (mesmo padrão W2).
+Não implementar orquestração (Step Functions) nem relatórios Excel ainda."
+**AI Response**: Glue enriquecer_dia + terraform + scripts W3 + docs U3
+**Context**: W3 Construction started
+
+---
+
+## Construction U3 Complete
+**Timestamp**: 2026-06-28T19:30:00Z
+**AI Response**: Job enriquecer_dia SUCCEEDED; E3-US03 PARITY OK (100 rows, revenue_sum=879026.03); stories E3-US01..03 done
+**Context**: W3 DoD passed — enriquecido dt=2022-01-01 em s3://retail-inventory-insights-dev-use1/enriquecido/
+
+---

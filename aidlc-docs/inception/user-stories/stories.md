@@ -113,13 +113,13 @@
 - **Como** esteira (P2)  
 - **Quero** ler `origem/dt=` e gravar `enriquecido/dt=` com métricas de negócio  
 - **Para** replicar `enriquecer_dia(dt)`  
-- **Status:** backlog · **Onda:** W3 · **Depende:** E2-US01
+- **Status:** done · **Onda:** W3 · **Depende:** E2-US01
 
 **Critérios de aceite:**
-- [ ] `_revenue = Units Sold * Price`
-- [ ] `_stockout` conforme notebook: vendeu estoque E forecast > estoque
-- [ ] `_lost` quando `_stockout == 1`
-- [ ] `_is_weekend` e coluna `dt`
+- [x] `_revenue = Units Sold * Price`
+- [x] `_stockout` conforme notebook: vendeu estoque E forecast > estoque
+- [x] `_lost` quando `_stockout == 1`
+- [x] `_is_weekend` e coluna `dt`
 
 ---
 
@@ -127,11 +127,11 @@
 - **Como** analista (P1)  
 - **Quero** indicadores de ruptura coerentes com §1 do notebook  
 - **Para** confiar nos relatórios D-2 futuros  
-- **Status:** backlog · **Onda:** W3 · **Depende:** E3-US01
+- **Status:** done · **Onda:** W3 · **Depende:** E3-US01
 
 **Critérios de aceite:**
-- [ ] % linhas com `_stockout=1` documentado
-- [ ] Desvio vs. notebook local dentro de tolerância acordada (ex.: 0% em mesmo insumo)
+- [x] % linhas com `_stockout=1` documentado
+- [x] Desvio vs. notebook local dentro de tolerância acordada (ex.: 0% em mesmo insumo)
 
 ---
 
@@ -139,11 +139,11 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** comparar `enriquecido/dt=2022-01-01` AWS vs. local  
 - **Para** validar migração brownfield  
-- **Status:** backlog · **Onda:** W3 · **Depende:** E3-US01
+- **Status:** done · **Onda:** W3 · **Depende:** E3-US01
 
 **Critérios de aceite:**
-- [ ] Colunas `_*` batem em amostra ou dataset completo do dia teste
-- [ ] Somas de `_revenue` e contagem `_stockout` conferem
+- [x] Colunas `_*` batem em amostra ou dataset completo do dia teste
+- [x] Somas de `_revenue` e contagem `_stockout` conferem
 
 ---
 

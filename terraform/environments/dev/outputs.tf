@@ -60,5 +60,15 @@ output "glue_carregar_origem_job_name" {
 
 output "glue_script_s3_uri" {
   value       = module.glue.glue_script_s3_uri
-  description = "S3 URI of Glue job script"
+  description = "S3 URI of carregar_origem_dia script"
+}
+
+output "glue_enriquecer_job_name" {
+  value       = module.glue.enriquecer_dia_job_name
+  description = "Glue job: enriquecer_dia (W3)"
+}
+
+output "glue_enriquecer_script_s3_uri" {
+  value       = module.glue.enriquecer_script_s3_uri
+  description = "S3 URI of enriquecer_dia script"
 }
