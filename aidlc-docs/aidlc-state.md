@@ -2,13 +2,13 @@
 
 ## Projeto
 - **Nome:** datamesh-retail-inventory-insights-d1-d2-d3
-- **Escopo atual:** Onda W3 concluída · próxima W4 (orquestração)
+- **Escopo atual:** Onda W4 concluída · próxima W5 (relatório D-1)
 - **Referência brownfield:** `Esteira_3Relatorios_D1_D2_D3.ipynb`, `PROJETO_DATAMESH.txt`
 
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: W3 done — ready for W4 Construction
+- **Current Stage**: W4 done — ready for W5 Construction
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -26,6 +26,7 @@
 - [x] U1 Infra S3/IAM — **deployed & validated** 2026-06-28
 - [x] U2 Origem Glue — **deployed & validated** 2026-06-28
 - [x] U3 Enriquecido Glue — **deployed & validated** 2026-06-28
+- [x] U4 Orquestração SFN — **deployed & validated** 2026-06-28
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -36,14 +37,14 @@
 | W1 | E1 Fundação | 4 | **done** |
 | W2 | E2 Origem | 3 | **done** |
 | W3 | E3 Enriquecimento | 3 | **done** |
-| W4 | E4 Orquestração | 3 | backlog |
+| W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | backlog |
 | W6 | E6 + E7 D-2/D-3/Ops | 5 | backlog |
 
 ## Current Status
-- **Lifecycle Phase**: CONSTRUCTION complete for W3
-- **Next Stage**: W4 — `processar_dia` (Step Functions)
-- **Status**: Glue job `retail-inventory-insights-enriquecer-dia-dev`; enriquecido `dt=2022-01-01` validado
+- **Lifecycle Phase**: CONSTRUCTION complete for W4
+- **Next Stage**: W5 — Excel D-1 (Lambda)
+- **Status**: SFN `retail-inventory-insights-processar-dia-dev`; 3 dts validados (2022-01-01..03)
 
 ## Última atualização
-- 2026-06-28 — W3 DoD passed; enriquecer_dia + paridade E3-US03 (100 rows, revenue_sum=879,026.03)
+- 2026-06-28 — W4 DoD passed; processar_dia SFN + 3 dias consecutivos SUCCEEDED

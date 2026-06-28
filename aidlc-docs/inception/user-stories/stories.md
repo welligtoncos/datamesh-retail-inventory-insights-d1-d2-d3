@@ -153,12 +153,12 @@
 - **Como** esteira (P2)  
 - **Quero** Step Functions executando origem → enriquecido para um `dt`  
 - **Para** replicar `processar_dia(dt)`  
-- **Status:** backlog · **Onda:** W4 · **Depende:** E3-US01
+- **Status:** done · **Onda:** W4 · **Depende:** E3-US01
 
 **Critérios de aceite:**
-- [ ] Estado de falha se origem ou enriquecimento falhar
-- [ ] Retry configurado onde fizer sentido
-- [ ] Execução testada para 3 `dt` consecutivos (ex.: 2022-01-01 a 03)
+- [x] Estado de falha se origem ou enriquecimento falhar
+- [x] Retry configurado onde fizer sentido
+- [x] Execução testada para 3 `dt` consecutivos (ex.: 2022-01-01 a 03)
 
 ---
 
@@ -166,12 +166,12 @@
 - **Como** operação (P2)  
 - **Quero** EventBridge disparando a esteira todo dia  
 - **Para** simular `DATA_EXECUCAO` = hoje  
-- **Status:** backlog · **Onda:** W4 · **Depende:** E4-US01
+- **Status:** done · **Onda:** W4 · **Depende:** E4-US01
 
 **Critérios de aceite:**
-- [ ] Cron configurado (horário documentado)
-- [ ] `dt` processado = dia anterior (lógica D-1)
-- [ ] Possibilidade de desabilitar rule em sandbox
+- [x] Cron configurado (horário documentado)
+- [x] `dt` processado = dia anterior (lógica D-1)
+- [x] Possibilidade de desabilitar rule em sandbox
 
 ---
 
@@ -179,11 +179,11 @@
 - **Como** plataforma (P4)  
 - **Quero** logs estruturados por execução  
 - **Para** auditar qual `dt` foi processado  
-- **Status:** backlog · **Onda:** W4 · **Depende:** E4-US01
+- **Status:** done · **Onda:** W4 · **Depende:** E4-US01
 
 **Critérios de aceite:**
-- [ ] CloudWatch Logs com `execution_id`, `dt`, status
-- [ ] Link execução Step Functions → logs
+- [x] CloudWatch Logs com `execution_id`, `dt`, status
+- [x] Link execução Step Functions → logs
 
 ---
 

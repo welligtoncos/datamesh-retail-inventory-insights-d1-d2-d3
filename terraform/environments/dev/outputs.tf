@@ -72,3 +72,18 @@ output "glue_enriquecer_script_s3_uri" {
   value       = module.glue.enriquecer_script_s3_uri
   description = "S3 URI of enriquecer_dia script"
 }
+
+output "sfn_processar_dia_arn" {
+  value       = module.stepfunctions.processar_dia_state_machine_arn
+  description = "Step Functions ARN: processar_dia (W4)"
+}
+
+output "sfn_processar_dia_name" {
+  value       = module.stepfunctions.processar_dia_state_machine_name
+  description = "Step Functions name: processar_dia (W4)"
+}
+
+output "sfn_log_group_name" {
+  value       = module.stepfunctions.processar_dia_log_group_name
+  description = "CloudWatch log group for processar_dia (E4-US03)"
+}

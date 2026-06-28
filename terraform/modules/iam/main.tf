@@ -243,6 +243,20 @@ data "aws_iam_policy_document" "sfn_orchestrator" {
   }
 
   statement {
+    sid    = "PassRoleToGlue"
+    effect = "Allow"
+    actions = [
+      "iam:PassRole",
+    ]
+    resources = [aws_iam_role.glue_etl.arn]
+    condition {
+      test     = "StringEquals"
+      variable = "iam:PassedToService"
+      values   = ["glue.amazonaws.com"]
+    }
+  }
+
+  statement {
     sid    = "StepFunctionsExecutionLogs"
     effect = "Allow"
     actions = [

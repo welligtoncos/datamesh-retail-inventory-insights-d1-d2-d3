@@ -61,3 +61,16 @@ module "glue" {
   script_path            = abspath("${path.module}/../../../glue/jobs/carregar_origem_dia.py")
   enriquecer_script_path = abspath("${path.module}/../../../glue/jobs/enriquecer_dia.py")
 }
+
+module "stepfunctions" {
+  source = "../../modules/stepfunctions"
+
+  project_name          = var.project_name
+  environment           = var.environment
+  sfn_role_arn          = module.iam.sfn_role_arn
+  origem_job_name       = module.glue.carregar_origem_dia_job_name
+  enriquecer_job_name   = module.glue.enriquecer_dia_job_name
+  enable_eventbridge_schedule = var.enable_eventbridge_schedule
+  eventbridge_rule_enabled    = var.eventbridge_rule_enabled
+  enable_sfn_logging          = var.enable_sfn_logging
+}

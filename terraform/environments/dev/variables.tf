@@ -27,3 +27,21 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enable_eventbridge_schedule" {
+  description = "W4: create EventBridge cron rule (disabled by default in dev)"
+  type        = bool
+  default     = false
+}
+
+variable "eventbridge_rule_enabled" {
+  description = "W4: ENABLED state for EventBridge rule when schedule exists"
+  type        = bool
+  default     = false
+}
+
+variable "enable_sfn_logging" {
+  description = "W4: CloudWatch Logs for SFN (requires logs:CreateLogGroup)"
+  type        = bool
+  default     = false
+}

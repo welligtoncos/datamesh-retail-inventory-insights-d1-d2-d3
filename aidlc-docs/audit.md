@@ -137,3 +137,23 @@ Não implementar orquestração (Step Functions) nem relatórios Excel ainda."
 **Context**: W3 DoD passed — enriquecido dt=2022-01-01 em s3://retail-inventory-insights-dev-use1/enriquecido/
 
 ---
+
+## W4 User Request
+**Timestamp**: 2026-06-28T20:00:00Z
+**User Input**: "Siga o AI-DLC — Onda W4 (E4-US01 a E4-US03).
+Brownfield: processar_dia(dt) no notebook (origem → enriquecido).
+Infra: bucket retail-inventory-insights-dev-use1, roles glue-dev e sfn-dev, região us-east-1.
+Orquestrar os Glue jobs já existentes.
+Em dev: execução manual OK; EventBridge cron opcional/documentado.
+Não implementar Lambda Excel (W5) ainda."
+**AI Response**: Step Functions processar_dia + terraform module + w4 script
+**Context**: W4 Construction started
+
+---
+
+## Construction U4 Complete
+**Timestamp**: 2026-06-28T20:45:00Z
+**AI Response**: SFN SUCCEEDED for dt 2022-01-01, 02, 03; ResultPath fix for dt preservation; stories E4-US01..03 done
+**Context**: W4 DoD passed — processar_dia orquestrado origem→enriquecido
+
+---
