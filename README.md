@@ -115,7 +115,7 @@ Diagramas: [`diagrams/`](diagrams/) · Documentação técnica: [`PROJETO_DATAME
 #### E7 · Operação (W6)
 | ID | O que queremos |
 |----|----------------|
-| E7-US01 | Athena/Glue Catalog sobre `enriquecido/dt=` |
+| E7-US01 | Athena/Glue Catalog sobre `enriquecido/dt=` — ver [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) |
 | E7-US02 | Alarme CloudWatch se a execução diária falhar |
 
 **Personas:** analista de estoque, engenheiro de dados, gestor de compras, plataforma AWS — ver [`personas.md`](aidlc-docs/inception/user-stories/personas.md)

@@ -28,6 +28,8 @@ Pacote único: `lambda/build/lambda_reports.zip` (D-1/D-2/D-3 + `common.py`).
 
 Query exemplo (terraform output `athena_example_query`).
 
+Documentação completa de validação: [`scripts/athena-validation-queries.md`](../../../scripts/athena-validation-queries.md).
+
 ## Monitoramento (E7-US02)
 
 - Alarme: `retail-inventory-insights-processar-dia-failed-dev` (metric `ExecutionsFailed` > 0)

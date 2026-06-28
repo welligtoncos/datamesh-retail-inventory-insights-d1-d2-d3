@@ -13,6 +13,7 @@
 | Terraform monitoring | `terraform/modules/monitoring/` (SNS opcional) |
 | Alarm script | `scripts/ensure-sfn-alarm.ps1` |
 | Athena query | `scripts/athena-example-query.sql` |
+| Athena validação | `scripts/athena-validation-queries.md` + `scripts/athena-validation-queries.sql` |
 | DoD | `scripts/w6-run-and-validate.ps1` |
 
 ## Decisões dev
