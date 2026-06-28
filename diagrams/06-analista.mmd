@@ -1,0 +1,11 @@
+%% Papel do analista · insights D-1 / D-2 / D-3
+
+flowchart LR
+    A[Validar insumo §1] --> B[Confirmar dt= correto]
+    B --> C{Tipo de insight}
+    C --> D1[Validar ranking D-1]
+    C --> D2[Priorizar ruptura _lost]
+    C --> D3[Janela histórica vários dt=]
+    D1 & D2 & D3 --> E[Recomendação + confiança]
+    E --> F[Negócio decide]
+    F --> G[Medir no ciclo seguinte]

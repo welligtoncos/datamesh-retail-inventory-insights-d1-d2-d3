@@ -1,0 +1,11 @@
+# Esteira_3Relatorios_D1_D2_D3.ipynb
+numpy>=2.0,<3
+pandas>=2.2,<3
+
+# exportação Excel (.xlsx) + parquet particionado (tabela_origem / tabela_enriquecida)
+openpyxl>=3.1,<4
+pyarrow>=18,<22
+
+# Jupyter / Cursor — kernel para rodar notebooks
+ipykernel>=6.29,<7
+jupyter>=1.0,<2

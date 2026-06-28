@@ -1,0 +1,27 @@
+%% Três insights · campos e decisões (notebook Esteira_3Relatorios)
+
+flowchart TB
+    ENR["tabela_enriquecida/dt=<br/>partição do dia"]
+
+    subgraph D1["D-1 · Produtos vendidos ✓"]
+        Q1["O que mais saiu?<br/>Onde está a receita?"]
+        F1["Units Sold · _revenue<br/>agregado por Product ID"]
+        A1["Mix · promoção · exposição"]
+    end
+
+    subgraph D2["D-2 · Reposição (planejado)"]
+        Q2["O que está em ruptura?<br/>Quanto perdeu de venda?"]
+        F2["_stockout · _lost<br/>por loja × produto"]
+        A2["Pedido · transferência entre lojas"]
+    end
+
+    subgraph D3["D-3 · Tendência (planejado)"]
+        Q3["Consumo sobe ou cai?<br/>Efeito fim de semana?"]
+        F3["_is_weekend · Units Sold<br/>várias partições dt="]
+        A3["Estoque mínimo · compra futura"]
+    end
+
+    ENR --> D1 & D2 & D3
+    Q1 --> F1 --> A1
+    Q2 --> F2 --> A2
+    Q3 --> F3 --> A3

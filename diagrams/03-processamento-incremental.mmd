@@ -1,0 +1,17 @@
+%% processar_dia(dt) — carga incremental idempotente
+
+sequenceDiagram
+    autonumber
+    participant INS as insumo DataFrame
+    participant CO as carregar_origem_dia
+    participant ORIG as tabela_origem/dt=
+    participant EN as enriquecer_dia
+    participant ENR as tabela_enriquecida/dt=
+    participant ACC as ler_enriquecido
+
+    INS->>CO: filtra Date == dt
+    CO->>ORIG: data.parquet (overwrite se existir)
+    ORIG->>EN: read_parquet
+    Note over EN: _revenue · _stockout<br/>_lost · _is_weekend · dt
+    EN->>ENR: data.parquet (overwrite se existir)
+    ENR->>ACC: concat todas partições dt=*

@@ -1,0 +1,34 @@
+%% Fluxo completo · Esteira_3Relatorios_D1_D2_D3.ipynb
+
+flowchart TB
+    subgraph S0["§0 Setup"]
+        SET["imports · OUT = raiz do projeto"]
+    end
+
+    subgraph S1["§1 Insumo"]
+        CSV["retail_store_inventory.csv"]
+        VAL["Valida SCHEMA 15 colunas"]
+        SAN["Sanidade: volume, dup, nulos, ruptura%"]
+    end
+
+    subgraph S2["§2 Carga incremental"]
+        CO["carregar_origem_dia(dt)"]
+        EN["enriquecer_dia(dt)"]
+        PR["processar_dia(dt)"]
+        ORIG["tabela_origem/dt=/"]
+        ENRIQ["tabela_enriquecida/dt=/"]
+    end
+
+    subgraph S3["§3 Relatórios"]
+        D1["D-1 Excel · IMPLEMENTADO"]
+        D2["D-2 Reposição · PLANEJADO"]
+        D3["D-3 Tendência · PLANEJADO"]
+    end
+
+    SET --> CSV --> VAL --> SAN
+    SAN --> CO --> ORIG
+    CO --> EN --> ENRIQ
+    EN --> PR
+    ENRIQ --> D1
+    ENRIQ -.-> D2
+    ENRIQ -.-> D3

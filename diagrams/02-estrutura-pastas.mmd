@@ -1,0 +1,24 @@
+%% Estrutura de pastas e arquivos · project-datamesh-1
+
+flowchart TB
+    ROOT["project-datamesh-1/"]
+
+    ROOT --> NB["Esteira_3Relatorios_D1_D2_D3.ipynb"]
+    ROOT --> CSV["retail_store_inventory.csv<br/>insumo · 15 colunas"]
+    ROOT --> REQ["requirements.txt"]
+
+    ROOT --> ORIG["tabela_origem/"]
+    ORIG --> O1["dt=2022-01-01/data.parquet"]
+    ORIG --> O2["dt=2022-01-02/data.parquet"]
+    ORIG --> ON["dt=.../data.parquet"]
+
+    ROOT --> ENR["tabela_enriquecida/"]
+    ENR --> E1["dt=2022-01-01/data.parquet<br/>+ _revenue _stockout _lost"]
+    ENR --> E2["dt=2022-01-02/data.parquet"]
+    ENR --> EN["dt=.../data.parquet"]
+
+    ROOT --> XLS["relatorio_D1_execYYYY-MM-DD_dadoYYYY-MM-DD.xlsx"]
+
+    CSV -->|"carregar_origem_dia"| ORIG
+    ORIG -->|"enriquecer_dia"| ENR
+    ENR -->|"agrega D-1"| XLS

@@ -1,0 +1,226 @@
+================================================================================
+  ESTEIRA DE ESTOQUE · 3 RELATÓRIOS DE INSIGHT (D-1 / D-2 / D-3)
+  Documento do projeto · baseado em Esteira_3Relatorios_D1_D2_D3.ipynb
+  Repositório: project-datamesh-1
+================================================================================
+
+1. ESCOPO DO PROJETO
+--------------------------------------------------------------------------------
+
+Este repositório implementa UMA esteira de dados local (Jupyter + Python) para
+gestão de estoque em varejo, a partir do dataset:
+
+  retail_store_inventory.csv
+  (Retail Store Inventory Forecasting · Kaggle · schema 15 colunas)
+
+O notebook único do projeto é:
+
+  Esteira_3Relatorios_D1_D2_D3.ipynb
+
+Ele carrega o insumo, valida qualidade, processa por dia em partições parquet,
+enriquece com métricas de negócio e gera relatórios Excel de insight.
+
+IMPORTANTE: não há múltiplos domínios (mesh) neste repositório — é um pipeline
+fechado de estoque/varejo com três relatórios planejados (D-1 implementado).
+
+
+2. O QUE O PROJETO RESOLVE
+--------------------------------------------------------------------------------
+
+  PROBLEMA                              | ENTREGA DESTA ESTEIRA
+  --------------------------------------|----------------------------------------
+  Dado de inventário em CSV único       | Carga validada com contrato de schema
+  Sem visão do que vendeu ontem (D-1)   | Relatório Excel ranking + receita
+  Ruptura invisível (D-2)               | Campos _stockout e _lost no enriquecido
+  Sem leitura de tendência (D-3)        | Base _is_weekend + histórico por dt=
+  Reprocessamento manual                | Partições idempotentes por dia
+
+  RELATÓRIO | INSIGHT              | PERGUNTA                    | STATUS NO NOTEBOOK
+  ----------|----------------------|-----------------------------|--------------------
+  D-1       | Produtos vendidos    | O que saiu? Onde está a     | IMPLEMENTADO
+            |                      | receita?                    | (.xlsx)
+  D-2       | Reposição necessária | O que está em ruptura?      | PLANEJADO
+            |                      |                             | (dados prontos)
+  D-3       | Tendência de consumo | Consumo sobe ou cai?        | PLANEJADO
+            |                      |                             | (dados prontos)
+
+
+3. FLUXO DO NOTEBOOK (ORDEM DAS CÉLULAS)
+--------------------------------------------------------------------------------
+
+  §0  Setup
+      → imports (pandas, numpy, openpyxl)
+      → OUT = pasta raiz do projeto
+
+  §1  Insumo
+      → lê retail_store_inventory.csv (ou gera fallback sintético)
+      → valida SCHEMA (15 colunas)
+      → sanidade: volume, duplicatas, nulos, ruptura %
+
+  §2  Carga incremental (simula esteira diária AWS)
+      → tabela_origem/dt=AAAA-MM-DD/data.parquet
+      → tabela_enriquecida/dt=AAAA-MM-DD/data.parquet
+      → funções: carregar_origem_dia, enriquecer_dia, processar_dia
+
+  §3  Relatório D-1
+      → DATA_EXECUCAO = dia em que a esteira roda
+      → DIA_DADO = D-1 (dia anterior)
+      → agrega por produto → Excel com fórmulas e insight no topo
+
+Diagramas versionados: pasta diagrams/ (ver diagrams/README.md)
+
+
+4. ESTRUTURA DE DADOS LOCAL
+--------------------------------------------------------------------------------
+
+  ARQUIVO / PASTA                    | PAPEL
+  ------------------------------------|------------------------------------------
+  retail_store_inventory.csv          | Insumo (fonte única)
+  tabela_origem/dt={data}/            | Partição do dia extraída do CSV (origem)
+    data.parquet
+  tabela_enriquecida/dt={data}/       | Partição enriquecida (silver lógico)
+    data.parquet
+  relatorio_D1_exec{exec}_dado{d}.xlsx| Saída D-1 (ranking produtos vendidos)
+
+  GRÃO DO DADO: 1 linha = Date × Store ID × Product ID
+
+  COLUNAS DO INSUMO (contrato):
+    Date, Store ID, Product ID, Category, Region,
+    Inventory Level, Units Sold, Units Ordered, Demand Forecast,
+    Price, Discount, Weather Condition, Holiday/Promotion,
+    Competitor Pricing, Seasonality
+
+  COLUNAS ENRIQUECIDAS (calculadas em enriquecer_dia):
+    _revenue    = Units Sold × Price
+    _stockout   = vendeu todo estoque E forecast > estoque
+    _lost       = venda perdida estimada (forecast - vendido)
+    _is_weekend = flag sábado/domingo
+    dt          = data da partição (string)
+
+
+5. PROCESSAMENTO INCREMENTAL
+--------------------------------------------------------------------------------
+
+  processar_dia(dt) executa:
+
+    1. carregar_origem_dia(dt)
+       Filtra insumo pelo dia → grava tabela_origem/dt=.../data.parquet
+       Idempotente: reprocessar sobrescreve só aquela partição.
+
+    2. enriquecer_dia(dt)
+       Lê origem do dia → calcula _revenue, _stockout, _lost, _is_weekend
+       → grava tabela_enriquecida/dt=.../data.parquet
+
+    3. ler_enriquecido()
+       Concatena todas as partições já processadas (tabela acumulada).
+
+  Na simulação do notebook, processa os 3 primeiros dias disponíveis para
+  demonstrar incremento de partições.
+
+
+6. RELATÓRIO D-1 (IMPLEMENTADO)
+--------------------------------------------------------------------------------
+
+  Lógica:
+    - Esteira roda em DATA_EXECUCAO (ex.: 2022-01-02)
+    - Processa partição enriquecida de DIA_DADO = D-1 (ex.: 2022-01-01)
+    - Se partição ausente, chama processar_dia(DIA_DADO) automaticamente
+    - Agrega por Product ID + Category (soma lojas)
+    - Ordena por unidades vendidas
+
+  Excel gerado:
+    - Título + insight automático (líder + concentração top 3)
+    - Colunas: Produto, Categoria, Unid. Vendidas, Receita, % do Total
+    - Fórmulas Excel para totais e percentuais
+
+  Nome do arquivo:
+    relatorio_D1_exec{DATA_EXECUCAO}_dado{DIA_DADO}.xlsx
+
+
+7. D-2 E D-3 (PLANEJADOS — DADOS JÁ PREPARADOS)
+--------------------------------------------------------------------------------
+
+  D-2 · Reposição
+    Fonte: tabela_enriquecida com _stockout=1 e _lost>0
+    Decisão: priorizar pedido/transferência por loja × produto
+
+  D-3 · Tendência
+    Fonte: várias partições dt= + _is_weekend + Units Sold no tempo
+    Decisão: ajustar estoque mínimo e compra futura (janela histórica)
+
+  O notebook já calcula os campos necessários; falta a célula de geração Excel
+  no mesmo padrão do D-1.
+
+
+8. TECNOLOGIAS (DESTE REPOSITÓRIO)
+--------------------------------------------------------------------------------
+
+  LOCAL (em uso):
+    Python 3.13
+    Jupyter / ipykernel
+    pandas, numpy          → transformação e agregação
+    pyarrow                → parquet particionado
+    openpyxl               → relatórios Excel (.xlsx)
+
+  AWS (referência futura — mesmo fluxo, um pipeline):
+    S3                     → tabela_origem / tabela_enriquecida
+    Glue Job               → enriquecer_dia em escala
+    Lambda                 → disparo diário + gerar Excel
+    Step Functions         → orquestrar processar_dia por dt
+    EventBridge            → cron diário
+    Athena                 → consultar partições parquet
+
+
+9. COMO O ANALISTA DEVE TRATAR OS INSIGHTS
+--------------------------------------------------------------------------------
+
+  1. Validar insumo (§1) antes de confiar nos relatórios
+  2. Confirmar partição dt= do dia correto (D-1 = dia anterior à execução)
+  3. Ler o destaque do Excel como hipótese; validar no parquet enriquecido
+  4. D-1 → decisão comercial (mix, exposição)
+     D-2 → decisão operacional (reposição urgente)
+     D-3 → decisão de planejamento (tendência; exige vários dias processados)
+  5. Documentar data de execução vs. data do dado no nome do arquivo
+
+
+10. COMO EXECUTAR
+--------------------------------------------------------------------------------
+
+  python -m venv .venv
+  .venv\Scripts\Activate.ps1          (PowerShell)
+  pip install -r requirements.txt
+
+  Colocar retail_store_inventory.csv na raiz do projeto.
+  Abrir Esteira_3Relatorios_D1_D2_D3.ipynb com kernel .venv.
+  Executar células em ordem: §0 → §1 → incremental → D-1.
+
+
+11. ARTEFATOS DO REPOSITÓRIO
+--------------------------------------------------------------------------------
+
+  Esteira_3Relatorios_D1_D2_D3.ipynb   Notebook principal (única esteira)
+  retail_store_inventory.csv           Insumo
+  tabela_origem/                       Partições origem por dia
+  tabela_enriquecida/                  Partições enriquecidas por dia
+  relatorio_D1_exec*_dado*.xlsx        Relatórios D-1 gerados
+  requirements.txt                     Dependências Python
+  PROJETO_DATAMESH.txt                 Este documento
+  diagrams/*.mmd                       Diagramas Mermaid versionados
+
+
+12. DIAGRAMAS
+--------------------------------------------------------------------------------
+
+  diagrams/01-fluxo-notebook.mmd           Fluxo completo §0 a §3
+  diagrams/02-estrutura-pastas.mmd         CSV, partições, saídas
+  diagrams/03-processamento-incremental.mmd  carregar → enriquecer → acumular
+  diagrams/04-insights-d1-d2-d3.mmd         Três relatórios e decisões
+  diagrams/05-relatorio-d1.mmd             Geração do Excel D-1
+  diagrams/06-analista.mmd               Papel do analista
+  diagrams/07-equivalencia-aws.mmd         Como subir este fluxo para AWS
+
+  Índice: diagrams/README.md
+
+================================================================================
+  Fim do documento
+================================================================================

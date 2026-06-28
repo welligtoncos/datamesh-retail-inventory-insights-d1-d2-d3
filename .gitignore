@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+*.log
+
+# artefato zip duplicado da fonte aidlc-rules/
+ai-dlc-rules-v1.0.0.zip

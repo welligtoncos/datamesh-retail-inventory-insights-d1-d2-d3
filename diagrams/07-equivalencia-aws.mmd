@@ -1,0 +1,24 @@
+%% Este fluxo local → equivalente AWS (mesmo pipeline, sem multi-domínio)
+
+flowchart LR
+    subgraph LOCAL["Notebook local"]
+        L1["retail_store_inventory.csv"]
+        L2["tabela_origem/"]
+        L3["tabela_enriquecida/"]
+        L4["relatorio_D1.xlsx"]
+        L5["processar_dia()"]
+    end
+
+    subgraph AWS["Produção AWS equivalente"]
+        A1["S3 insumo/"]
+        A2["S3 origem/dt=/"]
+        A3["S3 enriquecido/dt=/"]
+        A4["S3 relatorios/ ou SES"]
+        A5["Glue + Step Functions<br/>+ EventBridge cron"]
+    end
+
+    L1 --> A1
+    L2 --> A2
+    L3 --> A3
+    L4 --> A4
+    L5 --> A5

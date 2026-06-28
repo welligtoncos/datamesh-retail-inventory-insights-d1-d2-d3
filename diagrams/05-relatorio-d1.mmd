@@ -1,0 +1,15 @@
+%% Geração do relatório D-1 · Excel
+
+flowchart LR
+    EXEC["DATA_EXECUCAO<br/>ex.: 2022-01-02"]
+    D1["DIA_DADO = exec - 1 dia<br/>ex.: 2022-01-01"]
+
+    EXEC --> D1
+    D1 --> CHK{partição<br/>enriquecida<br/>existe?}
+    CHK -->|não| PROC["processar_dia(DIA_DADO)"]
+    CHK -->|sim| READ["read_parquet"]
+    PROC --> READ
+
+    READ --> AGG["groupby Product ID, Category<br/>sum Units Sold · sum _revenue"]
+    AGG --> XLS["openpyxl Workbook<br/>insight + tabela + fórmulas"]
+    XLS --> OUT["relatorio_D1_exec*_dado*.xlsx"]
