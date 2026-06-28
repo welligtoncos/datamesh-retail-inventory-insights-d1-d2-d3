@@ -1,281 +1,236 @@
-# datamesh-retail-inventory-insights-d1-d2-d3
+# Retail Inventory Insights · Datamesh de estoque varejo
 
-Esteira de dados de **estoque em varejo** com três relatórios de insight (**D-1**, **D-2**, **D-3**), partindo do dataset Kaggle `retail_store_inventory.csv`.
+**Transforme dados de estoque em decisões diárias** — sem planilhas manuais, sem adivinhação na reposição e com visão clara do que vende, do que falta e para onde o consumo está indo.
 
-O fluxo de referência está no notebook [`Esteira_3Relatorios_D1_D2_D3.ipynb`](Esteira_3Relatorios_D1_D2_D3.ipynb). A evolução para **AWS** é feita em ondas, com **20 user stories** documentadas em [`aidlc-docs/`](aidlc-docs/) e desenvolvimento guiado pelo **[AI-DLC](aidlc-rules/README.md)** no Cursor.
+Esteira de dados na **AWS** que processa automaticamente o dia anterior e entrega **três relatórios de insight** prontos para compras, operações de loja e equipe comercial.
 
 **Repositório:** https://github.com/welligtoncos/datamesh-retail-inventory-insights-d1-d2-d3
 
 ---
 
-## O que este projeto entrega
+## O problema que resolve
 
-| Camada | Hoje (local) | Meta (AWS) |
-|--------|--------------|------------|
-| Insumo | `retail_store_inventory.csv` | S3 `insumo/` |
-| Origem diária | `tabela_origem/dt=` | S3 `origem/dt=` |
-| Enriquecido | `tabela_enriquecida/dt=` | S3 `enriquecido/dt=` |
-| Relatório D-1 | Excel implementado | S3 `relatorios/D1/` |
-| Relatório D-2 | Dados prontos, Excel planejado | S3 `relatorios/D2/` |
-| Relatório D-3 | Dados prontos, Excel planejado | S3 `relatorios/D3/` |
-| Orquestração | Células Python no Jupyter | Step Functions + EventBridge |
+| Dor do varejo | Impacto no negócio | Como este datamesh responde |
+|---------------|-------------------|----------------------------|
+| Não saber o que vendeu ontem | Perda de oportunidade comercial | **D-1** — ranking de produtos e receita |
+| Ruptura descoberta tarde demais | Venda perdida (`_lost`) e cliente insatisfeito | **D-2** — lista priorizada por impacto financeiro |
+| Pedido no “feeling” | Estoque parado ou falta crônica | **D-3** — tendência de consumo e efeito fim de semana |
+| Dados espalhados em CSVs | Horas de trabalho manual, baixa confiança | Pipeline automatizado, particionado e auditável na AWS |
 
-### Resultados de negócio que queremos
-
-| Relatório | Insight | Pergunta respondida | Status |
-|-----------|---------|---------------------|--------|
-| **D-1** | Produtos vendidos | O que mais saiu? Onde está a receita? | Implementado no notebook · meta AWS na onda W5 |
-| **D-2** | Reposição | O que está em ruptura? Quanto se perdeu de venda? | Planejado · onda W6 |
-| **D-3** | Tendência | O consumo sobe ou cai? Efeito de fim de semana? | Planejado · onda W6 |
-
-Cada execução usa **defasagem D-1**: a esteira roda em `DATA_EXECUCAO` e processa o dado do **dia anterior** (`DIA_DADO`).
+> **Defasagem D-1:** toda manhã a esteira processa o **fechamento de ontem** — o dado que importa para decidir hoje.
 
 ---
 
-## Fluxo da esteira
+## Agregação de valor · três insights, três decisões
 
 ```mermaid
 flowchart LR
-    CSV["insumo CSV"] --> ORIG["origem/dt="]
-    ORIG --> ENR["enriquecido/dt="]
-    ENR --> D1["Relatório D-1"]
-    ENR --> D2["Relatório D-2"]
-    ENR --> D3["Relatório D-3"]
+    DADOS["Dados de estoque<br/>loja × produto × dia"]
+    D1["D-1 Comercial"]
+    D2["D-2 Operacional"]
+    D3["D-3 Planejamento"]
+    V1["↑ Receita<br/>mix e exposição"]
+    V2["↓ Ruptura<br/>↓ venda perdida"]
+    V3["↑ Acurácia<br/>de compra"]
+
+    DADOS --> D1 & D2 & D3
+    D1 --> V1
+    D2 --> V2
+    D3 --> V3
 ```
 
-Funções centrais do notebook (espelho obrigatório na AWS):
+### D-1 · Produtos vendidos — *“O que saiu? Onde está o dinheiro?”*
 
-- `carregar_origem_dia(dt)` — extrai um dia do insumo → parquet em `origem/`
-- `enriquecer_dia(dt)` — adiciona `_revenue`, `_stockout`, `_lost`, `_is_weekend`
-- `processar_dia(dt)` — origem + enriquecido (idempotente por partição)
+| Entrega | Valor para a empresa |
+|---------|---------------------|
+| Ranking por unidades e receita | Foco no mix que realmente vende |
+| Insight automático no Excel | Concentração top 3 → evita dependência de poucos SKUs |
+| Atualização diária | Reunião comercial com dado de ontem, não de semana passada |
 
-Diagramas: [`diagrams/`](diagrams/) · Documentação técnica: [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt)
-
----
-
-## User stories · escopo completo
-
-**20 stories** em **7 épicos**, entregues em **6 ondas (W1–W6)**. Detalhes e critérios de aceite: [`aidlc-docs/inception/user-stories/stories.md`](aidlc-docs/inception/user-stories/stories.md)
-
-### Roadmap por onda
-
-| Onda | Épico | Stories | Resultado esperado ao concluir |
-|------|-------|---------|------------------------------|
-| **W1** | E1 Fundação | E1-US01 … US04 | S3 com prefixos, CSV no `insumo/`, IAM mínimo, mapa local→S3 |
-| **W2** | E2 Origem | E2-US01 … US03 | `carregar_origem_dia` na AWS; parquet `origem/dt=` = notebook |
-| **W3** | E3 Enriquecimento | E3-US01 … US03 | `enriquecer_dia` na AWS; colunas `_*` com paridade local |
-| **W4** | E4 Orquestração | E4-US01 … US03 | `processar_dia` via Step Functions; cron diário EventBridge |
-| **W5** | E5 Relatório D-1 | E5-US01 … US03 | Excel D-1 no S3, mesmo ranking/totais do notebook |
-| **W6** | E6 + E7 Ops | E6-US01 … E7-US02 | Excel D-2/D-3, Athena, alarme se a esteira falhar |
-
-### Resumo das stories por épico
-
-#### E1 · Fundação (W1)
-| ID | O que queremos |
-|----|----------------|
-| E1-US01 | Buckets/prefixos S3: `insumo/`, `origem/dt=`, `enriquecido/dt=`, `relatorios/` |
-| E1-US02 | `retail_store_inventory.csv` carregado e validado (15 colunas) |
-| E1-US03 | Roles IAM (Glue, Lambda, Step Functions) com least privilege |
-| E1-US04 | Documentação de paths para o analista |
-
-#### E2 · Origem diária (W2)
-| ID | O que queremos |
-|----|----------------|
-| E2-US01 | Job que replica `carregar_origem_dia(dt)` → `origem/dt=/data.parquet` |
-| E2-US02 | Reprocessar um `dt` sem afetar outras partições |
-| E2-US03 | Paridade com `tabela_origem/` local (ex.: `dt=2022-01-01`) |
-
-#### E3 · Enriquecimento (W3)
-| ID | O que queremos |
-|----|----------------|
-| E3-US01 | Job que replica `enriquecer_dia(dt)` com `_revenue`, `_stockout`, `_lost`, `_is_weekend` |
-| E3-US02 | Indicadores de ruptura coerentes com sanidade do notebook §1 |
-| E3-US03 | Paridade com `tabela_enriquecida/` local |
-
-#### E4 · Orquestração (W4)
-| ID | O que queremos |
-|----|----------------|
-| E4-US01 | Step Functions: origem → enriquecido para um `dt` |
-| E4-US02 | EventBridge cron diário (`DATA_EXECUCAO` hoje, dado D-1 ontem) |
-| E4-US03 | Logs CloudWatch por execução (`dt`, status) |
-
-#### E5 · Relatório D-1 (W5)
-| ID | O que queremos |
-|----|----------------|
-| E5-US01 | Excel `relatorio_D1_exec*_dado*.xlsx` no S3 (insight + fórmulas) |
-| E5-US02 | Analista acessa relatório sem Jupyter |
-| E5-US03 | Top 3 produtos e totais iguais ao Excel gerado localmente |
-
-#### E6 · D-2 e D-3 (W6)
-| ID | O que queremos |
-|----|----------------|
-| E6-US01 | Excel D-2: rupturas por loja × produto, ordenado por `_lost` |
-| E6-US02 | Excel D-3: tendência de consumo em janela histórica |
-
-#### E7 · Operação (W6)
-| ID | O que queremos |
-|----|----------------|
-| E7-US01 | Athena/Glue Catalog sobre `enriquecido/dt=` — ver [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) |
-| E7-US02 | Alarme CloudWatch se a execução diária falhar |
-
-**Personas:** analista de estoque, engenheiro de dados, gestor de compras, plataforma AWS — ver [`personas.md`](aidlc-docs/inception/user-stories/personas.md)
-
-**Caminho e dependências:** [`backlog-roadmap.md`](aidlc-docs/inception/user-stories/backlog-roadmap.md)
+**Decisão típica:** aumentar exposição de gôndola, ajustar promoção, negociar com fornecedor dos líderes.
 
 ---
 
-## Como o desenvolvedor usa o AI-DLC
+### D-2 · Reposição — *“O que está em ruptura? Quanto estou perdendo?”*
 
-O projeto está configurado para o Cursor injetar o workflow AI-DLC em todo chat (regra em [`.cursor/rules/ai-dlc-workflow.mdc`](.cursor/rules/ai-dlc-workflow.mdc)). Setup: [`aidlc-rules/README.md`](aidlc-rules/README.md).
+| Entrega | Valor para a empresa |
+|---------|---------------------|
+| Filtro inteligente (`ruptura` + `venda perdida`) | Só o que exige ação — sem ruído |
+| Ordenação por `_lost` | Prioriza o que **mais custa** não repor |
+| Visão loja × produto | Pedido expresso ou transferência entre filiais |
 
-### Princípio
+**Decisão típica:** reposição urgente na loja S003, produto P0007 — antes que a venda perdida acumule.
 
-> **Não peça “cria tudo na AWS”.** Trabalhe **uma onda por vez**, aprove cada fase no `aidlc-docs/audit.md`, e mantenha paridade com o notebook.
+---
 
-### Fluxo do desenvolvedor
+### D-3 · Tendência — *“O consumo sobe ou cai? Fim de semana vende mais?”*
+
+| Entrega | Valor para a empresa |
+|---------|---------------------|
+| Média dias úteis vs fim de semana | Entrega certa na hora certa |
+| Classificação Subindo / Caindo / Estável | Ajuste de estoque mínimo com antecedência |
+| Janela configurável (3, 7, 14 dias) | Planejamento de compra baseado em padrão, não em achismo |
+
+**Decisão típica:** reforçar estoque de quinta a sábado nos SKUs em alta com pico no FDS.
+
+---
+
+## Para quem é
+
+| Persona | O que ganha | Canal principal |
+|---------|-------------|-----------------|
+| **Gestor de compras / loja** | Lista de reposição e tendências acionáveis | Excel D-2 e D-3 no S3 |
+| **Analista de estoque** | Relatórios confiáveis + validação SQL | Excel + Amazon Athena |
+| **Diretoria comercial** | Ranking de vendas e concentração de receita | Excel D-1 |
+| **TI / dados** | Pipeline idempotente, monitorado, escalável | Step Functions, Glue, CloudWatch |
+
+**Guia completo de uso na empresa:** [`docs/como-usar-datamesh-empresa.md`](docs/como-usar-datamesh-empresa.md)
+
+---
+
+## Resultados que a empresa pode medir
+
+| KPI | Antes | Com o datamesh |
+|-----|-------|----------------|
+| Tempo até insight diário | Horas (Excel manual) | Minutos (automático após a esteira) |
+| Visibilidade de ruptura | Reativa | Proativa, priorizada por `_lost` |
+| Confiança no dado | Planilhas isoladas | Camada enriquecida única + paridade validada |
+| Rastreabilidade | “De onde veio esse número?” | Partição `dt=`, execução nomeada, logs CloudWatch |
+| Consultas ad hoc | Depende de TI | Athena sobre `enriquecido` (analistas autônomos) |
+
+---
+
+## Como funciona · da fonte ao insight
 
 ```mermaid
-flowchart TD
-    A[Clonar repo + ativar AI-DLC] --> B[Ler stories.md e backlog-roadmap.md]
-    B --> C[Escolher onda atual ex. W1]
-    C --> D[Chat Cursor: pedir fase AI-DLC só dessa onda]
-    D --> E[Revisar artefatos em aidlc-docs/]
-    E --> F{Aprovado?}
-    F -->|Não| D
-    F -->|Sim| G[Registrar em audit.md]
-    G --> H[Construction: código IaC/jobs]
-    H --> I[Validar critérios de aceite da onda]
-    I --> J[Marcar stories done + aidlc-state.md]
-    J --> K{Próxima onda?}
-    K -->|Sim| C
-    K -->|Não| L[Projeto AWS completo]
+flowchart TB
+    subgraph ENTRADA["Entrada"]
+        INS["ERP / POS / CSV<br/>→ S3 insumo/"]
+    end
+
+    subgraph ESTEIRA["Esteira automática (diária)"]
+        SFN["Step Functions<br/>processar_dia(ontem)"]
+        ENR["Camada enriquecida<br/>receita · ruptura · tendência"]
+    end
+
+    subgraph INSIGHTS["Insights prontos"]
+        R1["Excel D-1"]
+        R2["Excel D-2"]
+        R3["Excel D-3"]
+        ATH["Athena SQL"]
+    end
+
+    INS --> SFN --> ENR
+    ENR --> R1 & R2 & R3 & ATH
 ```
 
-### Passo a passo
+**Fluxo em linguagem de negócio:**
 
-1. **Clone e ambiente local**
-   ```bash
-   git clone https://github.com/welligtoncos/datamesh-retail-inventory-insights-d1-d2-d3.git
-   cd datamesh-retail-inventory-insights-d1-d2-d3
-   python -m venv .venv
-   source .venv/Scripts/activate   # Windows Git Bash
-   pip install -r requirements.txt
-   ```
-   Rode o notebook local para entender o comportamento de referência.
+1. Os dados de estoque entram no data lake (`insumo/`).
+2. Toda noite/madrugada a esteira processa **o dia anterior**.
+3. Métricas de negócio são calculadas (receita, ruptura, venda perdida, fim de semana).
+4. Pela manhã, gestores recebem Excel; analistas consultam Athena.
 
-2. **Ative o AI-DLC** (se `.aidlc-rule-details/` estiver vazio)
-   - Siga [`aidlc-rules/README.md`](aidlc-rules/README.md) (PowerShell ou bash).
-
-3. **Consulte o backlog**
-   - Status geral: [`aidlc-docs/aidlc-state.md`](aidlc-docs/aidlc-state.md)
-   - Stories: [`aidlc-docs/inception/user-stories/stories.md`](aidlc-docs/inception/user-stories/stories.md)
-   - Ordem de entrega: [`aidlc-docs/inception/user-stories/backlog-roadmap.md`](aidlc-docs/inception/user-stories/backlog-roadmap.md)
-
-4. **Abra um chat no Cursor** com pedido explícito, por exemplo:
-   ```text
-   Siga o AI-DLC. Escopo desta rodada: Onda W1 apenas (E1-US01 a E1-US04).
-   Brownfield: Esteira_3Relatorios_D1_D2_D3.ipynb.
-   Não implementar Glue/Lambda ainda.
-   Região: us-east-1 · IaC: [CDK/Terraform]
-   ```
-
-5. **Revise o Inception (REVIEW REQUIRED)**
-
-   Antes de **Approve & Continue** para Construction, revise os artefatos gerados:
-
-   - [`aidlc-docs/inception/requirements/requirements.md`](aidlc-docs/inception/requirements/requirements.md)
-   - [`aidlc-docs/inception/user-stories/stories.md`](aidlc-docs/inception/user-stories/stories.md) (épico da onda)
-   - [`aidlc-docs/inception/plans/execution-plan.md`](aidlc-docs/inception/plans/execution-plan.md)
-   - [`aidlc-docs/inception/reverse-engineering/`](aidlc-docs/inception/reverse-engineering/)
-   - [`aidlc-docs/inception/application-design/`](aidlc-docs/inception/application-design/)
-
-   **Guia passo a passo:** [`aidlc-docs/README.md#revisar-inception-antes-de-construction`](aidlc-docs/README.md#revisar-inception-antes-de-construction)
-
-   - **Approve & Continue** — se escopo, região, bucket e ausência de Glue/Lambda/SFN (W1) estiverem corretos
-   - **Request Changes** — cite arquivo e o que mudar; não inicie Construction
-
-6. **Registre aprovação e Construction**
-   - Registre em [`aidlc-docs/audit.md`](aidlc-docs/audit.md)
-   - Atualize status das stories em `stories.md` (`in_progress` → `done` após validar)
-
-7. **Valide o resultado da onda**
-   - Use os checkboxes de **Definition of Done** em [`backlog-roadmap.md`](aidlc-docs/inception/user-stories/backlog-roadmap.md)
-   - Stories de paridade (E2-US03, E3-US03, E5-US03) comparam AWS vs. artefatos locais
-
-### Regras para o desenvolvedor
-
-| Faça | Não faça |
-|------|----------|
-| Uma onda (W1…W6) por PR/entrega | Misturar infra S3 com Step Functions no mesmo escopo |
-| Manter lógica igual ao notebook | Mudar regra de `_stockout` só na AWS |
-| Atualizar `stories.md` e `aidlc-state.md` | Deixar decisões só no histórico do chat |
-| Pedir aprovação antes de Construction | Pular User Stories / Workflow Planning |
-
-### Próxima onda recomendada
-
-**W1 (E1)** — fundação S3 + insumo + IAM. Nada de Glue até W1 estar `done`.
+Diagramas detalhados: [`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-empresa.mmd)
 
 ---
 
-## Execução local (notebook)
+## O que está entregue na AWS
+
+| Capacidade | Status | Benefício |
+|------------|--------|-----------|
+| Data lake particionado (S3) | ✅ | Escala por dia, reprocessamento seguro |
+| Jobs Glue origem + enriquecido | ✅ | Mesma lógica do notebook, na nuvem |
+| Orquestração Step Functions | ✅ | Um `dt` processado de ponta a ponta |
+| Relatório D-1 Excel | ✅ | Ranking comercial diário |
+| Relatório D-2 Excel | ✅ | Rupturas priorizadas |
+| Relatório D-3 Excel | ✅ | Tendência em janela histórica |
+| Amazon Athena | ✅ | Consultas SQL para analistas |
+| Alarme CloudWatch | ✅ | Falha na esteira visível em minutos |
+
+**Ambiente de referência:** `us-east-1` · bucket `retail-inventory-insights-dev-use1`
+
+---
+
+## Rotina sugerida na empresa
+
+| Quando | Quem | Ação |
+|--------|------|------|
+| Manhã | Gestor compras | Abre **D-2** → define reposições do dia |
+| Manhã | Comercial | Abre **D-1** → revisa top vendas e receita |
+| Semanal | Planejamento | Abre **D-3** → ajusta mínimos e pedidos |
+| Diário | TI | Confirma esteira OK (ou trata alarme) |
+
+---
+
+## Comece por aqui
+
+| Objetivo | Documento |
+|----------|-----------|
+| Entender valor e adoção na empresa | [`docs/como-usar-datamesh-empresa.md`](docs/como-usar-datamesh-empresa.md) |
+| Validar dados com SQL | [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) |
+| Visão técnica completa | [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt) |
+| Personas e user stories | [`aidlc-docs/inception/user-stories/personas.md`](aidlc-docs/inception/user-stories/personas.md) |
+
+**Validar a esteira na AWS:**
+
+```powershell
+.\scripts\w6-run-and-validate.ps1
+```
+
+---
+
+## Para equipes técnicas
+
+<details>
+<summary>Desenvolvimento, IaC e AI-DLC</summary>
+
+### Referência brownfield
+
+- Notebook: [`Esteira_3Relatorios_D1_D2_D3.ipynb`](Esteira_3Relatorios_D1_D2_D3.ipynb)
+- Funções espelhadas na AWS: `carregar_origem_dia`, `enriquecer_dia`, `processar_dia`
+
+### Infraestrutura
+
+- **IaC:** Terraform em [`terraform/`](terraform/)
+- **Lambdas:** D-1, D-2, D-3 em [`lambda/reports/`](lambda/reports/)
+- **Scripts de validação:** [`scripts/`](scripts/) (`w4`, `w5`, `w6-run-and-validate.ps1`)
+
+### AI-DLC e backlog
+
+- Estado do projeto: [`aidlc-docs/aidlc-state.md`](aidlc-docs/aidlc-state.md)
+- 20 user stories (W1–W6 concluídas): [`aidlc-docs/inception/user-stories/stories.md`](aidlc-docs/inception/user-stories/stories.md)
+- Workflow Cursor: [`aidlc-rules/README.md`](aidlc-rules/README.md)
+
+### Execução local
 
 ```bash
-# Na raiz do projeto, com venv ativo
+python -m venv .venv
+source .venv/Scripts/activate   # Windows Git Bash
+pip install -r requirements.txt
 jupyter notebook Esteira_3Relatorios_D1_D2_D3.ipynb
 ```
 
-Ordem das células: **§0 Setup** → **§1 Insumo** → **carga incremental** → **relatório D-1**.
-
-Artefatos gerados localmente:
-
-```
-retail_store_inventory.csv          # insumo
-tabela_origem/dt=YYYY-MM-DD/        # origem
-tabela_enriquecida/dt=YYYY-MM-DD/   # enriquecido
-relatorio_D1_exec*_dado*.xlsx       # saída D-1
-```
+</details>
 
 ---
 
-## Estrutura do repositório
+## Documentação
 
-```
-├── Esteira_3Relatorios_D1_D2_D3.ipynb   # fonte brownfield
-├── retail_store_inventory.csv
-├── requirements.txt
-├── PROJETO_DATAMESH.txt                 # documentação técnica
-├── README.md                            # este arquivo
-├── aidlc-docs/                          # backlog + estado AI-DLC
-│   ├── aidlc-state.md
-│   ├── audit.md
-│   └── inception/user-stories/
-│       ├── stories.md                   # 20 user stories
-│       ├── backlog-roadmap.md           # ondas W1–W6
-│       └── personas.md
-├── aidlc-rules/                         # fonte AI-DLC + README de setup
-├── .cursor/rules/ai-dlc-workflow.mdc    # regra ativa no Cursor
-├── diagrams/                            # Mermaid do fluxo
-├── tabela_origem/                       # partições locais (demo)
-└── tabela_enriquecida/
-```
+| Documento | Público | Conteúdo |
+|-----------|---------|----------|
+| [`docs/como-usar-datamesh-empresa.md`](docs/como-usar-datamesh-empresa.md) | Negócio | Insights, personas, rotina, KPIs |
+| [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) | Analistas | Queries de validação |
+| [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt) | Técnico | Schema, funções, artefatos |
+| [`diagrams/README.md`](diagrams/README.md) | Todos | Diagramas Mermaid |
+| [`aidlc-docs/README.md`](aidlc-docs/README.md) | Eng. dados | Backlog e estado AI-DLC |
 
 ---
 
-## Documentação relacionada
+## Dados de referência
 
-| Documento | Conteúdo |
-|-----------|----------|
-| [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt) | Escopo, schema, funções, tecnologias |
-| [`aidlc-docs/README.md`](aidlc-docs/README.md) | Gestão do backlog |
-| [`aidlc-rules/README.md`](aidlc-rules/README.md) | Configurar AI-DLC no Cursor |
-| [`diagrams/README.md`](diagrams/README.md) | Diagramas Mermaid |
+Dataset demo: [Retail Store Inventory Forecasting](https://www.kaggle.com/) (Kaggle). Em produção, substitua o CSV por integração com ERP, WMS ou POS — a esteira permanece a mesma.
 
 ---
 
-## Licença e dados
-
-Dataset de referência: [Retail Store Inventory Forecasting](https://www.kaggle.com/) (Kaggle). Uso conforme termos da fonte.
-
----
-
-**Status do projeto:** notebook local com D-1 implementado · migração AWS em backlog (W1 pendente) · stories aprovadas para revisão em `aidlc-docs/audit.md`
+**Status:** esteira completa na AWS (W1–W6) · D-1, D-2 e D-3 operacionais · Athena e alarmes configurados

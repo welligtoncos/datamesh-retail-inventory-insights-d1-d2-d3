@@ -218,6 +218,8 @@ Diagramas versionados: pasta diagrams/ (ver diagrams/README.md)
   diagrams/05-relatorio-d1.mmd             Geração do Excel D-1
   diagrams/06-analista.mmd               Papel do analista
   diagrams/07-equivalencia-aws.mmd         Como subir este fluxo para AWS
+  diagrams/08-datamesh-empresa.mmd         Visão empresa: AWS, insights, adoção
+  docs/como-usar-datamesh-empresa.md       Guia de uso empresarial (D-1/D-2/D-3)
 
   Índice: diagrams/README.md
 

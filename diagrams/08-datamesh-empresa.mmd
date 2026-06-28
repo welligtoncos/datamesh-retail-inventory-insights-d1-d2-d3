@@ -1,0 +1,116 @@
+%% Datamesh retail inventory · visão empresa (AWS + insights D-1/D-2/D-3)
+%% Guia completo: docs/como-usar-datamesh-empresa.md
+%% Visualizar: https://mermaid.live (um bloco por vez)
+
+%% --- Diagrama 1: Visão geral (fontes → camadas → produtos → consumo) ---
+
+flowchart TB
+    subgraph FONTES["Fontes de dados (empresa)"]
+        ERP["ERP / WMS / POS"]
+        CSV["CSV / API / Stream"]
+    end
+
+    subgraph INGESTAO["Camada bruta"]
+        INS["S3 insumo/"]
+    end
+
+    subgraph TRANSFORM["Camada transformada (dt=)"]
+        ORIG["S3 origem/dt="]
+        ENR["S3 enriquecido/dt=<br/>_revenue _stockout _lost _is_weekend"]
+    end
+
+    subgraph PRODUTOS["Produtos de insight"]
+        D1["D-1 Produtos vendidos"]
+        D2["D-2 Reposição rupturas"]
+        D3["D-3 Tendência consumo"]
+    end
+
+    subgraph CONSUMO["Consumo na empresa"]
+        P1["Analista estoque"]
+        P3["Gestor compras"]
+        ATH["Athena SQL"]
+        CW["CloudWatch alarme"]
+    end
+
+    ERP --> CSV --> INS --> ORIG --> ENR
+    ENR --> D1 & D2 & D3
+    ENR --> ATH
+    D1 & D2 & D3 --> P1 & P3
+    ATH --> P1
+    ENR -.-> CW
+
+%% --- Diagrama 2: Arquitetura AWS ---
+
+flowchart TB
+    subgraph AGENDA["Agendamento"]
+        EB["EventBridge cron"]
+        SFN["Step Functions processar_dia"]
+    end
+
+    subgraph JOBS["Processamento"]
+        G1["Glue carregar_origem_dia"]
+        G2["Glue enriquecer_dia"]
+    end
+
+    subgraph STORAGE["S3 Data Lake"]
+        S1["insumo/"]
+        S2["origem/dt=/"]
+        S3["enriquecido/dt=/"]
+        S4["relatorios/D1|D2|D3/"]
+    end
+
+    subgraph REPORTS["Lambda relatórios"]
+        L1["gerar_relatorio_d1"]
+        L2["gerar_relatorio_d2"]
+        L3["gerar_relatorio_d3"]
+    end
+
+    subgraph CATALOG["Consulta"]
+        GLUE["Glue Catalog"]
+        ATH["Athena"]
+        TBL["Tabela enriquecido"]
+    end
+
+    EB --> SFN --> G1 --> S2
+    G1 --> G2 --> S3
+    S1 --> G1
+    S3 --> L1 & L2 & L3 --> S4
+    S3 --> GLUE --> TBL --> ATH
+
+%% --- Diagrama 3: Três insights → decisão ---
+
+flowchart LR
+    ENR["enriquecido/dt="]
+
+    subgraph D1["D-1 Comercial"]
+        Q1["O que vendeu? Receita?"]
+        A1["Mix promoção exposição"]
+    end
+
+    subgraph D2["D-2 Operacional"]
+        Q2["Ruptura? Venda perdida?"]
+        A2["Reposição transferência"]
+    end
+
+    subgraph D3["D-3 Planejamento"]
+        Q3["Tendência? FDS vs úteis?"]
+        A3["Estoque mínimo compra"]
+    end
+
+    ENR --> D1 & D2 & D3
+    Q1 --> A1
+    Q2 --> A2
+    Q3 --> A3
+
+%% --- Diagrama 4: Jornada de adoção ---
+
+flowchart TD
+    F1["1 Conectar fonte ERP/POS"]
+    F2["2 Validar insumo"]
+    F3["3 Processar histórico dt="]
+    F4["4 Validar enriquecido Athena"]
+    F5["5 Ativar D-1 D-2 D-3"]
+    F6["6 Rotina diária Excel"]
+    F7["7 Medir impacto rupturas receita"]
+
+    F1 --> F2 --> F3 --> F4 --> F5 --> F6 --> F7
