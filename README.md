@@ -179,12 +179,26 @@ flowchart TD
    Região: sa-east-1 · IaC: [CDK/Terraform]
    ```
 
-5. **Aprove fase a fase**
-   - O agente gera/atualiza artefatos em `aidlc-docs/`
-   - Você revisa e registra aprovação em [`aidlc-docs/audit.md`](aidlc-docs/audit.md)
-   - Atualize status das stories em `stories.md` (`in_progress` → `done`)
+5. **Revise o Inception (REVIEW REQUIRED)**
 
-6. **Valide o resultado da onda**
+   Antes de **Approve & Continue** para Construction, revise os artefatos gerados:
+
+   - [`aidlc-docs/inception/requirements/requirements.md`](aidlc-docs/inception/requirements/requirements.md)
+   - [`aidlc-docs/inception/user-stories/stories.md`](aidlc-docs/inception/user-stories/stories.md) (épico da onda)
+   - [`aidlc-docs/inception/plans/execution-plan.md`](aidlc-docs/inception/plans/execution-plan.md)
+   - [`aidlc-docs/inception/reverse-engineering/`](aidlc-docs/inception/reverse-engineering/)
+   - [`aidlc-docs/inception/application-design/`](aidlc-docs/inception/application-design/)
+
+   **Guia passo a passo:** [`aidlc-docs/README.md#revisar-inception-antes-de-construction`](aidlc-docs/README.md#revisar-inception-antes-de-construction)
+
+   - **Approve & Continue** — se escopo, região, bucket e ausência de Glue/Lambda/SFN (W1) estiverem corretos
+   - **Request Changes** — cite arquivo e o que mudar; não inicie Construction
+
+6. **Registre aprovação e Construction**
+   - Registre em [`aidlc-docs/audit.md`](aidlc-docs/audit.md)
+   - Atualize status das stories em `stories.md` (`in_progress` → `done` após validar)
+
+7. **Valide o resultado da onda**
    - Use os checkboxes de **Definition of Done** em [`backlog-roadmap.md`](aidlc-docs/inception/user-stories/backlog-roadmap.md)
    - Stories de paridade (E2-US03, E3-US03, E5-US03) comparam AWS vs. artefatos locais
 

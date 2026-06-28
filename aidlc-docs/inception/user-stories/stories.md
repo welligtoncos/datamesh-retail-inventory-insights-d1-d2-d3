@@ -6,6 +6,8 @@
 
 **Status:** `backlog` | `ready` | `in_progress` | `done` | `blocked`
 
+**W1 (E1-US01–04):** `ready` — aprovado 2026-06-28 · escopo Construction U1
+
 ---
 
 ## Épico E1 · Fundação de dados (Onda W1)
@@ -14,10 +16,10 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** buckets S3 com prefixos `insumo/`, `origem/dt=`, `enriquecido/dt=`, `relatorios/D1|D2|D3/`  
 - **Para** espelhar `tabela_origem/`, `tabela_enriquecida/` e saídas Excel do notebook  
-- **Status:** backlog · **Onda:** W1 · **Depende:** —
+- **Status:** ready · **Onda:** W1 · **Depende:** —
 
 **Critérios de aceite:**
-- [ ] Layout documentado (1 bucket ou estratégia multi-bucket definida)
+- [ ] Layout documentado (1 bucket: `retail-inventory-insights-dev`)
 - [ ] Particionamento `dt=YYYY-MM-DD/` igual ao local
 - [ ] Bloqueio de acesso público
 - [ ] Tags de ambiente/custo (ex.: `Project=retail-inventory-insights`)
@@ -28,7 +30,7 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** `retail_store_inventory.csv` em `insumo/`  
 - **Para** a esteira AWS consumir o mesmo dataset do Kaggle  
-- **Status:** backlog · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
 - [ ] Arquivo presente e legível pelas roles da esteira
@@ -41,7 +43,7 @@
 - **Como** plataforma AWS (P4)  
 - **Quero** roles para Glue, Lambda e Step Functions  
 - **Para** ler/escrever apenas os prefixos da esteira  
-- **Status:** backlog · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
 - [ ] Role Glue: leitura `insumo/`, leitura/escrita `origem/`, `enriquecido/`
@@ -55,7 +57,7 @@
 - **Como** analista de estoque (P1)  
 - **Quero** documentação de onde ficam insumo, camadas e relatórios  
 - **Para** localizar arquivos sem Jupyter  
-- **Status:** backlog · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
 - [ ] Tabela local → S3 em `aidlc-docs` ou README

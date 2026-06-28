@@ -239,11 +239,24 @@ NÃO implementar Glue, Lambda ou Step Functions ainda.
 
 O agente deve gerar artefatos em `aidlc-docs/` e **parar para aprovação**.
 
-#### Passo 2 · Aprovar e registrar
+#### Passo 2 · Revisar Inception e aprovar
 
-1. Revise o plano (escopo = só W1).
-2. Registre em `aidlc-docs/audit.md` (data, evento, aprovador).
-3. Atualize `aidlc-state.md`: W1 → `in_progress`.
+Quando o agente exibir **REVIEW REQUIRED**, revise os artefatos **antes** de Construction. Guia completo: [`aidlc-docs/README.md#revisar-inception-antes-de-construction`](../aidlc-docs/README.md#revisar-inception-antes-de-construction).
+
+Resumo:
+
+1. `requirements.md` — escopo só W1; sem Glue/Lambda/SFN
+2. `stories.md` — E1-US01…04 com critérios testáveis
+3. `execution-plan.md` — Construction = Terraform U1
+4. `reverse-engineering/` — bate com o notebook
+5. `application-design/` — S3 + IAM + upload CSV manual
+
+Se ok → **Approve & Continue** e registre em `aidlc-docs/audit.md`. Se não → **Request Changes** (arquivo + o que mudar).
+
+Depois da aprovação:
+
+1. Atualize `aidlc-state.md`: W1 → `in_progress`
+2. Construction gera `terraform/` — valide com `terraform plan` antes de `apply`
 
 #### Passo 3 · Implementar E1 na ordem
 
