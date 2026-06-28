@@ -82,5 +82,24 @@ module "lambda_reports" {
   environment     = var.environment
   bucket_name     = module.s3.bucket_name
   lambda_role_arn = module.iam.lambda_reports_role_arn
-  package_path    = abspath("${path.module}/../../../lambda/build/gerar_relatorio_d1.zip")
+  package_path    = abspath("${path.module}/../../../lambda/build/lambda_reports.zip")
+}
+
+module "athena" {
+  source = "../../modules/athena"
+
+  project_name = var.project_name
+  environment  = var.environment
+  bucket_name  = module.s3.bucket_name
+  aws_region   = var.aws_region
+}
+
+module "monitoring" {
+  source = "../../modules/monitoring"
+
+  project_name          = var.project_name
+  environment           = var.environment
+  sfn_state_machine_arn = module.stepfunctions.processar_dia_state_machine_arn
+  alert_email           = var.alert_email
+  enable_sns_alerts     = var.enable_sns_alerts
 }

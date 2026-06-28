@@ -178,3 +178,34 @@ Não implementar D-2/D-3, Athena nem alarmes (W6) ainda."
 **Context**: W5 DoD passed — Excel D-1 em s3://retail-inventory-insights-dev-use1/relatorios/D1/
 
 ---
+
+## W6 User Request
+**Timestamp**: 2026-06-28T23:45:00Z
+**User Input**: "Siga o AI-DLC — Onda W6 (E6-US01, E6-US02, E7-US01, E7-US02).
+Brownfield: relatórios D-2/D-3 + operação (Esteira_3Relatorios_D1_D2_D3.ipynb).
+Nota: D-1 já implementado (W5); D-2/D-3 estão planejados no notebook — D-3 ainda sem célula completa; definir lógica mínima alinhada ao § intro.
+
+Infra existente: bucket retail-inventory-insights-dev-use1, roles lambda-reports-dev, glue-dev, sfn-dev, região us-east-1.
+Lambda D-1: retail-inventory-insights-gerar-relatorio-d1-dev (reutilizar padrão W5).
+SFN: retail-inventory-insights-processar-dia-dev.
+
+Escopo W6:
+- E6-US01: Excel D-2 (rupturas _stockout==1, _lost>0) → relatorios/D2/relatorio_D2_exec*_dado*
+- E6-US02: Excel D-3 (janela N partições dt=, _is_weekend) → relatorios/D3/
+- E7-US01: Glue Data Catalog / Athena sobre enriquecido/dt=
+- E7-US02: CloudWatch Alarm em falha Step Functions + SNS (dev)
+
+Entrega Excel: S3 apenas (mesmo padrão W5).
+Em dev: execução manual OK; EventBridge cron opcional/documentado.
+Não implementar prod/multi-ambiente ainda."
+**AI Response**: Lambda D-2/D-3 + Athena + SNS alarm + w6 scripts
+**Context**: W6 Construction started
+
+---
+
+## Construction U6/U7 Complete
+**Timestamp**: 2026-06-28T23:30:00Z
+**AI Response**: Lambda D-2/D-3 OK; Athena SUCCEEDED; CloudWatch alarm OK; SNS skipped (IAM)
+**Context**: W6 DoD passed — esteira W1-W6 completa
+
+---

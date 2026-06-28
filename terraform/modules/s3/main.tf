@@ -36,6 +36,7 @@ locals {
     "relatorios/D1/.keep",
     "relatorios/D2/.keep",
     "relatorios/D3/.keep",
+    "athena-results/.keep",
   ]
 }
 

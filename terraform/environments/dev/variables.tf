@@ -45,3 +45,15 @@ variable "enable_sfn_logging" {
   type        = bool
   default     = false
 }
+
+variable "alert_email" {
+  description = "W6: optional email for SNS pipeline failure alerts (dev)"
+  type        = string
+  default     = ""
+}
+
+variable "enable_sns_alerts" {
+  description = "W6: create SNS topic (requires sns:CreateTopic IAM permission)"
+  type        = bool
+  default     = false
+}

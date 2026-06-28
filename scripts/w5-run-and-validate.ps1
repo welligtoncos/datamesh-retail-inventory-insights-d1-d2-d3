@@ -56,7 +56,7 @@ if ($enrLs -notmatch "data.parquet") {
 Write-Host "  [OK] enriquecido present" -ForegroundColor Green
 
 Write-Host "`n[2] Build Lambda package..." -ForegroundColor Yellow
-& (Join-Path $RepoRoot "scripts\build_lambda_d1_package.ps1")
+& (Join-Path $RepoRoot "scripts\build_lambda_reports_package.ps1")
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Push-Location $TfDir

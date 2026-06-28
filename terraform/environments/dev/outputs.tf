@@ -97,3 +97,48 @@ output "lambda_gerar_relatorio_d1_arn" {
   value       = module.lambda_reports.gerar_relatorio_d1_function_arn
   description = "Lambda ARN: gerar relatório D-1 (W5)"
 }
+
+output "lambda_gerar_relatorio_d2_name" {
+  value       = module.lambda_reports.gerar_relatorio_d2_function_name
+  description = "Lambda: gerar relatório Excel D-2 (W6)"
+}
+
+output "lambda_gerar_relatorio_d2_arn" {
+  value       = module.lambda_reports.gerar_relatorio_d2_function_arn
+  description = "Lambda ARN: gerar relatório D-2 (W6)"
+}
+
+output "lambda_gerar_relatorio_d3_name" {
+  value       = module.lambda_reports.gerar_relatorio_d3_function_name
+  description = "Lambda: gerar relatório Excel D-3 (W6)"
+}
+
+output "lambda_gerar_relatorio_d3_arn" {
+  value       = module.lambda_reports.gerar_relatorio_d3_function_arn
+  description = "Lambda ARN: gerar relatório D-3 (W6)"
+}
+
+output "athena_database_name" {
+  value       = module.athena.glue_database_name
+  description = "Glue/Athena database (E7-US01)"
+}
+
+output "athena_workgroup_name" {
+  value       = module.athena.athena_workgroup_name
+  description = "Athena workgroup (E7-US01)"
+}
+
+output "athena_example_query" {
+  value       = module.athena.example_query
+  description = "Example Athena SQL query"
+}
+
+output "sns_pipeline_alerts_topic_arn" {
+  value       = module.monitoring.sns_topic_arn
+  description = "SNS topic for SFN failure alerts (E7-US02)"
+}
+
+output "sfn_failed_alarm_name" {
+  value       = module.monitoring.sfn_failed_alarm_name
+  description = "CloudWatch alarm name for SFN failures (E7-US02)"
+}

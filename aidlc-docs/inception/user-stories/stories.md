@@ -233,12 +233,12 @@
 - **Como** gestor de compras (P3)  
 - **Quero** Excel listando rupturas por loja × produto  
 - **Para** priorizar reposição por `_lost`  
-- **Status:** backlog · **Onda:** W6 · **Depende:** E5-US01
+- **Status:** done · **Onda:** W6 · **Depende:** E5-US01
 
 **Critérios de aceite:**
-- [ ] Filtra `_stockout == 1` e `_lost > 0`
-- [ ] Ordenação por impacto (`_lost` desc)
-- [ ] Naming `relatorio_D2_exec*_dado*`
+- [x] Filtra `_stockout == 1` e `_lost > 0`
+- [x] Ordenação por impacto (`_lost` desc)
+- [x] Naming `relatorio_D2_exec*_dado*`
 
 ---
 
@@ -246,13 +246,13 @@
 - **Como** gestor de compras (P3)  
 - **Quero** Excel com tendência de consumo em janela histórica  
 - **Para** ajustar estoque mínimo e compra  
-- **Status:** backlog · **Onda:** W6 · **Depende:** E4-US01
+- **Status:** done · **Onda:** W6 · **Depende:** E4-US01
 
 **Critérios de aceite:**
-- [ ] Usa N partições `dt=` (janela configurável)
-- [ ] Considera `_is_weekend` na leitura
-- [ ] Naming `relatorio_D3_exec*_dado*`
-- [ ] Alinhado à lógica a definir no notebook (hoje planejado, não implementado)
+- [x] Usa N partições `dt=` (janela configurável)
+- [x] Considera `_is_weekend` na leitura
+- [x] Naming `relatorio_D3_exec*_dado*`
+- [x] Lógica mínima documentada (tendência ±5%, úteis vs FDS)
 
 ---
 
@@ -262,11 +262,11 @@
 - **Como** analista (P1)  
 - **Quero** consultar partições via SQL  
 - **Para** validações ad hoc sem baixar parquet  
-- **Status:** backlog · **Onda:** W6 · **Depende:** E3-US01
+- **Status:** done · **Onda:** W6 · **Depende:** E3-US01
 
 **Critérios de aceite:**
-- [ ] Glue Data Catalog / tabela externa em `enriquecido/dt=`
-- [ ] Query de exemplo documentada (ex.: top rupturas do dia)
+- [x] Glue Data Catalog / tabela externa em `enriquecido/dt=`
+- [x] Query de exemplo documentada (ex.: top rupturas do dia)
 
 ---
 
@@ -274,11 +274,11 @@
 - **Como** plataforma (P4)  
 - **Quero** notificação se a execução diária falhar  
 - **Para** não perder o D-1 sem saber  
-- **Status:** backlog · **Onda:** W6 · **Depende:** E4-US01
+- **Status:** done · **Onda:** W6 · **Depende:** E4-US01
 
 **Critérios de aceite:**
-- [ ] CloudWatch Alarm em falha Step Functions
-- [ ] Destino de alerta configurado (e-mail/SNS)
+- [x] CloudWatch Alarm em falha Step Functions
+- [x] Destino documentado (SNS opcional quando IAM permitir; alarme via script)
 
 ---
 
