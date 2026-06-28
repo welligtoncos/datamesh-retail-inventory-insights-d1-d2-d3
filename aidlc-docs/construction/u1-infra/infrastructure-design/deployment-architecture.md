@@ -7,7 +7,7 @@ flowchart TB
         CLI["aws s3 cp CSV"]
     end
 
-    subgraph AWS_sa_east_1["AWS sa-east-1 · dev"]
+    subgraph AWS_us_east_1["AWS us-east-1 · dev"]
         S3["S3 retail-inventory-insights-dev"]
         IAM_G["IAM retail-inventory-glue-dev"]
         IAM_L["IAM retail-inventory-lambda-reports-dev"]
@@ -37,7 +37,7 @@ flowchart TB
 3. `terraform init`
 4. `terraform plan -var-file=dev.tfvars`
 5. `terraform apply -var-file=dev.tfvars`
-6. Upload CSV: `aws s3 cp ../../../retail_store_inventory.csv s3://retail-inventory-insights-dev/insumo/ --region sa-east-1`
+6. Upload CSV: `aws s3 cp ../../../retail_store_inventory.csv s3://retail-inventory-insights-dev/insumo/ --region us-east-1`
 7. Validar: `aws s3 ls s3://retail-inventory-insights-dev/ --recursive`
 
 ## Rollback

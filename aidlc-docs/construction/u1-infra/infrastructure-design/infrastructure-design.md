@@ -5,7 +5,7 @@
 | Atributo | Valor |
 |----------|-------|
 | Provider | AWS |
-| Region | sa-east-1 |
+| Region | us-east-1 |
 | Environment | dev |
 | Account | Caller identity (terraform data source) |
 

@@ -38,8 +38,8 @@ Confirm resources point to `retail-inventory-insights-dev` bucket ARNs only.
 ### 4. Upload + read test (E1-US02)
 
 ```powershell
-aws s3 cp ../../../retail_store_inventory.csv s3://retail-inventory-insights-dev/insumo/retail_store_inventory.csv --region sa-east-1
-aws s3 ls s3://retail-inventory-insights-dev/insumo/ --region sa-east-1
+aws s3 cp ../../../retail_store_inventory.csv s3://retail-inventory-insights-dev/insumo/retail_store_inventory.csv --region us-east-1
+aws s3 ls s3://retail-inventory-insights-dev/insumo/ --region us-east-1
 ```
 
 ## Future integration (W2+)

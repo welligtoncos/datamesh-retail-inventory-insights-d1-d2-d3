@@ -11,7 +11,7 @@
 ```
 module.s3.aws_s3_bucket.main
   name: retail-inventory-insights-dev
-  region: sa-east-1
+  region: us-east-1
 
 module.s3.aws_s3_bucket_public_access_block.main
   block_public_acls: true
@@ -42,7 +42,7 @@ module.s3.aws_s3_bucket_versioning.main (optional dev)
 ```
 aws s3 cp retail_store_inventory.csv \
   s3://retail-inventory-insights-dev/insumo/retail_store_inventory.csv \
-  --region sa-east-1
+  --region us-east-1
 ```
 
 ---
@@ -101,7 +101,7 @@ aws s3 cp retail_store_inventory.csv \
 
 | Variable | Default | Descrição |
 |----------|---------|-----------|
-| `aws_region` | `sa-east-1` | Região |
+| `aws_region` | `us-east-1` | Região |
 | `environment` | `dev` | Tag Environment |
 | `project_name` | `retail-inventory-insights` | Tag Project |
 | `bucket_name` | `retail-inventory-insights-dev` | Nome global único S3 |

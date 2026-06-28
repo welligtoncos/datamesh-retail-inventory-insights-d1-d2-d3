@@ -32,8 +32,8 @@ SCHEMA = [
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dt", default="2022-01-01")
-    parser.add_argument("--bucket", default="retail-inventory-insights-dev")
-    parser.add_argument("--region", default="sa-east-1")
+    parser.add_argument("--bucket", default="retail-inventory-insights-dev-use1")
+    parser.add_argument("--region", default="us-east-1")
     parser.add_argument("--out-dir", default="tabela_origem")
     args = parser.parse_args()
 

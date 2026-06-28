@@ -12,7 +12,7 @@ terraform {
   # backend "s3" {
   #   bucket = "retail-inventory-insights-terraform-state"
   #   key    = "dev/u1-infra/terraform.tfstate"
-  #   region = "sa-east-1"
+  #   region = "us-east-1"
   # }
 }
 

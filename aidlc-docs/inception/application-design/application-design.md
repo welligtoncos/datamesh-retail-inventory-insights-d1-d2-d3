@@ -25,7 +25,7 @@ flowchart LR
         TE["tabela_enriquecida/"]
     end
 
-    subgraph AWS_Dev["AWS sa-east-1 dev"]
+    subgraph AWS_Dev["AWS us-east-1 dev"]
         S3["S3 retail-inventory-insights-dev"]
         IAM["IAM Roles x3"]
         TF["Terraform"]
@@ -93,7 +93,7 @@ Detalhes: [`component-dependency.md`](component-dependency.md)
 
 | Decisão | Escolha |
 |---------|---------|
-| Região | sa-east-1 |
+| Região | us-east-1 |
 | IaC | Terraform modular |
 | Bucket | Único `retail-inventory-insights-dev` |
 | Encryption | SSE-S3 AES256 |

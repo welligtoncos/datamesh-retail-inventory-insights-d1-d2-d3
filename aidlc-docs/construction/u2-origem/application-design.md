@@ -28,5 +28,5 @@ insumo/retail_store_inventory.csv
 
 ```powershell
 aws glue start-job-run --job-name retail-inventory-insights-carregar-origem-dia-dev `
-  --arguments '{"--dt":"2022-01-01"}' --region sa-east-1
+  --arguments '{"--dt":"2022-01-01"}' --region us-east-1
 ```

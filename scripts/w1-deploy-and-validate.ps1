@@ -3,8 +3,8 @@
 # Requires: Terraform >= 1.5, AWS CLI v2, credentials with S3+IAM permissions
 
 $ErrorActionPreference = "Stop"
-$Region = "sa-east-1"
-$Bucket = "retail-inventory-insights-dev"
+$Region = "us-east-1"
+$Bucket = "retail-inventory-insights-dev-use1"
 $TfDir = Join-Path $PSScriptRoot "..\terraform\environments\dev" | Resolve-Path
 $CsvPath = Join-Path $PSScriptRoot "..\retail_store_inventory.csv" | Resolve-Path
 

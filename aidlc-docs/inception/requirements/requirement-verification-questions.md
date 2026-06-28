@@ -4,6 +4,8 @@
 **Escopo desta rodada:** Onda W1 (E1-US01 a E1-US04)  
 **Data:** 2026-06-28
 
+> **Atualização:** Q1 respondida como **A) us-east-1** (alteração pós-implementação W2; antes sa-east-1).
+
 > Decisões já informadas pelo solicitante foram pré-preenchidas. Itens fora de W1 ficam registrados para ondas futuras.
 
 ---
@@ -18,7 +20,7 @@ B) sa-east-1
 C) us-west-2  
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: B
+[Answer]: A
 
 ---
 

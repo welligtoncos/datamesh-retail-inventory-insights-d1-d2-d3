@@ -29,7 +29,7 @@ sequenceDiagram
 
 ### Responsibilities
 
-1. Validar região sa-east-1
+1. Validar região us-east-1
 2. Criar bucket com tags
 3. Criar roles IAM (sem anexar a recursos inexistentes)
 4. Exportar outputs para documentação

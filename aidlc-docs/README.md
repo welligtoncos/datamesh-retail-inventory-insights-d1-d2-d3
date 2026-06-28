@@ -143,7 +143,7 @@ Não iniciar Construction até atualizar aidlc-state.md.
 
 ```text
 Approve & Continue — Inception W1 aprovado.
-Decisões: sa-east-1, Terraform, bucket retail-inventory-insights-dev, env dev.
+Decisões: us-east-1, Terraform, bucket retail-inventory-insights-dev, env dev.
 Escopo Construction U1: S3 + IAM + docs; sem Glue/Lambda/SFN.
 Registrar aprovação em aidlc-docs/audit.md.
 ```

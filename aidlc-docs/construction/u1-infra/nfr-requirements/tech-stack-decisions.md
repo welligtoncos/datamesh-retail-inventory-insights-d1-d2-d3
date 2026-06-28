@@ -2,7 +2,7 @@
 
 | Decisão | Escolha | Rationale |
 |---------|---------|-----------|
-| Cloud | AWS sa-east-1 | Decisão do projeto |
+| Cloud | AWS us-east-1 | Decisão do projeto |
 | IaC | Terraform >= 1.5 | Decisão do projeto; modular e versionável |
 | AWS Provider | hashicorp/aws ~> 5.0 | Estável; suporte S3/IAM completo |
 | Storage | S3 single bucket | Paridade notebook; prefixos Hive-style |

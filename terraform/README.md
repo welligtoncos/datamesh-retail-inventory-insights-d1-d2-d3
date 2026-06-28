@@ -2,7 +2,7 @@
 
 Infraestrutura da **Onda W1** (E1-US01 a E1-US04) para a esteira `datamesh-retail-inventory-insights-d1-d2-d3`.
 
-**Região:** sa-east-1 · **Ambiente:** dev · **Bucket:** `retail-inventory-insights-dev`
+**Região:** us-east-1 · **Ambiente:** dev · **Bucket:** `retail-inventory-insights-dev-use1`
 
 > Sem Glue, Lambda ou Step Functions nesta rodada — apenas bucket, prefixos e roles IAM preparatórias.
 
@@ -74,8 +74,8 @@ Após o `apply`, envie o CSV manualmente:
 
 ```powershell
 aws s3 cp ../../../retail_store_inventory.csv `
-  s3://retail-inventory-insights-dev/insumo/retail_store_inventory.csv `
-  --region sa-east-1
+  s3://retail-inventory-insights-dev-use1/insumo/retail_store_inventory.csv `
+  --region us-east-1
 ```
 
 Validar schema (15 colunas) localmente com o notebook §1 antes do upload.
@@ -86,10 +86,10 @@ Validar schema (15 colunas) localmente com o notebook §1 antes do upload.
 
 | Notebook (local) | AWS S3 |
 |------------------|--------|
-| `retail_store_inventory.csv` | `s3://retail-inventory-insights-dev/insumo/retail_store_inventory.csv` |
-| `tabela_origem/dt=2022-01-01/data.parquet` | `s3://retail-inventory-insights-dev/origem/dt=2022-01-01/data.parquet` |
-| `tabela_enriquecida/dt=2022-01-01/data.parquet` | `s3://retail-inventory-insights-dev/enriquecido/dt=2022-01-01/data.parquet` |
-| `relatorio_D1_exec2022-01-02_dado2022-01-01.xlsx` | `s3://retail-inventory-insights-dev/relatorios/D1/relatorio_D1_exec2022-01-02_dado2022-01-01.xlsx` |
+| `retail_store_inventory.csv` | `s3://retail-inventory-insights-dev-use1/insumo/retail_store_inventory.csv` |
+| `tabela_origem/dt=2022-01-01/data.parquet` | `s3://retail-inventory-insights-dev-use1/origem/dt=2022-01-01/data.parquet` |
+| `tabela_enriquecida/dt=2022-01-01/data.parquet` | `s3://retail-inventory-insights-dev-use1/enriquecido/dt=2022-01-01/data.parquet` |
+| `relatorio_D1_exec2022-01-02_dado2022-01-01.xlsx` | `s3://retail-inventory-insights-dev-use1/relatorios/D1/relatorio_D1_exec2022-01-02_dado2022-01-01.xlsx` |
 
 Paths de exemplo também disponíveis via `terraform output example_paths`.
 
@@ -123,7 +123,7 @@ Marcadores `.keep` criados pelo Terraform para visibilidade dos prefixos no cons
 ## Validação pós-deploy
 
 ```powershell
-aws s3 ls s3://retail-inventory-insights-dev/ --recursive --region sa-east-1
+aws s3 ls s3://retail-inventory-insights-dev-use1/ --recursive --region us-east-1
 aws iam get-role --role-name retail-inventory-glue-dev
 aws iam get-role --role-name retail-inventory-lambda-reports-dev
 aws iam get-role --role-name retail-inventory-sfn-dev

@@ -11,9 +11,9 @@
 - **Current Stage**: W2 done — ready for W3 Construction
 
 ## Decisões confirmadas
-- [x] Região AWS: **sa-east-1**
+- [x] Região AWS: **us-east-1** (N. Virginia)
 - [x] IaC: **Terraform**
-- [x] Bucket: **retail-inventory-insights-dev**
+- [x] Bucket: **retail-inventory-insights-dev-use1** (us-east-1; legado sa-east-1: `retail-inventory-insights-dev`)
 - [x] Ambiente: **dev**
 - [x] AWS Account: **303238378103**
 - [ ] Entrega Excel W5: S3 apenas (default)
@@ -45,4 +45,5 @@
 - **Status**: Glue job `retail-inventory-insights-carregar-origem-dia-dev`; origem `dt=2022-01-01` validado
 
 ## Última atualização
+- 2026-06-28 — Região alterada para **us-east-1** (Virginia); requirements, dev.tfvars e docs atualizados
 - 2026-06-28 — W2 DoD passed; Glue job + paridade E2-US03 (100 rows, 15 cols)

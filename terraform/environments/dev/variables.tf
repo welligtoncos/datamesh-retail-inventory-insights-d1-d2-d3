@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "sa-east-1"
+  default     = "us-east-1"
 }
 
 variable "environment" {
@@ -19,7 +19,7 @@ variable "project_name" {
 variable "bucket_name" {
   description = "S3 bucket name (must be globally unique)"
   type        = string
-  default     = "retail-inventory-insights-dev"
+  default     = "retail-inventory-insights-dev-use1"
 }
 
 variable "tags" {

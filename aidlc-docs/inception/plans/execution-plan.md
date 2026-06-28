@@ -140,7 +140,7 @@ CONSTRUCTION (próxima rodada):
 - [ ] NFR Design U1 — **EXECUTE**
   - **Rationale**: Traduzir NFR em padrões Terraform
 - [ ] Infrastructure Design U1 — **EXECUTE**
-  - **Rationale**: Módulos S3, IAM, outputs, variáveis sa-east-1
+  - **Rationale**: Módulos S3, IAM, outputs, variáveis us-east-1
 - [ ] Code Generation U1 — **EXECUTE**
   - **Rationale**: Gerar Terraform + docs upload CSV
 - [ ] Build and Test — **EXECUTE**
@@ -171,7 +171,7 @@ CONSTRUCTION (próxima rodada):
 
 ## Success Criteria
 
-- **Primary Goal**: Fundação S3/IAM dev em sa-east-1 espelhando layout local
+- **Primary Goal**: Fundação S3/IAM dev em us-east-1 espelhando layout local
 - **Key Deliverables**: Bucket `retail-inventory-insights-dev`, 3 IAM roles, docs mapeamento
 - **Quality Gates**: W1 DoD em backlog-roadmap.md; Security Baseline para S3/IAM
 

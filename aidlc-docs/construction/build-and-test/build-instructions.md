@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Terraform >= 1.5.0
-- AWS CLI v2 configured for sa-east-1
+- AWS CLI v2 configured for us-east-1
 - IAM permissions: `s3:*` (bucket management), `iam:*` (roles/policies) on target account
 
 ## Build Steps

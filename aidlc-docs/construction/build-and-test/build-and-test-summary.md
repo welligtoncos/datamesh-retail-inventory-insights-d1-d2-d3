@@ -4,7 +4,7 @@
 
 ## What was built
 
-Terraform modules for S3 data lake bucket and IAM roles (Glue, Lambda, Step Functions preparatórias) in sa-east-1 dev.
+Terraform modules for S3 data lake bucket and IAM roles (Glue, Lambda, Step Functions preparatórias) in us-east-1 dev.
 
 ## Build
 

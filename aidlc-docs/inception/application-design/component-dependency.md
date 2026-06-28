@@ -80,5 +80,5 @@ s3://.../relatorios/D1/*.xlsx
 | Dependency | Version/Config | Purpose |
 |------------|----------------|---------|
 | Terraform | >= 1.5 | IaC |
-| AWS Provider | ~> 5.0 | Recursos sa-east-1 |
+| AWS Provider | ~> 5.0 | Recursos us-east-1 |
 | AWS CLI | v2 | Upload CSV manual |

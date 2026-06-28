@@ -180,7 +180,7 @@ Registre em [`aidlc-docs/aidlc-state.md`](../aidlc-docs/aidlc-state.md) (ou em `
 
 | Decisão | Opções | Sugestão POC |
 |---------|--------|--------------|
-| Região AWS | `sa-east-1`, `us-east-1`, … | `sa-east-1` (conta BR) |
+| Região AWS | `sa-east-1`, `us-east-1`, … | `us-east-1` (N. Virginia) |
 | IaC | CDK, Terraform, Console | Terraform ou CDK Python |
 | Buckets | 1 bucket com prefixos vs. vários | **1 bucket** `retail-inventory-insights-dev` |
 | Ambiente | `dev`, `prod` | Começar só `dev` |
@@ -226,7 +226,7 @@ Escopo desta rodada: APENAS Onda W1 (E1-US01 a E1-US04).
 Brownfield: Esteira_3Relatorios_D1_D2_D3.ipynb.
 
 Decisões:
-- Região: sa-east-1
+- Região: us-east-1
 - IaC: Terraform
 - 1 bucket: retail-inventory-insights-dev
 - Ambiente: dev

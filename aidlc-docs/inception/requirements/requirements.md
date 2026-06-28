@@ -32,18 +32,20 @@ A migração AWS segue ondas W1–W6. **Esta rodada entrega apenas W1** — fund
 
 | Decisão | Valor |
 |---------|-------|
-| Região AWS | **sa-east-1** |
+| Região AWS | **us-east-1** (N. Virginia) |
 | IaC | **Terraform** (CDK Python = alternativa documentada) |
-| Bucket | **retail-inventory-insights-dev** (único) |
+| Bucket | **retail-inventory-insights-dev-use1** (us-east-1; legado sa-east-1 sem permissão de delete) |
 | Ambiente | **dev** |
 | Compute | **Nenhum** nesta rodada |
+
+> **Alteração de decisão (2026-06-28):** região migrada de `sa-east-1` para **`us-east-1`**. Bucket renomeado para **`retail-inventory-insights-dev-use1`** (bucket legado `retail-inventory-insights-dev` permanece em sa-east-1 — sem permissão de delete).
 
 ---
 
 ## Requisitos funcionais (W1)
 
 ### RF-W1-01 · Bucket e prefixos S3 (E1-US01)
-- Criar bucket `retail-inventory-insights-dev` em sa-east-1.
+- Criar bucket `retail-inventory-insights-dev-use1` em us-east-1.
 - Prefixos obrigatórios:
   - `insumo/`
   - `origem/dt=YYYY-MM-DD/`
@@ -135,7 +137,7 @@ A migração AWS segue ondas W1–W6. **Esta rodada entrega apenas W1** — fund
 
 ## Critérios de sucesso W1
 
-1. Bucket e prefixos provisionados via Terraform em sa-east-1.
+1. Bucket e prefixos provisionados via Terraform em us-east-1.
 2. CSV de insumo acessível em `insumo/` (upload manual documentado).
 3. Roles IAM criadas com policies scoped por prefixo.
 4. Documentação de mapeamento local→S3 disponível para P1 e P2.

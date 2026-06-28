@@ -102,3 +102,19 @@ Não implementar enriquecimento/orquestração ainda."
 **Context**: W2 DoD passed — origem dt=2022-01-01 em s3://retail-inventory-insights-dev/origem/
 
 ---
+
+## Request Changes — Região AWS
+**Timestamp**: 2026-06-28T17:00:00Z
+**User Input**: "Request Changes: alterar a região do projeto de sa-east-1 para us-east-1 (Virginia). Atualizar requirements, dev.tfvars e a documentação."
+**AI Response**: Região atualizada para us-east-1 em dev.tfvars, variables.tf, scripts, requirements, aidlc-state e documentação AI-DLC/Terraform
+**Context**: Decisão arquitetural alterada — sa-east-1 → us-east-1 (N. Virginia)
+
+---
+
+## Request Changes — Bucket us-east-1 (sem delete legado)
+**Timestamp**: 2026-06-28T18:00:00Z
+**User Input**: "nao tenho permissão so recria mesmo na virginia"
+**AI Response**: Novo bucket `retail-inventory-insights-dev-use1` em dev.tfvars; legado `retail-inventory-insights-dev` (sa-east-1) permanece
+**Context**: Bucket name global — recriação em Virginia via novo nome
+
+---

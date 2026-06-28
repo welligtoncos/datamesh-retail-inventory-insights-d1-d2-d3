@@ -176,7 +176,7 @@ flowchart TD
    Siga o AI-DLC. Escopo desta rodada: Onda W1 apenas (E1-US01 a E1-US04).
    Brownfield: Esteira_3Relatorios_D1_D2_D3.ipynb.
    Não implementar Glue/Lambda ainda.
-   Região: sa-east-1 · IaC: [CDK/Terraform]
+   Região: us-east-1 · IaC: [CDK/Terraform]
    ```
 
 5. **Revise o Inception (REVIEW REQUIRED)**

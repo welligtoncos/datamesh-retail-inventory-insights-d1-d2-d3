@@ -3,13 +3,41 @@
 
 param(
     [string]$Dt = "2022-01-01",
-    [string]$Region = "sa-east-1",
-    [string]$Bucket = "retail-inventory-insights-dev"
+    [string]$Region = "us-east-1",
+    [string]$Bucket = "retail-inventory-insights-dev-use1"
 )
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path $PSScriptRoot -Parent
 $TfDir = Join-Path $RepoRoot "terraform\environments\dev" | Resolve-Path
+
+function Resolve-PythonExe {
+    param([string]$Root)
+    $venvPy = Join-Path $Root ".venv\Scripts\python.exe"
+    if (Test-Path $venvPy) {
+        & $venvPy -c "import pandas, pyarrow, boto3" 2>$null
+        if ($LASTEXITCODE -eq 0) { return $venvPy }
+        Write-Host "  WARN: .venv invalid, using system Python" -ForegroundColor Yellow
+    }
+    if (Get-Command python -ErrorAction SilentlyContinue) {
+        & python -c "import pandas, pyarrow, boto3" 2>$null
+        if ($LASTEXITCODE -eq 0) { return "python" }
+    }
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        & py -3 -c "import pandas, pyarrow, boto3" 2>$null
+        if ($LASTEXITCODE -eq 0) { return "py:-3" }
+    }
+    throw "Python with pandas, pyarrow, boto3 not found. Install: pip install pandas pyarrow boto3"
+}
+
+function Invoke-PythonScript {
+    param([string]$PyExe, [string]$ScriptPath, [string[]]$ScriptArgs)
+    if ($PyExe -eq "py:-3") {
+        & py -3 $ScriptPath @ScriptArgs
+    } else {
+        & $PyExe $ScriptPath @ScriptArgs
+    }
+}
 
 Write-Host "=== W2 Deploy & Validate (dt=$Dt) ===" -ForegroundColor Cyan
 
@@ -67,16 +95,13 @@ Write-Host "  [OK] data.parquet present" -ForegroundColor Green
 # 4. Parity vs local (E2-US03) — requires local partition from notebook
 Write-Host "`n[4] Paridade local vs AWS (E2-US03)..." -ForegroundColor Yellow
 $localPath = Join-Path $RepoRoot "tabela_origem\dt=$Dt\data.parquet"
+$py = Resolve-PythonExe -Root $RepoRoot
 if (-not (Test-Path $localPath)) {
     Write-Host "  Generating local baseline from S3 insumo..." -ForegroundColor Yellow
-    $py = Join-Path $RepoRoot ".venv\Scripts\python.exe"
-    if (-not (Test-Path $py)) { $py = "python" }
-    & $py (Join-Path $RepoRoot "scripts\generate_local_origem.py") --dt $Dt --bucket $Bucket --region $Region
+    Invoke-PythonScript -PyExe $py -ScriptPath (Join-Path $RepoRoot "scripts\generate_local_origem.py") -ScriptArgs @("--dt", $Dt, "--bucket", $Bucket, "--region", $Region)
     if ($LASTEXITCODE -ne 0) { exit 1 }
 }
-$py = Join-Path $RepoRoot ".venv\Scripts\python.exe"
-if (-not (Test-Path $py)) { $py = "python" }
-& $py (Join-Path $RepoRoot "scripts\compare_origem_parquet.py") --dt $Dt --bucket $Bucket --region $Region --local $localPath
+Invoke-PythonScript -PyExe $py -ScriptPath (Join-Path $RepoRoot "scripts\compare_origem_parquet.py") -ScriptArgs @("--dt", $Dt, "--bucket", $Bucket, "--region", $Region, "--local", $localPath)
 if ($LASTEXITCODE -ne 0) { exit 1 }
 
 Write-Host "`n=== W2 DoD: CHECKS PASSED (dt=$Dt) ===" -ForegroundColor Green

@@ -27,4 +27,4 @@ Replicar `carregar_origem_dia(dt)` do notebook na AWS via **Glue Python Shell** 
 
 - Idempotente (delete prefix + rewrite)
 - SCHEMA 15 colunas validado antes de processar
-- Região sa-east-1
+- Região us-east-1

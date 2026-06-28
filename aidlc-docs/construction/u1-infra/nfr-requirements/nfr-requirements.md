@@ -1,6 +1,6 @@
 # NFR Requirements · U1 Infra S3/IAM
 
-**Unidade:** u1-infra · **Onda:** W1 · **Ambiente:** dev · **Região:** sa-east-1
+**Unidade:** u1-infra · **Onda:** W1 · **Ambiente:** dev · **Região:** us-east-1
 
 ---
 
@@ -16,7 +16,7 @@
 
 | ID | Requisito | Valor W1 |
 |----|-----------|----------|
-| PERF-01 | Latência S3 | Padrão regional sa-east-1 |
+| PERF-01 | Latência S3 | Padrão regional us-east-1 |
 | PERF-02 | Throughput | Suficiente para upload CSV único e parquet diário |
 
 ## Availability
