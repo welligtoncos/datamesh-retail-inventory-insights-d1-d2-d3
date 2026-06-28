@@ -16,7 +16,7 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
-.terraform.lock.hcl
+# Commit lock files: terraform/environments/*/.terraform.lock.hcl
 
 # artefato zip duplicado da fonte aidlc-rules/
 ai-dlc-rules-v1.0.0.zip

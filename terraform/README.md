@@ -29,12 +29,41 @@ terraform/
 
 ## Deploy
 
+> **Diretório correto:** `terraform/environments/dev` (não `terraform/` nem `terraform/environments/`)
+
 ```powershell
 cd terraform/environments/dev
 terraform init
 terraform plan -var-file=dev.tfvars
 terraform apply -var-file=dev.tfvars
 terraform output
+```
+
+**Script automatizado (deploy + DoD):** na raiz do repo:
+
+```powershell
+.\scripts\w1-deploy-and-validate.ps1
+```
+
+### Erro comum: AWS `SignatureDoesNotMatch` / Signature expired
+
+Relógio do Windows desincronizado (~horas de diferença). Corrija antes do `apply`:
+
+1. **Configurações → Hora e idioma → Sincronizar agora**
+2. Ou PowerShell **como Administrador:**
+   ```powershell
+   Start-Service w32time
+   w32tm /resync /force
+   ```
+3. Renove credenciais SSO/session se usar tokens temporários.
+4. Teste: `aws sts get-caller-identity`
+
+### Erro: disco cheio no `terraform init`
+
+Libere espaço em disco (~600 MB para o provider AWS). Remova caches parciais:
+
+```powershell
+Remove-Item -Recurse -Force terraform/environments/dev/.terraform -ErrorAction SilentlyContinue
 ```
 
 ---

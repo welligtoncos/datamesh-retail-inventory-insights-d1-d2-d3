@@ -6,7 +6,7 @@
 
 **Status:** `backlog` | `ready` | `in_progress` | `done` | `blocked`
 
-**W1 (E1-US01–04):** `in_progress` — Terraform gerado 2026-06-28 · apply AWS pendente
+**W1 (E1-US01–04):** `done` — apply AWS 2026-06-28 · conta 303238378103
 
 ---
 
@@ -16,13 +16,13 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** buckets S3 com prefixos `insumo/`, `origem/dt=`, `enriquecido/dt=`, `relatorios/D1|D2|D3/`  
 - **Para** espelhar `tabela_origem/`, `tabela_enriquecida/` e saídas Excel do notebook  
-- **Status:** ready · **Onda:** W1 · **Depende:** —
+- **Status:** done · **Onda:** W1 · **Depende:** —
 
 **Critérios de aceite:**
-- [ ] Layout documentado (1 bucket: `retail-inventory-insights-dev`)
-- [ ] Particionamento `dt=YYYY-MM-DD/` igual ao local
-- [ ] Bloqueio de acesso público
-- [ ] Tags de ambiente/custo (ex.: `Project=retail-inventory-insights`)
+- [x] Layout documentado (1 bucket: `retail-inventory-insights-dev`)
+- [x] Particionamento `dt=YYYY-MM-DD/` igual ao local
+- [x] Bloqueio de acesso público
+- [x] Tags de ambiente/custo (ex.: `Project=retail-inventory-insights`)
 
 ---
 
@@ -30,12 +30,12 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** `retail_store_inventory.csv` em `insumo/`  
 - **Para** a esteira AWS consumir o mesmo dataset do Kaggle  
-- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** done · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
-- [ ] Arquivo presente e legível pelas roles da esteira
-- [ ] 15 colunas do `SCHEMA` do notebook validadas
-- [ ] Volume de linhas documentado (sanidade §1)
+- [x] Arquivo presente e legível pelas roles da esteira
+- [x] 15 colunas do `SCHEMA` do notebook validadas
+- [x] Volume de linhas documentado (sanidade §1 · 73.100 linhas)
 
 ---
 
@@ -43,13 +43,13 @@
 - **Como** plataforma AWS (P4)  
 - **Quero** roles para Glue, Lambda e Step Functions  
 - **Para** ler/escrever apenas os prefixos da esteira  
-- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** done · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
-- [ ] Role Glue: leitura `insumo/`, leitura/escrita `origem/`, `enriquecido/`
-- [ ] Role Lambda relatórios: leitura `enriquecido/`, escrita `relatorios/`
-- [ ] Role Step Functions: invocar jobs/Lambdas da esteira
-- [ ] Nenhuma policy `*` em actions sensíveis
+- [x] Role Glue: leitura `insumo/`, leitura/escrita `origem/`, `enriquecido/`
+- [x] Role Lambda relatórios: leitura `enriquecido/`, escrita `relatorios/`
+- [x] Role Step Functions: invocar jobs/Lambdas da esteira
+- [x] Nenhuma policy `*` em actions sensíveis
 
 ---
 
@@ -57,11 +57,11 @@
 - **Como** analista de estoque (P1)  
 - **Quero** documentação de onde ficam insumo, camadas e relatórios  
 - **Para** localizar arquivos sem Jupyter  
-- **Status:** ready · **Onda:** W1 · **Depende:** E1-US01
+- **Status:** done · **Onda:** W1 · **Depende:** E1-US01
 
 **Critérios de aceite:**
-- [ ] Tabela local → S3 em `aidlc-docs` ou README
-- [ ] Exemplo de path completo para um `dt` e um relatório D-1 futuro
+- [x] Tabela local → S3 em `aidlc-docs` ou README
+- [x] Exemplo de path completo para um `dt` e um relatório D-1 futuro
 
 ---
 
