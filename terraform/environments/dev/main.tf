@@ -74,3 +74,13 @@ module "stepfunctions" {
   eventbridge_rule_enabled    = var.eventbridge_rule_enabled
   enable_sfn_logging          = var.enable_sfn_logging
 }
+
+module "lambda_reports" {
+  source = "../../modules/lambda_reports"
+
+  project_name    = var.project_name
+  environment     = var.environment
+  bucket_name     = module.s3.bucket_name
+  lambda_role_arn = module.iam.lambda_reports_role_arn
+  package_path    = abspath("${path.module}/../../../lambda/build/gerar_relatorio_d1.zip")
+}

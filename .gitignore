@@ -20,3 +20,6 @@ override.tf.json
 
 # artefato zip duplicado da fonte aidlc-rules/
 ai-dlc-rules-v1.0.0.zip
+
+# Lambda build artifacts (W5)
+lambda/build/

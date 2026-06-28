@@ -193,13 +193,13 @@
 - **Como** analista (P1)  
 - **Quero** relatório D-1 em Excel após a esteira rodar  
 - **Para** ver ranking de produtos e receita do dia D-1  
-- **Status:** backlog · **Onda:** W5 · **Depende:** E4-US01
+- **Status:** done · **Onda:** W5 · **Depende:** E4-US01
 
 **Critérios de aceite:**
-- [ ] Lê partição `enriquecido/dt={DIA_DADO}`
-- [ ] Agrega por `Product ID` + `Category` (soma lojas)
-- [ ] Arquivo: `relatorio_D1_exec{DATA_EXECUCAO}_dado{DIA_DADO}.xlsx`
-- [ ] Insight no topo + fórmulas Excel (como notebook §3)
+- [x] Lê partição `enriquecido/dt={DIA_DADO}`
+- [x] Agrega por `Product ID` + `Category` (soma lojas)
+- [x] Arquivo: `relatorio_D1_exec{DATA_EXECUCAO}_dado{DIA_DADO}.xlsx`
+- [x] Insight no topo + fórmulas Excel (como notebook §3)
 
 ---
 
@@ -207,11 +207,11 @@
 - **Como** analista (P1)  
 - **Quero** acessar o relatório sem Jupyter  
 - **Para** usar no dia a dia  
-- **Status:** backlog · **Onda:** W5 · **Depende:** E5-US01
+- **Status:** done · **Onda:** W5 · **Depende:** E5-US01
 
 **Critérios de aceite:**
-- [ ] Path fixo em `relatorios/D1/`
-- [ ] Mecanismo de acesso documentado (console S3, URL pré-assinada, etc.)
+- [x] Path fixo em `relatorios/D1/`
+- [x] Mecanismo de acesso documentado (console S3, URL pré-assinada, etc.)
 
 ---
 
@@ -219,11 +219,11 @@
 - **Como** analista (P1)  
 - **Quero** mesmo ranking e totais que o notebook para o mesmo `dt`  
 - **Para** validar a migração  
-- **Status:** backlog · **Onda:** W5 · **Depende:** E5-US01
+- **Status:** done · **Onda:** W5 · **Depende:** E5-US01
 
 **Critérios de aceite:**
-- [ ] Top 3 produtos iguais ao Excel local de referência
-- [ ] Totais de unidades e receita conferem
+- [x] Top 3 produtos iguais ao Excel local de referência
+- [x] Totais de unidades e receita conferem
 
 ---
 

@@ -157,3 +157,24 @@ Não implementar Lambda Excel (W5) ainda."
 **Context**: W4 DoD passed — processar_dia orquestrado origem→enriquecido
 
 ---
+
+## W5 User Request
+**Timestamp**: 2026-06-28T22:00:00Z
+**User Input**: "Siga o AI-DLC — Onda W5 (E5-US01 a E5-US03).
+Brownfield: relatório Excel D-1 no notebook (§3 — Esteira_3Relatorios_D1_D2_D3.ipynb).
+Infra existente: bucket retail-inventory-insights-dev-use1, roles lambda-reports-dev e glue-dev, região us-east-1.
+Preferência: Lambda Python + openpyxl (ou Glue se justificar).
+Lê enriquecido/dt={DIA_DADO}; grava relatorio_D1_exec{DATA_EXECUCAO}_dado{DIA_DADO}.xlsx em relatorios/D1/.
+Entrega: S3 apenas (default dev).
+Não implementar D-2/D-3, Athena nem alarmes (W6) ainda."
+**AI Response**: Lambda gerar_relatorio_d1 + terraform module + w5 scripts
+**Context**: W5 Construction started
+
+---
+
+## Construction U5 Complete
+**Timestamp**: 2026-06-28T23:30:00Z
+**AI Response**: Lambda gerar_relatorio_d1 OK; 69 produtos, 14484 un., receita 879026.03; E5-US03 PARITY OK
+**Context**: W5 DoD passed — Excel D-1 em s3://retail-inventory-insights-dev-use1/relatorios/D1/
+
+---

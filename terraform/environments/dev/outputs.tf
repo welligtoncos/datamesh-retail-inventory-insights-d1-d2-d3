@@ -87,3 +87,13 @@ output "sfn_log_group_name" {
   value       = module.stepfunctions.processar_dia_log_group_name
   description = "CloudWatch log group for processar_dia (E4-US03)"
 }
+
+output "lambda_gerar_relatorio_d1_name" {
+  value       = module.lambda_reports.gerar_relatorio_d1_function_name
+  description = "Lambda: gerar relatório Excel D-1 (W5)"
+}
+
+output "lambda_gerar_relatorio_d1_arn" {
+  value       = module.lambda_reports.gerar_relatorio_d1_function_arn
+  description = "Lambda ARN: gerar relatório D-1 (W5)"
+}
