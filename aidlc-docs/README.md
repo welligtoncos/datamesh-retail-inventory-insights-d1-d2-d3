@@ -46,3 +46,7 @@ Detalhe completo: [`backlog-roadmap.md`](inception/user-stories/backlog-roadmap.
 - **Story:** `E1-US01`, `E2-US02`, …
 - **Onda:** `W1` … `W6`
 - **Unidade de deploy (futuro):** `U1` … `U6` (mapeada no roadmap)
+
+## Processo completo do desenvolvedor
+
+Passo a passo detalhado (primeira story, decisões, prompt Cursor, checklist): **[`../aidlc-rules/README.md`](../aidlc-rules/README.md#processo-de-desenvolvimento-como-usar-o-ai-dlc-neste-projeto)**.

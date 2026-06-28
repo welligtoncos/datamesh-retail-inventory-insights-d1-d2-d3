@@ -128,3 +128,184 @@ Versão da fonte em `aidlc-rules/VERSION` (atual: **1.0.0**).
 - **`aidlc-rules/` sozinha não basta** — o Cursor ignora essa pasta até os arquivos estarem em `.cursor/rules/` e `.aidlc-rule-details/`.
 - **`alwaysApply: true`** faz a regra valer em toda conversa do projeto; remova ou mude para `false` se quiser ativar só sob demanda.
 - O workflow procura detalhes nesta ordem: `.aidlc/aidlc-rules/...`, **`.aidlc-rule-details/`** (setup Cursor), `.kiro/...`, `.amazonq/...` — este projeto usa `.aidlc-rule-details/`.
+
+---
+
+## Processo de desenvolvimento (como usar o AI-DLC neste projeto)
+
+Esta seção descreve **como o desenvolvedor inicia a primeira story**, quais **decisões tomar** e como **não perder o fluxo** entre chats do Cursor.
+
+Documentação complementar:
+
+- Backlog e stories: [`../aidlc-docs/`](../aidlc-docs/)
+- README do projeto: [`../README.md`](../README.md)
+- Notebook brownfield: [`../Esteira_3Relatorios_D1_D2_D3.ipynb`](../Esteira_3Relatorios_D1_D2_D3.ipynb)
+
+### Princípio
+
+> **Não peça “cria tudo na AWS”.** Trabalhe **uma onda (W1…W6) por vez**, aprove cada fase em `aidlc-docs/audit.md` e mantenha **paridade com o notebook** (`carregar_origem_dia`, `enriquecer_dia`, `processar_dia`, relatório D-1).
+
+### Onde você está no projeto
+
+| Item | Onde ver |
+|------|----------|
+| Fase AI-DLC atual | [`aidlc-docs/aidlc-state.md`](../aidlc-docs/aidlc-state.md) |
+| 20 user stories | [`aidlc-docs/inception/user-stories/stories.md`](../aidlc-docs/inception/user-stories/stories.md) |
+| Ordem W1→W6 | [`aidlc-docs/inception/user-stories/backlog-roadmap.md`](../aidlc-docs/inception/user-stories/backlog-roadmap.md) |
+| Aprovações | [`aidlc-docs/audit.md`](../aidlc-docs/audit.md) |
+
+**Primeira entrega:** onda **W1** / épico **E1** (S3 + insumo + IAM + documentação). Glue, Lambda e Step Functions vêm depois.
+
+### Fluxo do desenvolvedor
+
+```mermaid
+flowchart TD
+    A[Clone + ativar AI-DLC] --> B[Ler stories.md e backlog-roadmap.md]
+    B --> C[Tomar decisões W1]
+    C --> D[Chat Cursor: AI-DLC só da onda atual]
+    D --> E[Revisar artefatos em aidlc-docs/]
+    E --> F{Aprovado?}
+    F -->|Não| D
+    F -->|Sim| G[Registrar em audit.md]
+    G --> H[Construction: código IaC/jobs]
+    H --> I[Validar critérios de aceite]
+    I --> J[Marcar stories done + aidlc-state.md]
+    J --> K{Próxima onda?}
+    K -->|Sim| C
+```
+
+### Decisões obrigatórias antes de codar (W1)
+
+Registre em [`aidlc-docs/aidlc-state.md`](../aidlc-docs/aidlc-state.md) (ou em `requirements.md` quando o AI-DLC gerar):
+
+| Decisão | Opções | Sugestão POC |
+|---------|--------|--------------|
+| Região AWS | `sa-east-1`, `us-east-1`, … | `sa-east-1` (conta BR) |
+| IaC | CDK, Terraform, Console | Terraform ou CDK Python |
+| Buckets | 1 bucket com prefixos vs. vários | **1 bucket** `retail-inventory-insights-dev` |
+| Ambiente | `dev`, `prod` | Começar só `dev` |
+
+**Layout S3 recomendado (1 bucket):**
+
+```
+s3://retail-inventory-insights-dev/
+  insumo/retail_store_inventory.csv
+  origem/dt=2022-01-01/data.parquet
+  enriquecido/dt=2022-01-01/data.parquet
+  relatorios/D1/
+  relatorios/D2/
+  relatorios/D3/
+```
+
+Decisões que **podem esperar**:
+
+| Decisão | Onda |
+|---------|------|
+| Horário do cron (EventBridge) | W4 |
+| Excel: S3 apenas vs. e-mail | W5 |
+| Athena e alarmes | W6 |
+
+**Regra de ouro:** lógica de negócio vem do notebook — na AWS só muda *onde* roda e *onde* grava.
+
+### Como iniciar a primeira story (W1)
+
+#### Passo 0 · Preparação
+
+1. Rode o notebook local e confirme `tabela_origem/`, `tabela_enriquecida/` e um Excel D-1.
+2. Leia o roadmap W1 em `backlog-roadmap.md`.
+3. Em `stories.md`, marque **E1-US01** como `ready`.
+
+#### Passo 1 · Chat no Cursor (AI-DLC)
+
+Abra chat **novo** e use um pedido explícito (ajuste região e IaC):
+
+```text
+Siga o AI-DLC para datamesh-retail-inventory-insights-d1-d2-d3.
+
+Escopo desta rodada: APENAS Onda W1 (E1-US01 a E1-US04).
+Brownfield: Esteira_3Relatorios_D1_D2_D3.ipynb.
+
+Decisões:
+- Região: sa-east-1
+- IaC: Terraform
+- 1 bucket: retail-inventory-insights-dev
+- Ambiente: dev
+
+Execute: Workspace Detection → Reverse Engineering →
+Requirements Analysis → Workflow Planning → Design mínimo U1.
+
+NÃO implementar Glue, Lambda ou Step Functions ainda.
+```
+
+O agente deve gerar artefatos em `aidlc-docs/` e **parar para aprovação**.
+
+#### Passo 2 · Aprovar e registrar
+
+1. Revise o plano (escopo = só W1).
+2. Registre em `aidlc-docs/audit.md` (data, evento, aprovador).
+3. Atualize `aidlc-state.md`: W1 → `in_progress`.
+
+#### Passo 3 · Implementar E1 na ordem
+
+```
+E1-US01 (S3)  →  E1-US03 (IAM)  →  E1-US02 (CSV)  →  E1-US04 (docs)
+```
+
+| Story | Entrega | Validação |
+|-------|---------|-----------|
+| E1-US01 | Bucket + prefixos + block public + tags | `aws s3 ls` ou console |
+| E1-US03 | Roles Glue, Lambda-relatórios, Step Functions | Policies só nos prefixos da esteira |
+| E1-US02 | `retail_store_inventory.csv` em `insumo/` | 15 colunas do SCHEMA do notebook |
+| E1-US04 | Mapa local → S3 no README ou aidlc-docs | Paths de exemplo documentados |
+
+Marque `done` só quando **todos** os critérios de aceite da story estiverem ok.
+
+#### Passo 4 · Fechar W1
+
+- [ ] CSV no S3 legível pela role Glue (teste futuro)
+- [ ] Prefixos `origem/`, `enriquecido/`, `relatorios/` criados
+- [ ] `aidlc-state.md`: W1 → `done`
+- [ ] Commit + push
+- [ ] Só então iniciar chat para **W2 (E2)**
+
+### Ondas e resultados esperados
+
+| Onda | Stories | Resultado ao concluir |
+|------|---------|------------------------|
+| W1 | E1-US01…04 | S3 + IAM + insumo + mapa documentado |
+| W2 | E2-US01…03 | `carregar_origem_dia` na AWS = parquet local |
+| W3 | E3-US01…03 | `enriquecer_dia` com colunas `_*` |
+| W4 | E4-US01…03 | `processar_dia` via Step Functions + cron |
+| W5 | E5-US01…03 | Excel D-1 no S3 = notebook |
+| W6 | E6/E7 | D-2, D-3, Athena, alarmes |
+
+### Regras do desenvolvedor
+
+| Faça | Não faça |
+|------|----------|
+| Uma onda por PR/entrega | Misturar S3 (W1) com Step Functions (W4) |
+| Paridade com o notebook | Mudar `_stockout` / agregação só na AWS |
+| Atualizar `stories.md` e `aidlc-state.md` | Deixar decisões só no histórico do chat |
+| Aprovar no `audit.md` antes de Construction | Pular Requirements / Workflow Planning |
+| Stories de paridade (E2-US03, E3-US03, E5-US03) | Declarar W2/W3/W5 pronta sem comparar com local |
+
+### Checklist · primeiro dia
+
+```
+[ ] AI-DLC ativo (.cursor/rules + .aidlc-rule-details)
+[ ] Decisões W1: região, IaC, bucket, env=dev
+[ ] Chat AI-DLC: escopo W1 apenas
+[ ] Aprovação registrada em audit.md
+[ ] E1-US01: bucket + prefixos
+[ ] E1-US03: roles IAM
+[ ] E1-US02: upload CSV + schema
+[ ] E1-US04: documentar paths
+[ ] W1 = done → commit → push → abrir W2
+```
+
+### Status das stories
+
+Use em `stories.md`:
+
+`backlog` → `ready` → `in_progress` → `done` | `blocked`
+
