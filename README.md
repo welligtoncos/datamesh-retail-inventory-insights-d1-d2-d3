@@ -190,11 +190,10 @@ Diagramas detalhados: [`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-
 **Guia completo:** [`docs/dev-testar-esteira.md`](docs/dev-testar-esteira.md)
 
 ```powershell
-# Simular 7 dias: SFN + D-1/D-2/D-3 + download Excel
-.\scripts\simular-esteira-dev.ps1 -DiaInicio "2022-01-01" -DiaFim "2022-01-07" -JanelaD3 7
+# Reprocessar dia (esteira falhou ou falta D-1)
+.\scripts\reprocessar-dia-dev.ps1 -DiaDado "2022-01-02" -SomenteD1
 
-# Ver dias processados vs faltantes
-.\scripts\list-partitions.ps1 -DiaInicio "2022-01-01" -DiaFim "2022-01-31"
+# Guia: docs/dev-testar-esteira.md
 ```
 
 ### Referência brownfield
