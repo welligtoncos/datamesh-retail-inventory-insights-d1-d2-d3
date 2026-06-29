@@ -185,6 +185,18 @@ Diagramas detalhados: [`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-
 <details>
 <summary>Desenvolvimento, IaC e AI-DLC</summary>
 
+### Testar a esteira (dev)
+
+**Guia completo:** [`docs/dev-testar-esteira.md`](docs/dev-testar-esteira.md)
+
+```powershell
+# Simular 7 dias: SFN + D-1/D-2/D-3 + download Excel
+.\scripts\simular-esteira-dev.ps1 -DiaInicio "2022-01-01" -DiaFim "2022-01-07" -JanelaD3 7
+
+# Ver dias processados vs faltantes
+.\scripts\list-partitions.ps1 -DiaInicio "2022-01-01" -DiaFim "2022-01-31"
+```
+
 ### Referência brownfield
 
 - Notebook: [`Esteira_3Relatorios_D1_D2_D3.ipynb`](Esteira_3Relatorios_D1_D2_D3.ipynb)
@@ -219,6 +231,7 @@ jupyter notebook Esteira_3Relatorios_D1_D2_D3.ipynb
 
 | Documento | Público | Conteúdo |
 |-----------|---------|----------|
+| [`docs/dev-testar-esteira.md`](docs/dev-testar-esteira.md) | Dev | Simular esteira, scripts, checklist |
 | [`docs/como-usar-datamesh-empresa.md`](docs/como-usar-datamesh-empresa.md) | Negócio | Insights, personas, rotina, KPIs |
 | [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) | Analistas | Queries de validação |
 | [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt) | Técnico | Schema, funções, artefatos |
