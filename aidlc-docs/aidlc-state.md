@@ -8,7 +8,7 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US02) — Code Generation Part 1
+- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US02) — Build & Test / validação manual
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -40,7 +40,7 @@
 - [x] U6 D-2/D-3 Lambda — **deployed & validated** 2026-06-28
 - [x] U7 Athena + Alarmes — **deployed & validated** 2026-06-28
 - [x] **U8 Portal Infra (E8-US01)** — aplicado dev; commit e35c26c; w7-us01-validate OK
-- [ ] **U8 Portal Web (E8-US02)** — design completo; Code Generation Part 1 aguardando aprovação
+- [ ] **U8 Portal Web (E8-US02)** — código gerado; `ng build` + `ng test` OK; checklist manual pendente
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -72,9 +72,9 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION — W7 Portal Web
-- **Next Stage**: Aprovar `u8-portal-web-code-generation-plan.md` → gerar `portal-web/`
+- **Next Stage**: Validar login manual (`w7-us02-validate.ps1`) → E8-US03
 - **Status E8-US01**: done (infra dev validada)
-- **Status E8-US02**: in_progress (design stages complete)
+- **Status E8-US02**: in_progress (código pronto; checklist manual login)
 
 ## Última atualização
-- 2026-06-30 — U8 Portal Web E8-US02: application/functional/NFR/infra design + code gen plan Part 1
+- 2026-06-30 — E8-US02: portal-web/ Angular Cognito; build + 6 testes OK

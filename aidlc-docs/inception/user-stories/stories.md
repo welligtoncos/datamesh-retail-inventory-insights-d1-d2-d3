@@ -312,11 +312,11 @@
 - **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US01
 
 **Critérios de aceite:**
-- [ ] Redirect para hosted UI ou login embutido Cognito
-- [ ] JWT anexado em interceptor HTTP para API BFF
-- [ ] Logout limpa sessão e tokens
-- [ ] Rotas protegidas com auth guard
-- [ ] Rastreabilidade: RF-M6-01, RF-M6-02
+- [x] Redirect para hosted UI ou login embutido Cognito
+- [x] JWT anexado em interceptor HTTP para API BFF
+- [x] Logout limpa sessão e tokens
+- [x] Rotas protegidas com auth guard
+- [x] Rastreabilidade: RF-M6-01, RF-M6-02
 
 ---
 
