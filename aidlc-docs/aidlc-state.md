@@ -2,13 +2,13 @@
 
 ## Projeto
 - **Nome:** datamesh-retail-inventory-insights-d1-d2-d3
-- **Escopo atual:** Ondas W1–W6 concluídas · esteira completa
-- **Referência brownfield:** `Esteira_3Relatorios_D1_D2_D3.ipynb`, `PROJETO_DATAMESH.txt`
+- **Escopo atual:** W1–W6 concluídas · **W7 Portal Web** em INCEPTION (Requirements Analysis)
+- **Referência brownfield:** `Esteira_3Relatorios_D1_D2_D3.ipynb`, `PROJETO_DATAMESH.txt`, `diagrams/09-portal-web.mmd`
 
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: W6 done — CONSTRUCTION complete
+- **Current Stage**: INCEPTION — W7 Portal Web (Requirements Analysis)
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -22,8 +22,16 @@
 
 ## Stage Progress
 
-### INCEPTION PHASE — complete
-### CONSTRUCTION PHASE — complete
+### INCEPTION PHASE
+- [x] Workspace Detection (W1–W6)
+- [x] Reverse Engineering (brownfield notebook)
+- [x] Requirements Analysis (W1–W6)
+- [x] **Requirements Analysis (W7 Portal)** — `portal-requirements.md` aprovado 2026-06-29
+- [x] **User Stories (W7)** — E8-US01…12 geradas 2026-06-29
+- [ ] Workflow Planning (W7)
+- [ ] Application Design (W7)
+
+### CONSTRUCTION PHASE — W1–W6 complete
 - [x] U1 Infra S3/IAM — **deployed & validated** 2026-06-28
 - [x] U2 Origem Glue — **deployed & validated** 2026-06-28
 - [x] U3 Enriquecido Glue — **deployed & validated** 2026-06-28
@@ -44,11 +52,26 @@
 | W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | **done** |
 | W6 | E6 + E7 D-2/D-3/Ops | 4 | **done** |
+| W7 | E8 Portal Web | 12 | **inception** — stories ready |
+
+## W7 Portal Web
+- **Frontend:** Angular + Angular Material · S3 + CloudFront
+- **Backend:** FastAPI Python 3.12 · API Gateway + ECS Fargate
+- **Auth:** Cognito (RBAC persona = fase 2)
+- **Escopo W7:** M1–M5 completo exceto upload insumo (lista only)
+- **Requirements:** `aidlc-docs/inception/requirements/portal-requirements.md`
+
+## Extension Configuration (W7)
+| Extension | Enabled | Decided At |
+|-----------|---------|------------|
+| Security Baseline | **Yes** | Q16 — Requirements Analysis W7 |
+| Resiliency Baseline | **Yes** | Q17 — Requirements Analysis W7 |
+| Property-Based Testing | **Yes** | Q18 — Requirements Analysis W7 |
 
 ## Current Status
-- **Lifecycle Phase**: CONSTRUCTION complete (W1–W6)
-- **Next Stage**: Operations (placeholder)
-- **Status**: Lambdas D-1/D-2/D-3; Athena `retail_inventory_insights_dev.enriquecido`; alarme SFN OK
+- **Lifecycle Phase**: INCEPTION — W7 Portal Web
+- **Next Stage**: Workflow Planning W7
+- **Status W1–W6**: Lambdas D-1/D-2/D-3; Athena; alarme SFN OK
 
 ## Última atualização
-- 2026-06-28 — W6 DoD passed; D-2/D-3 Excel + Athena SUCCEEDED + CloudWatch alarm
+- 2026-06-29 — W7 User Stories: E8-US01…12 (12 stories portal)

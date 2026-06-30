@@ -209,3 +209,35 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: W6 DoD passed — esteira W1-W6 completa
 
 ---
+
+## W7 Portal Web — Workspace Detection + Requirements Analysis (in progress)
+**Timestamp**: 2026-06-29T12:00:00Z
+**User Input**: "using ia-dllc, monte o planejamento dos requisitos funcionais para gerar esse sistema web e backend que seja em angular o front, mas preciso validar ainda isso."
+**AI Response**: Brownfield retomado (W1–W6 complete); gerados portal-requirements-plan.md (rascunho RF M1–M7 + API BFF) e requirement-verification-questions-portal.md (18 perguntas incl. Angular Q1, stack backend, MVP, extensions); aidlc-state atualizado para W7 INCEPTION
+**Context**: Requirements Analysis W7 — GATE aguardando respostas Q1–Q18
+
+---
+
+## W7 Portal — Requirements Analysis Complete
+**Timestamp**: 2026-06-29T14:00:00Z
+**User Input**: "as perguntas preenchidas."
+**AI Response**: Analisadas 18 respostas; gerado portal-requirements.md; tensões Q6×Q7 e Q8×Q15 resolvidas; extensions Security/Resiliency/PBT habilitadas; aidlc-state atualizado
+**Context**: Requirements Analysis W7 complete — aguardando aprovação usuário
+
+---
+
+## W7 Portal — Requirements Approved
+**Timestamp**: 2026-06-29T15:00:00Z
+**User Input**: "Approve & Continue"
+**AI Response**: portal-requirements.md marcado aprovado; iniciado User Stories W7
+**Context**: Requirements W7 approved — User Stories generation started
+
+---
+
+## W7 Portal — User Stories Complete
+**Timestamp**: 2026-06-29T15:05:00Z
+**User Input**: "Approve & Continue"
+**AI Response**: Gerados assessment-w7, story-generation-plan-w7, E8-US01…12 em stories.md, personas P5 + mapa E8, backlog W7 atualizado
+**Context**: User Stories W7 complete — aguardando aprovação para Workflow Planning
+
+---

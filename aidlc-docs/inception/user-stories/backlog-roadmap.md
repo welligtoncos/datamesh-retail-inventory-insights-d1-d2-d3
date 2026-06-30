@@ -35,7 +35,11 @@ flowchart LR
         ATH["Athena + alarmes"]
     end
 
-    W1 --> W2 --> W3 --> W4 --> W5 --> W6
+    subgraph W7["W7 · Portal Web"]
+        PW["Angular + FastAPI + Cognito"]
+    end
+
+    W1 --> W2 --> W3 --> W4 --> W5 --> W6 --> W7
 ```
 
 ---
@@ -50,6 +54,7 @@ flowchart LR
 | **W4** | E4 | E4-US01…03 | U4 Orquestração | `processar_dia(dt)` roda na AWS para 3 dias de teste | W3 |
 | **W5** | E5 | E5-US01…03 | U5 Relatório D-1 | Excel D-1 no S3 ≡ notebook (mesmo dia) | W4 |
 | **W6** | E6+E7 | E6/E7-US* | U6 Relatórios+Ops | D-2, D-3 Excel + Athena + alarme | W5 |
+| **W7** | E8 | E8-US01…12 | U8 Portal (Infra+API+Web) | Login → insight D-1 → download Excel em dev | W6 |
 
 **Regra:** só avance a onda seguinte quando **Definition of Done (DoD)** da onda atual estiver marcada `done` no `aidlc-state.md`.
 
@@ -105,6 +110,14 @@ flowchart LR
 - [ ] Tabela Athena sobre `enriquecido/dt=`
 - [ ] Alarme se execução diária falhar
 
+### W7 — Portal Web
+- [ ] Terraform `modules/portal/` aplicado em dev
+- [ ] Login Cognito + Angular shell funcionando
+- [ ] BFF FastAPI com endpoints insumos/origem/enriquecido/insights/pipeline
+- [ ] Dashboards D-1, D-2, D-3 com download Excel
+- [ ] Disparo SFN + alarmes na UI
+- [ ] E2E: login → D-1 → download Excel validado
+
 ---
 
 ## Gestão no dia a dia
@@ -136,9 +149,14 @@ E1-US01 → E1-US02 → E1-US03 → E1-US04
     → E4-US01 → E4-US02 → E4-US03
     → E5-US01 → E5-US02 → E5-US03
     → E6-US01 → E6-US02 → E7-US01 → E7-US02
+    → E8-US01 → E8-US02 → E8-US03
+    → E8-US04 → E8-US05 → E8-US06
+    → E8-US07 → E8-US08 → E8-US09 → E8-US10 → E8-US11
+    → E8-US12
 ```
 
-Stories **E2-US03**, **E3-US03**, **E5-US03** são validação/paridade — não pule.
+Stories **E2-US03**, **E3-US03**, **E5-US03** são validação/paridade — não pule.  
+**E8-US12** valida E2E do portal — não pule.
 
 ---
 
@@ -152,11 +170,12 @@ Stories **E2-US03**, **E3-US03**, **E5-US03** são validação/paridade — não
 | W4 | Médio | Médio |
 | W5 | Médio | Médio (openpyxl em Lambda) |
 | W6 | Alto | Médio (D-2/D-3 ainda não no notebook) |
+| W7 | Alto | Médio (Angular + ECS + integração AWS) |
 
 ---
 
 ## Próxima ação recomendada
 
-1. Aprovar este roadmap + `stories.md`.
-2. Preencher decisões pendentes em `aidlc-state.md` (região, IaC).
-3. Iniciar AI-DLC **Construction apenas W1** (E1-US01 a E1-US04).
+1. Aprovar user stories W7 (`stories.md` Épico E8).
+2. Iniciar AI-DLC **Workflow Planning W7** → unidades U8 Infra / API / Web.
+3. Construction W7 após aprovação do execution plan.

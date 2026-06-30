@@ -282,6 +282,193 @@
 
 ---
 
+## Épico E8 · Portal Web (Onda W7)
+
+> **Requirements:** [`portal-requirements.md`](../requirements/portal-requirements.md)  
+> **Stack:** Angular · FastAPI · ECS Fargate · Cognito · Terraform `modules/portal/`
+
+### E8-US01 · Infra Terraform do portal
+- **Como** plataforma AWS (P4)  
+- **Quero** módulo Terraform `portal/` com Cognito, CloudFront, S3 site, API Gateway, ECS Fargate  
+- **Para** hospedar o portal em dev sem configuração manual  
+- **Status:** backlog · **Onda:** W7 · **Depende:** W6 (esteira operacional)
+
+**Critérios de aceite:**
+- [ ] `terraform/modules/portal/` provisiona recursos em us-east-1 dev
+- [ ] Cognito User Pool + app client para SPA
+- [ ] S3 + CloudFront para `portal-web` estático
+- [ ] API Gateway HTTP → ALB → ECS Fargate
+- [ ] IAM task role least privilege (S3, SFN, Athena, CW read)
+- [ ] Tags `Project`, `Environment=dev`, `ManagedBy=terraform`
+- [ ] Rastreabilidade: RF-M6-01, NFR-W7-01, NFR-W7-07
+
+---
+
+### E8-US02 · Login Cognito no Angular
+- **Como** usuário autenticado (qualquer persona)  
+- **Quero** login e logout via Cognito  
+- **Para** acessar o portal com segurança  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01
+
+**Critérios de aceite:**
+- [ ] Redirect para hosted UI ou login embutido Cognito
+- [ ] JWT anexado em interceptor HTTP para API BFF
+- [ ] Logout limpa sessão e tokens
+- [ ] Rotas protegidas com auth guard
+- [ ] Rastreabilidade: RF-M6-01, RF-M6-02
+
+---
+
+### E8-US03 · Shell Angular e home dashboard
+- **Como** usuário do portal  
+- **Quero** menu de navegação e página inicial com resumo do dia  
+- **Para** chegar aos insights em ≤ 3 cliques  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US02
+
+**Critérios de aceite:**
+- [ ] App shell com menu: Insumos, Origem, Enriquecido, Insights, Operações
+- [ ] Home exibe último `dt` processado, KPIs resumidos, atalhos D-1/D-2/D-3
+- [ ] Interface em PT-BR; responsivo desktop + tablet
+- [ ] Mensagens de erro claras (timeout AWS, 401, 500)
+- [ ] Rastreabilidade: RF-M7-01..05
+
+---
+
+### E8-US04 · Listar insumos (M1)
+- **Como** engenheiro de dados (P2)  
+- **Quero** ver arquivos em `insumo/` no portal  
+- **Para** confirmar que o CSV está no data lake sem usar console S3  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01, E8-US03
+
+**Critérios de aceite:**
+- [ ] `GET /insumos` lista objetos com nome, tamanho, LastModified
+- [ ] Tela Angular exibe tabela de insumos
+- [ ] Upload via portal **fora de escopo** (fase 2)
+- [ ] Rastreabilidade: RF-M1-01, RF-API-02
+
+---
+
+### E8-US05 · Partições origem e preview (M2)
+- **Como** engenheiro de dados (P2)  
+- **Quero** calendário de `origem/dt=` e preview do Parquet  
+- **Para** validar extração diária antes do enriquecimento  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US04
+
+**Critérios de aceite:**
+- [ ] `GET /origem/partitions` lista prefixos `dt=YYYY-MM-DD`
+- [ ] `GET /origem/{dt}/preview` retorna ≤ 500 linhas paginadas
+- [ ] Detalhe: row count, lojas e produtos distintos
+- [ ] Indicador visual para `dt` sem partição
+- [ ] Rastreabilidade: RF-M2-01..04, RF-API-04, RF-API-05
+
+---
+
+### E8-US06 · Partições enriquecido, KPIs e comparativo (M3)
+- **Como** analista de estoque (P1)  
+- **Quero** ver KPIs por `dt` e comparar dois dias  
+- **Para** validar métricas `_revenue`, `_stockout`, `_lost`  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US05
+
+**Critérios de aceite:**
+- [ ] `GET /enriquecido/partitions` lista partições
+- [ ] `GET /enriquecido/{dt}/kpis` retorna somas e contagens corretas
+- [ ] Preview enriquecido com colunas originais + derivadas
+- [ ] UI compara dt A vs dt B com delta de KPIs
+- [ ] Rastreabilidade: RF-M3-01..04, RF-API-06, RF-API-07
+
+---
+
+### E8-US07 · Dashboard insight D-1 (M4)
+- **Como** diretoria comercial (P5)  
+- **Quero** ranking de produtos vendidos com insight textual  
+- **Para** decidir mix e exposição com dado de ontem  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US06, E5 (Lambda D-1)
+
+**Critérios de aceite:**
+- [ ] Seletor de `dt`; default = ontem
+- [ ] Tabela ranking por unidades e receita (agregação Product ID + Category)
+- [ ] Insight textual (produto líder, concentração top 3)
+- [ ] Download Excel via presigned URL `relatorios/D1/`
+- [ ] CTA processar se partição ausente (autenticado)
+- [ ] Rastreabilidade: RF-M4-01,02,05,06,07, RF-API-08, RF-API-11
+
+---
+
+### E8-US08 · Dashboards insights D-2 e D-3 (M4)
+- **Como** gestor de compras (P3)  
+- **Quero** ver rupturas priorizadas e tendência de consumo  
+- **Para** definir reposições e ajustar estoque mínimo  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US07, E6 (Lambda D-2/D-3)
+
+**Critérios de aceite:**
+- [ ] D-2: tabela `_stockout==1` e `_lost>0`, ordenada por `_lost` desc
+- [ ] D-3: tendência Subindo/Caindo/Estável; janela N configurável; úteis vs FDS
+- [ ] Download Excel D-2 e D-3 via presigned URL
+- [ ] Regras de negócio alinhadas ao notebook brownfield
+- [ ] Rastreabilidade: RF-M4-03,04,05, RF-API-09, RF-API-10
+
+---
+
+### E8-US09 · Disparar pipeline e acompanhar execução (M5)
+- **Como** usuário autenticado  
+- **Quero** processar um `dt` e ver status da Step Function  
+- **Para** reprocessar dia sem script PowerShell  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US05, E4 (SFN)
+
+**Critérios de aceite:**
+- [ ] `POST /pipeline/processar-dia` com body `{dt}` inicia SFN
+- [ ] UI mostra RUNNING / SUCCEEDED / FAILED
+- [ ] Histórico últimas 20 execuções (dt, duração, status)
+- [ ] Log de auditoria com `sub` Cognito + timestamp
+- [ ] Rastreabilidade: RF-M5-01..03, RF-M6-04, RF-API-12, RF-API-13
+
+---
+
+### E8-US10 · Alarmes CloudWatch e health na UI (M5)
+- **Como** plataforma AWS (P4)  
+- **Quero** ver estado do alarme SFN e saúde da API na home  
+- **Para** saber se a esteira falhou sem abrir console AWS  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US09, E7-US02
+
+**Critérios de aceite:**
+- [ ] `GET /ops/alarms` retorna estado OK/ALARM do alarme SFN
+- [ ] `GET /health` público para liveness
+- [ ] Badge na home: esteira operacional / em alarme
+- [ ] Rastreabilidade: RF-M5-04, RF-M5-05, RF-API-01, RF-API-15
+
+---
+
+### E8-US11 · Athena templates no portal (M3)
+- **Como** analista de estoque (P1)  
+- **Quero** executar queries pré-aprovadas sobre enriquecido  
+- **Para** validar dados sem editor SQL livre  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US06, E7-US01
+
+**Critérios de aceite:**
+- [ ] `POST /athena/query-template` com `template_id` da lista documentada
+- [ ] UI lista templates (ex.: de `athena-validation-queries.md`)
+- [ ] Resultado tabular com limite de linhas
+- [ ] Sem editor SQL ad hoc (fase 2)
+- [ ] Rastreabilidade: RF-M3-05, RF-API-14
+
+---
+
+### E8-US12 · FastAPI BFF e deploy E2E dev
+- **Como** engenheiro de dados (P2)  
+- **Quero** BFF FastAPI com todos os endpoints e portal deployado em dev  
+- **Para** demonstrar fluxo ponta a ponta: login → insight D-1 → download Excel  
+- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01…E8-US11
+
+**Critérios de aceite:**
+- [ ] `portal-api/` FastAPI Python 3.12 com OpenAPI `/docs`
+- [ ] Todos os endpoints RF-API-01..15 implementados (exceto upload)
+- [ ] Container ECS deployado; CORS configurado para CloudFront
+- [ ] Script ou doc deploy dev (`docs/portal-deploy-dev.md` ou equivalente)
+- [ ] E2E manual: login → home → D-1 `dt=2022-01-01` → download Excel OK
+- [ ] Rastreabilidade: NFR-W7-03, NFR-W7-06
+
+---
+
 ## Resumo quantitativo
 
 | Épico | Stories | Onda |
@@ -293,7 +480,8 @@
 | E5 Relatório D-1 | 3 | W5 |
 | E6 D-2 / D-3 | 2 | W6 |
 | E7 Operação | 2 | W6 |
-| **Total** | **20** | **6 ondas** |
+| **E8 Portal Web** | **12** | **W7** |
+| **Total** | **32** | **7 ondas** |
 
 ---
 
