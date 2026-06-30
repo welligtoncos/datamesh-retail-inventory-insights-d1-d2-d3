@@ -131,7 +131,9 @@ flowchart TB
 3. Métricas de negócio são calculadas (receita, ruptura, venda perdida, fim de semana).
 4. Pela manhã, gestores recebem Excel; analistas consultam Athena.
 
-Diagramas detalhados: [`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-empresa.mmd)
+Diagramas detalhados:
+[`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-empresa.mmd) ·
+[`diagrams/09-portal-web.mmd`](diagrams/09-portal-web.mmd) (portal de gestão de insumos, enriquecidos e insights)
 
 ---
 
@@ -170,6 +172,7 @@ Diagramas detalhados: [`diagrams/08-datamesh-empresa.mmd`](diagrams/08-datamesh-
 | Entender valor e adoção na empresa | [`docs/como-usar-datamesh-empresa.md`](docs/como-usar-datamesh-empresa.md) |
 | Validar dados com SQL | [`scripts/athena-validation-queries.md`](scripts/athena-validation-queries.md) |
 | Visão técnica completa | [`PROJETO_DATAMESH.txt`](PROJETO_DATAMESH.txt) |
+| Arquitetura do portal web (proposta) | [`diagrams/09-portal-web.mmd`](diagrams/09-portal-web.mmd) |
 | Personas e user stories | [`aidlc-docs/inception/user-stories/personas.md`](aidlc-docs/inception/user-stories/personas.md) |
 
 **Validar a esteira na AWS:**

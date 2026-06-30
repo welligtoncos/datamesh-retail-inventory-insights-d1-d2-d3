@@ -17,6 +17,7 @@ Visualizar: preview no Cursor/VS Code ou https://mermaid.live
 | [06-analista.mmd](06-analista.mmd) | Como o analista trata cada insight |
 | [07-equivalencia-aws.mmd](07-equivalencia-aws.mmd) | Mesmo pipeline na AWS (S3, Glue, Step Functions) |
 | [08-datamesh-empresa.mmd](08-datamesh-empresa.mmd) | Visão empresa: AWS, insights D-1/D-2/D-3, adoção |
+| [09-portal-web.mmd](09-portal-web.mmd) | Portal web: gestão de insumos, enriquecidos, insights e encaixe AWS |
 
 **Guia de uso empresarial:** [docs/como-usar-datamesh-empresa.md](../docs/como-usar-datamesh-empresa.md)
 

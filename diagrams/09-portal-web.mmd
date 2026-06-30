@@ -1,0 +1,277 @@
+%% Portal Web de Gestão · insumos, enriquecidos e insights D-1/D-2/D-3
+%% Encaixe sobre o datamesh existente (S3 → Glue → Step Functions → Lambda → Athena)
+%% Visualizar: https://mermaid.live (um bloco por vez)
+
+%% --- Diagrama 1: Onde o portal entra no ecossistema ---
+
+flowchart TB
+    subgraph FONTES["Fontes (empresa)"]
+        ERP["ERP / POS / WMS"]
+    end
+
+    subgraph LAKE["Data Lake S3 · já existente"]
+        INS["insumo/<br/>CSV bruto"]
+        ORIG["origem/dt=<br/>parquet do dia"]
+        ENR["enriquecido/dt=<br/>+ _revenue _stockout _lost"]
+        REL["relatorios/D1|D2|D3/<br/>Excel"]
+    end
+
+    subgraph ESTEIRA["Esteira AWS · já existente"]
+        EB["EventBridge cron"]
+        SFN["Step Functions<br/>processar_dia(dt)"]
+        G1["Glue carregar_origem_dia"]
+        G2["Glue enriquecer_dia"]
+        L1["Lambda D-1"]
+        L2["Lambda D-2"]
+        L3["Lambda D-3"]
+        ATH["Athena + Glue Catalog"]
+        CW["CloudWatch"]
+    end
+
+    subgraph PORTAL["Portal Web de Gestão"]
+        UI["Frontend React/Next"]
+        BFF["API BFF · Lambda ou ECS"]
+    end
+
+    subgraph USUARIOS["Personas"]
+        TI["TI / Dados"]
+        ANA["Analista estoque"]
+        GES["Gestor compras"]
+        DIR["Diretoria comercial"]
+    end
+
+    ERP -->|"upload CSV"| INS
+    INS --> G1 --> ORIG --> G2 --> ENR
+    EB --> SFN --> G1
+    ENR --> L1 & L2 & L3 --> REL
+    ENR --> ATH
+    SFN -.-> CW
+
+    UI --> BFF
+    BFF -->|"upload · listar · validar schema"| INS
+    BFF -->|"partições · preview · reprocessar"| ORIG & ENR
+    BFF -->|"disparar processar_dia(dt)"| SFN
+    BFF -->|"SQL ad hoc · validação"| ATH
+    BFF -->|"status execuções · alarmes"| CW
+    BFF -->|"listar · download · preview insight"| REL
+
+    TI & ANA & GES & DIR --> UI
+
+%% --- Diagrama 2: Módulos do portal (telas ↔ camadas de dados) ---
+
+flowchart LR
+    subgraph MOD_INSUMO["Módulo Insumos"]
+        I1["Upload CSV"]
+        I2["Validar 15 colunas"]
+        I3["Histórico de cargas"]
+        I4["Status: pronto p/ processar"]
+    end
+
+    subgraph MOD_ORIGEM["Módulo Origem"]
+        O1["Calendário de dt="]
+        O2["Preview parquet"]
+        O3["Linhas · lojas · produtos"]
+        O4["Reprocessar dia"]
+    end
+
+    subgraph MOD_ENR["Módulo Enriquecido"]
+        E1["Partições processadas"]
+        E2["Métricas: _revenue _lost"]
+        E3["Comparar dt vs dt"]
+        E4["Consulta SQL Athena"]
+    end
+
+    subgraph MOD_INS["Módulo Insights"]
+        D1["D-1 Ranking vendas"]
+        D2["D-2 Rupturas priorizadas"]
+        D3["D-3 Tendência + janela"]
+        DL["Download Excel"]
+    end
+
+    subgraph MOD_OPS["Módulo Operações"]
+        X1["Disparar esteira manual"]
+        X2["Log Step Functions"]
+        X3["Alarmes CloudWatch"]
+        X4["Paridade local vs AWS"]
+    end
+
+    INSUMO_S3[("S3 insumo/")] --> MOD_INSUMO
+    ORIGEM_S3[("S3 origem/dt=")] --> MOD_ORIGEM
+    ENR_S3[("S3 enriquecido/dt=")] --> MOD_ENR
+    REL_S3[("S3 relatorios/")] --> MOD_INS
+    SFN_AWS["Step Functions"] --> MOD_OPS
+
+    MOD_INSUMO -->|"dt selecionado"| MOD_ORIGEM
+    MOD_ORIGEM -->|"enriquecer"| MOD_ENR
+    MOD_ENR -->|"gerar insight"| MOD_INS
+    MOD_OPS -->|"orquestra"| MOD_ORIGEM
+
+%% --- Diagrama 3: Fluxo de dados pelo portal (jornada diária) ---
+
+sequenceDiagram
+    actor Gestor as Gestor / Analista
+    participant Portal as Portal Web
+    participant BFF as API BFF
+    participant S3 as S3 Data Lake
+    participant SFN as Step Functions
+    participant Glue as Glue Jobs
+    participant Lam as Lambda D-1/D-2/D-3
+    participant Ath as Athena
+
+    Note over Gestor,S3: Manhã · consumir insights de ontem (D-1)
+
+    Gestor->>Portal: Abre dashboard D-1 (dt=2022-01-01)
+    Portal->>BFF: GET /insights/d1?dt=...
+    BFF->>S3: Lê enriquecido/dt= ou relatorios/D1/
+    BFF-->>Portal: Ranking + insight automático
+    Portal-->>Gestor: Tabela interativa + botão Excel
+
+    Note over Gestor,Glue: TI · nova carga ou reprocessamento
+
+    Gestor->>Portal: Upload retail_store_inventory.csv
+    Portal->>BFF: POST /insumos/upload
+    BFF->>S3: Grava insumo/ + valida schema
+    BFF-->>Portal: OK · 15 colunas · N linhas
+
+    Gestor->>Portal: Processar dt=2022-01-02
+    Portal->>BFF: POST /pipeline/processar-dia
+    BFF->>SFN: StartExecution { dt }
+    SFN->>Glue: carregar_origem_dia
+    Glue->>S3: origem/dt=2022-01-02/
+    SFN->>Glue: enriquecer_dia
+    Glue->>S3: enriquecido/dt=2022-01-02/
+    SFN->>Lam: gerar D-1, D-2, D-3
+    Lam->>S3: relatorios/D1|D2|D3/
+    BFF-->>Portal: Execução SUCCEEDED
+    Portal-->>Gestor: Insights disponíveis
+
+    Note over Gestor,Ath: Analista · validação ad hoc
+
+    Gestor->>Portal: SQL sobre enriquecido
+    Portal->>BFF: POST /athena/query
+    BFF->>Ath: SELECT ... WHERE dt=...
+    Ath-->>Portal: Resultado tabular
+
+%% --- Diagrama 4: Arquitetura técnica sugerida (encaixe AWS) ---
+
+flowchart TB
+    subgraph CLIENT["Browser"]
+        SPA["SPA React / Next.js<br/>Auth Cognito"]
+    end
+
+    subgraph EDGE["Front door"]
+        CF["CloudFront + S3 estático"]
+        APIGW["API Gateway REST/HTTP"]
+    end
+
+    subgraph BACKEND["Backend for Frontend"]
+        AUTH["Cognito Authorizer"]
+        API1["Lambda: insumos"]
+        API2["Lambda: particoes"]
+        API3["Lambda: pipeline"]
+        API4["Lambda: insights"]
+        API5["Lambda: athena-proxy"]
+    end
+
+    subgraph EXISTING["Infra existente · reutilizar"]
+        BUCKET["S3 retail-inventory-insights-dev"]
+        SFN2["Step Functions processar_dia"]
+        GLUE2["Glue origem + enriquecido"]
+        LAM2["Lambda relatórios D1-D3"]
+        ATH2["Athena"]
+        CW2["CloudWatch"]
+    end
+
+    SPA --> CF
+    SPA --> APIGW --> AUTH
+    AUTH --> API1 & API2 & API3 & API4 & API5
+
+    API1 -->|"PutObject · HeadObject"| BUCKET
+    API2 -->|"ListObjects · GetObject preview"| BUCKET
+    API3 -->|"StartExecution · DescribeExecution"| SFN2
+    API4 -->|"GetObject Excel ou agrega Parquet"| BUCKET
+    API5 -->|"StartQueryExecution"| ATH2
+
+    SFN2 --> GLUE2 --> BUCKET
+    BUCKET --> LAM2
+    SFN2 -.-> CW2
+    API3 -.-> CW2
+
+%% --- Diagrama 5: Mapa persona → módulo do portal ---
+
+flowchart TD
+    subgraph PERSONAS
+        P_TI["TI / Dados"]
+        P_ANA["Analista estoque"]
+        P_GES["Gestor compras"]
+        P_DIR["Diretoria"]
+    end
+
+    subgraph TELAS
+        T_INS["Insumos · upload"]
+        T_PART["Partições origem/enriquecido"]
+        T_PIPE["Pipeline · reprocessar"]
+        T_D1["Insight D-1"]
+        T_D2["Insight D-2"]
+        T_D3["Insight D-3"]
+        T_ATH["Explorador SQL"]
+        T_MON["Monitoramento"]
+    end
+
+    P_TI --> T_INS & T_PIPE & T_MON & T_PART
+    P_ANA --> T_PART & T_ATH & T_D1 & T_D2 & T_D3
+    P_GES --> T_D2 & T_D3
+    P_DIR --> T_D1
+
+%% --- Diagrama 6: Modelo de domínio (entidades que o portal gerencia) ---
+
+erDiagram
+    INSUMO ||--o{ PARTICAO_ORIGEM : "carregar_origem_dia"
+    PARTICAO_ORIGEM ||--|| PARTICAO_ENRIQUECIDA : "enriquecer_dia"
+    PARTICAO_ENRIQUECIDA ||--o{ INSIGHT_D1 : "agrega Product ID"
+    PARTICAO_ENRIQUECIDA ||--o{ INSIGHT_D2 : "filtra _stockout _lost"
+    PARTICAO_ENRIQUECIDA ||--o{ INSIGHT_D3 : "janela N dt="
+    EXECUCAO_PIPELINE ||--|{ PARTICAO_ORIGEM : "processa dt"
+
+    INSUMO {
+        string arquivo "retail_store_inventory.csv"
+        date uploaded_at
+        int linhas
+        bool schema_ok "15 colunas"
+    }
+
+    PARTICAO_ORIGEM {
+        date dt "dt=AAAA-MM-DD"
+        int linhas
+        string s3_path
+    }
+
+    PARTICAO_ENRIQUECIDA {
+        date dt
+        decimal total_revenue
+        int rupturas
+        decimal venda_perdida
+    }
+
+    INSIGHT_D1 {
+        date dado_d1
+        string top_produto
+        decimal receita_total
+    }
+
+    INSIGHT_D2 {
+        date dado_d1
+        string loja_produto
+        decimal lost
+    }
+
+    INSIGHT_D3 {
+        int janela_dias
+        string tendencia "Subindo|Caindo|Estável"
+    }
+
+    EXECUCAO_PIPELINE {
+        string execution_arn
+        date dt
+        string status
+    }
