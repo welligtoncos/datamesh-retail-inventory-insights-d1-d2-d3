@@ -57,3 +57,27 @@ variable "enable_sns_alerts" {
   type        = bool
   default     = false
 }
+
+variable "enable_portal" {
+  description = "W7: provision portal infra (Cognito, CloudFront, ECS, API GW)"
+  type        = bool
+  default     = true
+}
+
+variable "portal_web_bucket_name" {
+  description = "Optional override for portal static site bucket name"
+  type        = string
+  default     = ""
+}
+
+variable "portal_callback_urls" {
+  description = "Extra Cognito callback URLs for Angular dev (localhost)"
+  type        = list(string)
+  default     = ["http://localhost:4200/"]
+}
+
+variable "enable_portal_logging" {
+  description = "W7: CloudWatch logs for portal API GW + ECS (requires logs:CreateLogGroup)"
+  type        = bool
+  default     = false
+}

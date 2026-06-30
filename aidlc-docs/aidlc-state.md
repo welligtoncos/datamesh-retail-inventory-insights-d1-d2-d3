@@ -8,7 +8,7 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: INCEPTION — W7 Portal Web (Requirements Analysis)
+- **Current Stage**: CONSTRUCTION — U8 Portal Infra (E8-US01)
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -39,6 +39,7 @@
 - [x] U5 Relatório D-1 Lambda — **deployed & validated** 2026-06-28
 - [x] U6 D-2/D-3 Lambda — **deployed & validated** 2026-06-28
 - [x] U7 Athena + Alarmes — **deployed & validated** 2026-06-28
+- [ ] **U8 Portal Infra (E8-US01)** — Terraform gerado; apply via `w7-us01-validate.ps1`
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -70,8 +71,8 @@
 
 ## Current Status
 - **Lifecycle Phase**: INCEPTION — W7 Portal Web
-- **Next Stage**: Workflow Planning W7
+- **Next Stage**: `terraform apply` E8-US01 → E8-US02 (Angular Cognito)
 - **Status W1–W6**: Lambdas D-1/D-2/D-3; Athena; alarme SFN OK
 
 ## Última atualização
-- 2026-06-29 — W7 User Stories: E8-US01…12 (12 stories portal)
+- 2026-06-29 — E8-US01: módulo terraform/modules/portal + w7-us01-validate.ps1

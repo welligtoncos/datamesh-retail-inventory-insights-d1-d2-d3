@@ -241,3 +241,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: User Stories W7 complete — aguardando aprovação para Workflow Planning
 
 ---
+
+## W7 E8-US01 Construction
+**Timestamp**: 2026-06-29T16:00:00Z
+**User Input**: "Siga o AI-DLC — Onda W7 · APENAS story E8-US01 (Infra Terraform do portal)..."
+**AI Response**: terraform/modules/portal criado (Cognito, S3/CloudFront OAC, ECS Fargate, ALB, API GW HTTP, IAM); wiring dev; outputs portal_*; scripts/w7-us01-validate.ps1; terraform validate OK
+**Context**: E8-US01 code complete — apply dev pendente operador
+
+---

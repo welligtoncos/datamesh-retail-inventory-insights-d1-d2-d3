@@ -103,3 +103,23 @@ module "monitoring" {
   alert_email           = var.alert_email
   enable_sns_alerts     = var.enable_sns_alerts
 }
+
+module "portal" {
+  count  = var.enable_portal ? 1 : 0
+  source = "../../modules/portal"
+
+  project_name           = var.project_name
+  environment            = var.environment
+  aws_region             = var.aws_region
+  aws_account_id         = data.aws_caller_identity.current.account_id
+  datamesh_bucket_name   = module.s3.bucket_name
+  datamesh_bucket_arn    = module.s3.bucket_arn
+  sfn_state_machine_arn  = module.stepfunctions.processar_dia_state_machine_arn
+  athena_workgroup_name  = module.athena.athena_workgroup_name
+  athena_database_name   = module.athena.glue_database_name
+  sfn_failed_alarm_name  = module.monitoring.sfn_failed_alarm_name
+  portal_web_bucket_name   = var.portal_web_bucket_name
+  additional_callback_urls = var.portal_callback_urls
+  enable_portal_logging    = var.enable_portal_logging
+  tags                     = var.tags
+}

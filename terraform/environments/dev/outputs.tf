@@ -142,3 +142,35 @@ output "sfn_failed_alarm_name" {
   value       = module.monitoring.sfn_failed_alarm_name
   description = "CloudWatch alarm name for SFN failures (E7-US02)"
 }
+
+# --- W7 Portal (E8-US01) ---
+
+output "portal_cognito_user_pool_id" {
+  value       = try(module.portal[0].cognito_user_pool_id, null)
+  description = "Portal Cognito User Pool ID (E8-US01)"
+}
+
+output "portal_cognito_client_id" {
+  value       = try(module.portal[0].cognito_client_id, null)
+  description = "Portal Cognito SPA client ID (E8-US01)"
+}
+
+output "portal_cloudfront_url" {
+  value       = try(module.portal[0].cloudfront_url, null)
+  description = "Portal Angular static site URL (E8-US01)"
+}
+
+output "portal_api_gateway_url" {
+  value       = try(module.portal[0].api_gateway_url, null)
+  description = "Portal BFF API Gateway invoke URL (E8-US01)"
+}
+
+output "portal_cognito_domain" {
+  value       = try(module.portal[0].cognito_domain, null)
+  description = "Cognito hosted UI URL"
+}
+
+output "portal_ecs_cluster_name" {
+  value       = try(module.portal[0].ecs_cluster_name, null)
+  description = "ECS cluster for portal BFF"
+}

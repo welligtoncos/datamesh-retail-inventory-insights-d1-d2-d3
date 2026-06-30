@@ -1,0 +1,91 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3DatameshBucket",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::retail-inventory-insights-dev-use1",
+        "arn:aws:s3:::retail-inventory-insights-dev-use1/*",
+        "arn:aws:s3:::retail-inventory-insights-portal-web-dev-use1",
+        "arn:aws:s3:::retail-inventory-insights-portal-web-dev-use1/*"
+      ]
+    },
+    {
+      "Sid": "S3ListAccountBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "GlueJobsProject",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetJob",
+        "glue:GetJobs",
+        "glue:CreateJob",
+        "glue:UpdateJob",
+        "glue:DeleteJob",
+        "glue:StartJobRun",
+        "glue:GetJobRun",
+        "glue:GetJobRuns",
+        "glue:BatchStopJobRun",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ],
+      "Resource": [
+        "arn:aws:glue:us-east-1:303238378103:job/retail-inventory-insights-*"
+      ]
+    },
+    {
+      "Sid": "GlueCatalogAthena",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase",
+        "glue:GetDatabases",
+        "glue:CreateDatabase",
+        "glue:UpdateDatabase",
+        "glue:DeleteDatabase",
+        "glue:GetTable",
+        "glue:GetTables",
+        "glue:CreateTable",
+        "glue:UpdateTable",
+        "glue:DeleteTable",
+        "glue:GetPartitions",
+        "glue:BatchCreatePartition",
+        "glue:BatchDeletePartition",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ],
+      "Resource": [
+        "arn:aws:glue:us-east-1:303238378103:catalog",
+        "arn:aws:glue:us-east-1:303238378103:database/retail_inventory_insights_dev",
+        "arn:aws:glue:us-east-1:303238378103:table/retail_inventory_insights_dev/*"
+      ]
+    },
+    {
+      "Sid": "AthenaWorkgroup",
+      "Effect": "Allow",
+      "Action": [
+        "athena:CreateWorkGroup",
+        "athena:DeleteWorkGroup",
+        "athena:GetWorkGroup",
+        "athena:UpdateWorkGroup",
+        "athena:ListWorkGroups",
+        "athena:StartQueryExecution",
+        "athena:GetQueryExecution",
+        "athena:GetQueryResults",
+        "athena:StopQueryExecution",
+        "athena:TagResource",
+        "athena:UntagResource"
+      ],
+      "Resource": [
+        "arn:aws:athena:us-east-1:303238378103:workgroup/retail-inventory-insights-dev"
+      ]
+    }
+  ]
+}

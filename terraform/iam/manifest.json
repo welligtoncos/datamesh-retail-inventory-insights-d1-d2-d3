@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "account_id": "303238378103",
+  "region": "us-east-1",
+  "target_user": "usuario-dados",
+  "modes": {
+    "modular": {
+      "description": "4 políticas granulares (recomendado)",
+      "policies": [
+        {
+          "aws_name": "Datamesh01StorageGlueAthenaDev",
+          "file": "policies/01-datamesh-storage-glue-athena.json"
+        },
+        {
+          "aws_name": "Datamesh02LambdaSfnEventsDev",
+          "file": "policies/02-datamesh-lambda-sfn-events.json"
+        },
+        {
+          "aws_name": "Datamesh03IamLogsMonitoringDev",
+          "file": "policies/03-datamesh-iam-logs-monitoring.json"
+        },
+        {
+          "aws_name": "Datamesh04PortalEdgeDev",
+          "file": "policies/04-datamesh-portal-edge.json"
+        }
+      ]
+    },
+    "unified": {
+      "description": "Política única ampla us-east-1",
+      "policies": [
+        {
+          "aws_name": "DatameshTerraformOperatorDev",
+          "file": "datamesh-terraform-operator-dev.json"
+        }
+      ]
+    }
+  },
+  "legacy_policies_superseded": [
+    "DatameshPortalDeployDev",
+    "DatameshLambdaTerraformDev"
+  ],
+  "scripts": {
+    "attach": "scripts/iam-attach-datamesh-policies.ps1",
+    "verify": "scripts/iam-verify-datamesh-policies.ps1"
+  }
+}

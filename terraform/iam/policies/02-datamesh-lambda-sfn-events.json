@@ -1,0 +1,76 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "LambdaReports",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:GetFunction",
+        "lambda:GetFunctionConfiguration",
+        "lambda:GetFunctionCodeSigningConfig",
+        "lambda:GetFunctionEventInvokeConfig",
+        "lambda:ListVersionsByFunction",
+        "lambda:ListTags",
+        "lambda:CreateFunction",
+        "lambda:UpdateFunctionCode",
+        "lambda:UpdateFunctionConfiguration",
+        "lambda:DeleteFunction",
+        "lambda:PublishVersion",
+        "lambda:TagResource",
+        "lambda:UntagResource",
+        "lambda:AddPermission",
+        "lambda:RemovePermission",
+        "lambda:GetPolicy"
+      ],
+      "Resource": "arn:aws:lambda:us-east-1:303238378103:function:retail-inventory-insights-*"
+    },
+    {
+      "Sid": "LambdaList",
+      "Effect": "Allow",
+      "Action": "lambda:ListFunctions",
+      "Resource": "*"
+    },
+    {
+      "Sid": "StepFunctionsProcessarDia",
+      "Effect": "Allow",
+      "Action": [
+        "states:DescribeStateMachine",
+        "states:DescribeStateMachineVersion",
+        "states:ListStateMachines",
+        "states:ListStateMachineVersions",
+        "states:CreateStateMachine",
+        "states:UpdateStateMachine",
+        "states:DeleteStateMachine",
+        "states:StartExecution",
+        "states:DescribeExecution",
+        "states:ListExecutions",
+        "states:StopExecution",
+        "states:TagResource",
+        "states:UntagResource",
+        "states:ListTagsForResource"
+      ],
+      "Resource": [
+        "arn:aws:states:us-east-1:303238378103:stateMachine:retail-inventory-insights-*",
+        "arn:aws:states:us-east-1:303238378103:execution:retail-inventory-insights-*:*"
+      ]
+    },
+    {
+      "Sid": "EventBridgeSchedule",
+      "Effect": "Allow",
+      "Action": [
+        "events:DescribeRule",
+        "events:ListRules",
+        "events:PutRule",
+        "events:DeleteRule",
+        "events:EnableRule",
+        "events:DisableRule",
+        "events:PutTargets",
+        "events:RemoveTargets",
+        "events:ListTargetsByRule",
+        "events:TagResource",
+        "events:UntagResource"
+      ],
+      "Resource": "arn:aws:events:us-east-1:303238378103:rule/retail-inventory-insights-*"
+    }
+  ]
+}
