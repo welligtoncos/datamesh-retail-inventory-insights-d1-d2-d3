@@ -291,7 +291,7 @@
 - **Como** plataforma AWS (P4)  
 - **Quero** módulo Terraform `portal/` com Cognito, CloudFront, S3 site, API Gateway, ECS Fargate  
 - **Para** hospedar o portal em dev sem configuração manual  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** W6 (esteira operacional)
+- **Status:** done · **Onda:** W7 · **Depende:** W6 (esteira operacional)
 
 **Critérios de aceite:**
 - [x] `terraform/modules/portal/` provisiona recursos em us-east-1 dev
@@ -301,7 +301,7 @@
 - [x] IAM task role least privilege (S3, SFN, Athena, CW read)
 - [x] Tags `Project`, `Environment=dev`, `ManagedBy=terraform`
 - [x] Rastreabilidade: RF-M6-01, NFR-W7-01, NFR-W7-07
-- [ ] `terraform apply` dev validado (`scripts/w7-us01-validate.ps1`)
+- [x] `terraform apply` dev validado (`scripts/w7-us01-validate.ps1`)
 
 ---
 
@@ -309,7 +309,7 @@
 - **Como** usuário autenticado (qualquer persona)  
 - **Quero** login e logout via Cognito  
 - **Para** acessar o portal com segurança  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US01
 
 **Critérios de aceite:**
 - [ ] Redirect para hosted UI ou login embutido Cognito

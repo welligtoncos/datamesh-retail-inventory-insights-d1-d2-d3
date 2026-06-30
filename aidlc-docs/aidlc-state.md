@@ -2,13 +2,13 @@
 
 ## Projeto
 - **Nome:** datamesh-retail-inventory-insights-d1-d2-d3
-- **Escopo atual:** W1–W6 concluídas · **W7 Portal Web** em INCEPTION (Requirements Analysis)
+- **Escopo atual:** W1–W6 concluídas · **W7 Portal Web** em CONSTRUCTION
 - **Referência brownfield:** `Esteira_3Relatorios_D1_D2_D3.ipynb`, `PROJETO_DATAMESH.txt`, `diagrams/09-portal-web.mmd`
 
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal Infra (E8-US01)
+- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US02) — Code Generation Part 1
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -39,7 +39,8 @@
 - [x] U5 Relatório D-1 Lambda — **deployed & validated** 2026-06-28
 - [x] U6 D-2/D-3 Lambda — **deployed & validated** 2026-06-28
 - [x] U7 Athena + Alarmes — **deployed & validated** 2026-06-28
-- [ ] **U8 Portal Infra (E8-US01)** — Terraform gerado; apply via `w7-us01-validate.ps1`
+- [x] **U8 Portal Infra (E8-US01)** — aplicado dev; commit e35c26c; w7-us01-validate OK
+- [ ] **U8 Portal Web (E8-US02)** — design completo; Code Generation Part 1 aguardando aprovação
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -53,7 +54,7 @@
 | W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | **done** |
 | W6 | E6 + E7 D-2/D-3/Ops | 4 | **done** |
-| W7 | E8 Portal Web | 12 | **inception** — stories ready |
+| W7 | E8 Portal Web | 12 | **construction** — E8-US02 em andamento |
 
 ## W7 Portal Web
 - **Frontend:** Angular + Angular Material · S3 + CloudFront
@@ -70,9 +71,10 @@
 | Property-Based Testing | **Yes** | Q18 — Requirements Analysis W7 |
 
 ## Current Status
-- **Lifecycle Phase**: INCEPTION — W7 Portal Web
-- **Next Stage**: `terraform apply` E8-US01 → E8-US02 (Angular Cognito)
-- **Status W1–W6**: Lambdas D-1/D-2/D-3; Athena; alarme SFN OK
+- **Lifecycle Phase**: CONSTRUCTION — W7 Portal Web
+- **Next Stage**: Aprovar `u8-portal-web-code-generation-plan.md` → gerar `portal-web/`
+- **Status E8-US01**: done (infra dev validada)
+- **Status E8-US02**: in_progress (design stages complete)
 
 ## Última atualização
-- 2026-06-29 — E8-US01: módulo terraform/modules/portal + w7-us01-validate.ps1
+- 2026-06-30 — U8 Portal Web E8-US02: application/functional/NFR/infra design + code gen plan Part 1
