@@ -8,7 +8,7 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US02) — Build & Test / validação manual
+- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US04) — próxima story
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -40,7 +40,8 @@
 - [x] U6 D-2/D-3 Lambda — **deployed & validated** 2026-06-28
 - [x] U7 Athena + Alarmes — **deployed & validated** 2026-06-28
 - [x] **U8 Portal Infra (E8-US01)** — aplicado dev; commit e35c26c; w7-us01-validate OK
-- [ ] **U8 Portal Web (E8-US02)** — código gerado; `ng build` + `ng test` OK; checklist manual pendente
+- [x] **U8 Portal Web (E8-US02)** — código gerado (commit 55d58ee); build + testes OK
+- [x] **U8 Portal Web Shell (E8-US03)** — shell + home; checklist manual OK
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -54,7 +55,7 @@
 | W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | **done** |
 | W6 | E6 + E7 D-2/D-3/Ops | 4 | **done** |
-| W7 | E8 Portal Web | 12 | **construction** — E8-US02 em andamento |
+| W7 | E8 Portal Web | 12 | **construction** — E8-US03 done; próxima E8-US04 |
 
 ## W7 Portal Web
 - **Frontend:** Angular + Angular Material · S3 + CloudFront
@@ -72,9 +73,10 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION — W7 Portal Web
-- **Next Stage**: Validar login manual (`w7-us02-validate.ps1`) → E8-US03
+- **Next Stage**: E8-US04 — Listar insumos (M1)
 - **Status E8-US01**: done (infra dev validada)
-- **Status E8-US02**: in_progress (código pronto; checklist manual login)
+- **Status E8-US02**: done (commit 55d58ee)
+- **Status E8-US03**: done (shell + home dashboard validado)
 
 ## Última atualização
-- 2026-06-30 — E8-US02: portal-web/ Angular Cognito; build + 6 testes OK
+- 2026-06-30 — E8-US03 done: AppShell, home KPIs, ícones Material, w7-us03-validate

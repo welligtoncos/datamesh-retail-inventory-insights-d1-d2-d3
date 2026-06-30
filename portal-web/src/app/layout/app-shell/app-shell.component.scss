@@ -1,0 +1,66 @@
+.shell-container {
+  height: 100vh;
+}
+
+.shell-sidenav {
+  width: 260px;
+}
+
+.sidenav-header {
+  padding: 1rem 1rem 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.shell-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.toolbar-title {
+  margin-left: 0.25rem;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-email {
+  margin: 0 0.5rem;
+  font-size: 0.85rem;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell-content {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a.active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 599px) {
+  .user-email {
+    display: none;
+  }
+
+  .toolbar-title {
+    font-size: 0.9rem;
+  }
+
+  .shell-content {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  .shell-content {
+    padding: 1.25rem;
+  }
+}

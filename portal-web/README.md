@@ -1,6 +1,6 @@
-# Portal Web · Datamesh W7 (E8-US02)
+# Portal Web · Datamesh W7 (E8-US02 + E8-US03)
 
-Angular SPA com autenticação **Amazon Cognito** (Hosted UI + OAuth2 code + PKCE).
+Angular SPA com autenticação **Amazon Cognito** (Hosted UI + OAuth2 code + PKCE) e **app shell** com home dashboard.
 
 ## Pré-requisitos
 
@@ -21,7 +21,7 @@ Abra http://localhost:4200 — callback Cognito registrado: `http://localhost:42
 ## Build
 
 ```powershell
-npm run build
+npm run build:prod
 ```
 
 Artefatos em `dist/portal-web/browser/`.
@@ -34,10 +34,11 @@ Na raiz do repositório:
 .\scripts\w7-deploy-portal-web.ps1
 ```
 
-## Validação E8-US02
+## Validação
 
 ```powershell
-.\scripts\w7-us02-validate.ps1
+.\scripts\w7-us02-validate.ps1   # auth Cognito
+.\scripts\w7-us03-validate.ps1   # shell + home dashboard
 ```
 
 ## Configuração
@@ -49,13 +50,16 @@ Na raiz do repositório:
 
 ## Rotas
 
-| Rota | Proteção |
-|------|----------|
-| `/login` | Pública |
-| `/home` | AuthGuard |
+| Rota | Proteção | Descrição |
+|------|----------|-----------|
+| `/login` | Pública | Login Cognito |
+| `/home` | AuthGuard | Home dashboard (KPIs + atalhos) |
+| `/insumos` … `/operacoes` | AuthGuard | Placeholder até E8-US04+ |
+| `/insights/d1` … `d3` | AuthGuard | Placeholder insights |
 
 ## Stack
 
-- Angular 19 · Angular Material
+- Angular 19 · Angular Material · CDK Layout
 - `angular-oauth2-oidc` 19
 - JWT via `authInterceptor` → API Gateway BFF
+- `GET /health` público (badge na toolbar); KPIs mock até E8-US12

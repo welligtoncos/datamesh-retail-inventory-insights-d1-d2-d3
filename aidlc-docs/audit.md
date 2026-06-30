@@ -265,3 +265,27 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: E8-US02 checklist manual login pendente
 
 ---
+
+## W7 E8-US03 Construction — Session Start
+**Timestamp**: 2026-06-30T21:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US03 (Shell Angular e home dashboard). [prompt completo: application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US03 em aidlc-docs/construction/u8-portal-web/shell/; plano u8-portal-shell-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US02 marcada done; E8-US03 in_progress
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---
+
+## W7 E8-US03 Code Generation Part 2
+**Timestamp**: 2026-06-30T22:30:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: Implementado shell E8-US03 em portal-web/: AppShellComponent, HomeDashboardComponent, HealthService, DashboardService mock fallback, placeholders módulos, w7-us03-validate.ps1; ng build prod OK; 19 testes SUCCESS
+**Context**: E8-US03 checklist manual pendente
+
+---
+
+## W7 E8-US03 — Story done
+**Timestamp**: 2026-06-30T23:00:00Z
+**User Input**: "Step 15: Atualizar stories.md E8-US03 → done após checklist manual e faça o comentario do commit detalhado e faça push"
+**AI Response**: E8-US03 marcada done em stories.md; aidlc-state e plano atualizados; commit + push E8-US03 shell
+**Context**: Checklist manual E8-US03 confirmado pelo usuário
+
+---

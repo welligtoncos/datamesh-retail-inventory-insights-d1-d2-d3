@@ -309,7 +309,7 @@
 - **Como** usuário autenticado (qualquer persona)  
 - **Quero** login e logout via Cognito  
 - **Para** acessar o portal com segurança  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US01
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US01
 
 **Critérios de aceite:**
 - [x] Redirect para hosted UI ou login embutido Cognito
@@ -324,14 +324,14 @@
 - **Como** usuário do portal  
 - **Quero** menu de navegação e página inicial com resumo do dia  
 - **Para** chegar aos insights em ≤ 3 cliques  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US02
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US02
 
 **Critérios de aceite:**
-- [ ] App shell com menu: Insumos, Origem, Enriquecido, Insights, Operações
-- [ ] Home exibe último `dt` processado, KPIs resumidos, atalhos D-1/D-2/D-3
-- [ ] Interface em PT-BR; responsivo desktop + tablet
-- [ ] Mensagens de erro claras (timeout AWS, 401, 500)
-- [ ] Rastreabilidade: RF-M7-01..05
+- [x] App shell com menu: Insumos, Origem, Enriquecido, Insights, Operações
+- [x] Home exibe último `dt` processado, KPIs resumidos, atalhos D-1/D-2/D-3
+- [x] Interface em PT-BR; responsivo desktop + tablet
+- [x] Mensagens de erro claras (timeout AWS, 401, 500)
+- [x] Rastreabilidade: RF-M7-01..05
 
 ---
 

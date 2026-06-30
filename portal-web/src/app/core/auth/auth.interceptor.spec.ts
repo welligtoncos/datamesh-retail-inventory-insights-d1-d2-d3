@@ -30,15 +30,26 @@ describe('authInterceptor', () => {
     httpMock.verify();
   });
 
-  it('adds Authorization header for API base URL when token exists', () => {
+  it('does not add Authorization for /health endpoint', () => {
     auth.getAccessToken.and.returnValue('test-token');
     const url = `${environment.apiBaseUrl}/health`;
 
     http.get(url).subscribe();
 
     const req = httpMock.expectOne(url);
-    expect(req.request.headers.get('Authorization')).toBe('Bearer test-token');
+    expect(req.request.headers.has('Authorization')).toBe(false);
     req.flush('ok');
+  });
+
+  it('adds Authorization header for API base URL when token exists', () => {
+    auth.getAccessToken.and.returnValue('test-token');
+    const url = `${environment.apiBaseUrl}/enriquecido/partitions`;
+
+    http.get(url).subscribe();
+
+    const req = httpMock.expectOne(url);
+    expect(req.request.headers.get('Authorization')).toBe('Bearer test-token');
+    req.flush({ partitions: [] });
   });
 
   it('does not add Authorization for external URLs', () => {

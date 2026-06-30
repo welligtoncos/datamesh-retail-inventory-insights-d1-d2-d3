@@ -11,6 +11,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
+  if (req.url.includes('/health')) {
+    return next(req);
+  }
+
   const token = inject(AuthService).getAccessToken();
   if (!token) {
     return next(req);
