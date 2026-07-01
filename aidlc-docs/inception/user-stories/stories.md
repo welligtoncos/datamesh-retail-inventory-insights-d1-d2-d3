@@ -368,7 +368,7 @@
 - **Como** analista de estoque (P1)  
 - **Quero** ver KPIs por `dt` e comparar dois dias  
 - **Para** validar métricas `_revenue`, `_stockout`, `_lost`  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US05
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US05
 
 **Critérios de aceite:**
 - [ ] `GET /enriquecido/partitions` lista partições

@@ -321,3 +321,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Code Generation Part 2 concluído; checklist manual confirmado pelo usuário
 
 ---
+
+## W7 E8-US06 Construction — Session Start
+**Timestamp**: 2026-06-30T23:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US06 (Partições enriquecido, KPIs e comparativo M3). [prompt completo: application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US06 em aidlc-docs/construction/u8-portal-web/enriquecido/; plano u8-portal-enriquecido-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US06 in_progress
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---

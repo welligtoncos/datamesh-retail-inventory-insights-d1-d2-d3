@@ -8,7 +8,7 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US06) — próxima story
+- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US06) — Code Generation Part 1 (design)
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -44,6 +44,7 @@
 - [x] **U8 Portal Web Shell (E8-US03)** — shell + home; checklist manual OK
 - [x] **U8 Portal Web Insumos (E8-US04)** — listagem insumos; checklist manual OK
 - [x] **U8 Portal Web Origem (E8-US05)** — origem M2; checklist manual OK
+- [ ] **U8 Portal Web Enriquecido (E8-US06)** — design Part 1 concluído; aguardando aprovação
 
 ### OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
@@ -57,7 +58,7 @@
 | W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | **done** |
 | W6 | E6 + E7 D-2/D-3/Ops | 4 | **done** |
-| W7 | E8 Portal Web | 12 | **construction** — E8-US05 done; próximo E8-US06 |
+| W7 | E8 Portal Web | 12 | **construction** — E8-US06 design Part 1 |
 
 ## W7 Portal Web
 - **Frontend:** Angular + Angular Material · S3 + CloudFront
@@ -75,9 +76,9 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION — W7 Portal Web
-- **Next Stage**: E8-US06 — Enriquecido KPIs (M3)
-- **Status E8-US04**: done (commit da40b09)
-- **Status E8-US05**: done
+- **Next Stage**: Aprovar design E8-US06 → Code Generation Part 2
+- **Status E8-US05**: done (commit ef57bb6)
+- **Status E8-US06**: in_progress (design Part 1 — aguardando aprovação)
 
 ## Última atualização
-- 2026-06-30 — E8-US05 done: origem M2 portal-web; build + 37 testes; checklist manual OK
+- 2026-06-30 — E8-US06: application/functional/NFR/infra design + plano enriquecido Part 1
