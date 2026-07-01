@@ -458,7 +458,7 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** BFF FastAPI com todos os endpoints e portal deployado em dev  
 - **Para** demonstrar fluxo ponta a ponta: login → insight D-1 → download Excel  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01…E8-US11
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US01…E8-US11
 
 **Critérios de aceite:**
 - [ ] `portal-api/` FastAPI Python 3.12 com OpenAPI `/docs`

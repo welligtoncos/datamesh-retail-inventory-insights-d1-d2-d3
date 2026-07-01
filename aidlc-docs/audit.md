@@ -492,10 +492,12 @@ Não implementar prod/multi-ambiente ainda."
 
 ---
 
-## W7 E8-US11 — Done + Commit
-**Timestamp**: 2026-07-01T03:30:00Z
-**User Input**: "marcar E8-US11 como done e preparar o commit e push detalhado"
-**AI Response**: stories.md E8-US11 → done; plano step 13 [x]; aidlc-state atualizado; commit feat(portal-web) E8-US11 + push
-**Context**: Story E8-US11 encerrada; próxima E8-US12
+---
+
+## W7 E8-US12 Construction — Session Start
+**Timestamp**: 2026-07-01T04:00:00Z
+**User Input**: "[prompt completo E8-US12 Part 1 design — using aidlc, U8-Portal-API, FastAPI BFF, extensions Security/Resiliency/PBT, NÃO gerar portal-api até Continue to Next Stage]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US12 em aidlc-docs/construction/u8-portal-api/; plano u8-portal-api-code-generation-plan.md Part 1 (15 steps); aidlc-state e stories E8-US12 in_progress; 10 decisões arquitetura adotadas
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
 
 ---
