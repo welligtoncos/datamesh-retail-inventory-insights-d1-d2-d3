@@ -383,7 +383,7 @@
 - **Como** diretoria comercial (P5)  
 - **Quero** ranking de produtos vendidos com insight textual  
 - **Para** decidir mix e exposição com dado de ontem  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US06, E5 (Lambda D-1)
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US06, E5 (Lambda D-1)
 
 **Critérios de aceite:**
 - [ ] Seletor de `dt`; default = ontem

@@ -337,3 +337,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Code Generation Part 2 + layout shell concluídos; checklist manual confirmado pelo usuário
 
 ---
+
+## W7 E8-US07 Construction — Session Start
+**Timestamp**: 2026-06-30T24:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US07 (Dashboard insight D-1 M4). [prompt completo: application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US07 em aidlc-docs/construction/u8-portal-web/insights-d1/; plano u8-portal-insights-d1-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US07 in_progress
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---
+
+## W7 E8-US07 — Approval Prompt (Code Generation Part 1)
+**Timestamp**: 2026-06-30T24:01:00Z
+**User Input**: "[approval prompt logged before user response]"
+**AI Response**: Apresentado resumo design E8-US07 e opções Request Changes / Continue to Next Stage — sem código gerado
+**Context**: Aguardando resposta do usuário para Part 2
+
+---
