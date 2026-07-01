@@ -409,3 +409,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Story E8-US08 encerrada; próxima E8-US09
 
 ---
+
+## W7 E8-US09 Construction — Session Start
+**Timestamp**: 2026-06-30T24:00:00Z
+**User Input**: "[prompt completo E8-US09 CONSTRUCTION Part 1 — application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US09 em aidlc-docs/construction/u8-portal-web/operacoes-pipeline/; plano u8-portal-operacoes-pipeline-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US09 in_progress
+**Context**: Aguardando resposta do usuário para Part 2
+
+---
+
+## W7 E8-US09 — Approval Prompt (Code Generation Part 1)
+**Timestamp**: 2026-06-30T24:01:00Z
+**User Input**: "(design Part 1 apresentado)"
+**AI Response**: Apresentado resumo design E8-US09 e opções Request Changes / Continue to Next Stage — sem código gerado
+**Context**: Aguardando aprovação usuário
+
+---

@@ -414,7 +414,7 @@
 - **Como** usuário autenticado  
 - **Quero** processar um `dt` e ver status da Step Function  
 - **Para** reprocessar dia sem script PowerShell  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US05, E4 (SFN)
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US05, E4 (SFN)
 
 **Critérios de aceite:**
 - [ ] `POST /pipeline/processar-dia` com body `{dt}` inicia SFN
