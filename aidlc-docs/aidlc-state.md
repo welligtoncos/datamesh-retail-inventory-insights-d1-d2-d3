@@ -8,11 +8,12 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal API (E8-US12) — design Part 1
+- **Current Stage**: CONSTRUCTION — U8 Portal API (E8-US12) — Code Generation Part 2
 - **Status E8-US11**: done
-- **Status E8-US12**: in_progress — Code Generation Part 1 concluído; aguardando aprovação
+- **Status E8-US12**: in_progress — Part 2 código gerado; deploy + E2E manual pendentes
 
 ## Última atualização
+- 2026-06-29 — E8-US12 Part 2 codegen: portal-api FastAPI BFF, Terraform ECR/ECS, scripts validate/deploy
 - 2026-07-01 — E8-US12 Part 1 design: u8-portal-api application/functional/nfr/infra + codegen plan
 - 2026-07-01 — E8-US10 done: EsteiraStatusCard, GET /ops/alarms, 111 specs
 - 2026-06-30 — E8-US09 done: /operacoes pipeline SFN, 94 specs, checklist manual OK
@@ -57,7 +58,7 @@
 - [x] **U8 Portal Web Operações Pipeline (E8-US09)** — pipeline M5; checklist manual OK
 - [x] **U8 Portal Web Ops Alarms + Health (E8-US10)** — alarmes + health home M5; checklist OK
 - [x] **U8 Portal Web Athena Templates (E8-US11)** — /enriquecido/athena M3; checklist manual OK
-- [ ] **U8 Portal API BFF (E8-US12)** — design Part 1 OK; Code Generation Part 2 pendente
+- [ ] **U8 Portal API BFF (E8-US12)** — Part 2 codegen OK (6 pytest); steps 14–15 deploy/E2E pendentes
 - [ ] Operations — PLACEHOLDER
 
 ## Entrega por onda
@@ -87,6 +88,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION — W7 Portal API BFF
-- **Next Stage**: E8-US12 Code Generation Part 2 após aprovação
+- **Next Stage**: E8-US12 deploy dev (`w7-us12-deploy.ps1`) + checklist E2E manual
 - **Status E8-US11**: done
-- **Status E8-US12**: in_progress — design Part 1 aguardando aprovação
+- **Status E8-US12**: in_progress — Part 2 codegen concluído; aguardando deploy/E2E

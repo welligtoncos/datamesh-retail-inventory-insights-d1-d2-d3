@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==8.3.4
+hypothesis==6.122.3
+httpx==0.28.1
+moto[s3,athena,cloudwatch]==5.0.22

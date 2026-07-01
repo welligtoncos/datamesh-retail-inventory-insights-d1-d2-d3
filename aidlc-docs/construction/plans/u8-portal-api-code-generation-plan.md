@@ -2,7 +2,7 @@
 
 **Stories:** E8-US12  
 **Unit:** U8-Portal-API  
-**Status:** Part 1 concluído — aguardando aprovação  
+**Status:** Part 2 concluído — steps 14–15 pendentes (deploy + E2E manual)  
 **Data:** 2026-07-01
 
 ---
@@ -19,19 +19,19 @@
 
 ## Steps (Part 2 — após aprovação)
 
-- [ ] Step 1: Scaffold `portal-api/` — `main.py`, `config.py`, `logging.py`, `Dockerfile`, `requirements.txt`
-- [ ] Step 2: Pydantic schemas espelhando models Angular (health, insumo, origem, enriquecido)
-- [ ] Step 3: Repositories S3 — partitions, parquet read, presign
-- [ ] Step 4: Domain puro — `dates.py`, `d1_aggregate.py`, `d2_filter.py`, `d3_trend.py`, `enriquecido_kpis.py`
-- [ ] Step 5: Routers + services — insumos, origem, enriquecido (RF-API-02, 04–07)
-- [ ] Step 6: Routers + services — insights d1/d2/d3 + download (RF-API-08–11)
-- [ ] Step 7: Router pipeline + SFN repository (RF-API-12, 13, 13b)
-- [ ] Step 8: Router athena — catalog, SQL files, poll service (RF-API-14)
-- [ ] Step 9: Router ops/alarms + health (RF-API-01, 15)
-- [ ] Step 10: pytest unit + hypothesis PBT em domain/
-- [ ] Step 11: Terraform ECR + ECS task image (`terraform/modules/portal/`)
-- [ ] Step 12: `scripts/w7-us12-deploy.ps1` + `scripts/w7-us12-validate.ps1`
-- [ ] Step 13: `docs/portal-deploy-dev.md` + `portal-api/README.md`
+- [x] Step 1: Scaffold `portal-api/` — `main.py`, `config.py`, `logging.py`, `Dockerfile`, `requirements.txt`
+- [x] Step 2: Pydantic schemas espelhando models Angular (health, insumo, origem, enriquecido)
+- [x] Step 3: Repositories S3 — partitions, parquet read, presign
+- [x] Step 4: Domain puro — `dates.py`, `d1_aggregate.py`, `d2_filter.py`, `d3_trend.py`, `enriquecido_kpis.py`
+- [x] Step 5: Routers + services — insumos, origem, enriquecido (RF-API-02, 04–07)
+- [x] Step 6: Routers + services — insights d1/d2/d3 + download (RF-API-08–11)
+- [x] Step 7: Router pipeline + SFN repository (RF-API-12, 13, 13b)
+- [x] Step 8: Router athena — catalog, SQL files, poll service (RF-API-14)
+- [x] Step 9: Router ops/alarms + health (RF-API-01, 15)
+- [x] Step 10: pytest unit + hypothesis PBT em domain/
+- [x] Step 11: Terraform ECR + ECS task image (`terraform/modules/portal/`)
+- [x] Step 12: `scripts/w7-us12-deploy.ps1` + `scripts/w7-us12-validate.ps1`
+- [x] Step 13: `docs/portal-deploy-dev.md` + `portal-api/README.md`
 - [ ] Step 14: Deploy dev + smoke API GW
 - [ ] Step 15: Atualizar `stories.md` E8-US12 → `done` após checklist E2E manual
 

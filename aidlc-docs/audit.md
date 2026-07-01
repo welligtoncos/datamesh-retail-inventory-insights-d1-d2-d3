@@ -501,3 +501,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
 
 ---
+
+## W7 E8-US12 — Continue to Next Stage (Code Generation Part 2)
+**Timestamp**: 2026-06-29T18:00:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: Executado Code Generation Part 2 E8-US12: portal-api/ FastAPI BFF (RF-API-01,02,04–15), pytest 6 passed, Terraform ECR+ECS, scripts w7-us12-validate/deploy, docs/portal-deploy-dev.md; plano steps 1–13 [x]; steps 14–15 deploy/E2E pendentes
+**Context**: Code Generation Part 2 concluído; aguardando aprovação do usuário ou deploy/E2E
+
+---

@@ -17,11 +17,24 @@ resource "aws_cloudwatch_log_group" "ecs" {
 }
 
 locals {
+  portal_api_enabled   = var.portal_api_image != ""
+  ecs_container_name   = local.portal_api_enabled ? "portal-api" : "bff-placeholder"
+  ecs_container_image  = local.portal_api_enabled ? var.portal_api_image : var.placeholder_container_image
+  ecs_container_environment = local.portal_api_enabled ? [
+    { name = "AWS_REGION", value = var.aws_region },
+    { name = "DATAMESH_BUCKET", value = var.datamesh_bucket_name },
+    { name = "SFN_STATE_MACHINE_ARN", value = var.sfn_state_machine_arn },
+    { name = "ATHENA_DATABASE", value = var.athena_database_name },
+    { name = "ATHENA_WORKGROUP", value = var.athena_workgroup_name },
+    { name = "SFN_ALARM_NAME", value = var.sfn_failed_alarm_name },
+    { name = "LOG_LEVEL", value = "INFO" },
+  ] : []
+
   ecs_container_definitions = jsonencode([
     merge(
       {
-        name      = "bff-placeholder"
-        image     = var.placeholder_container_image
+        name      = local.ecs_container_name
+        image     = local.ecs_container_image
         essential = true
         portMappings = [
           {
@@ -30,6 +43,7 @@ locals {
             protocol      = "tcp"
           }
         ]
+        environment = local.ecs_container_environment
       },
       var.enable_portal_logging ? {
         logConfiguration = {
@@ -73,7 +87,7 @@ resource "aws_ecs_service" "portal" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.portal.arn
-    container_name   = "bff-placeholder"
+    container_name   = local.ecs_container_name
     container_port   = 80
   }
 

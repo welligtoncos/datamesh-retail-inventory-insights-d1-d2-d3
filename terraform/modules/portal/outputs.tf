@@ -75,5 +75,10 @@ output "ecs_task_policy_arn" {
 
 output "ecs_task_definition_arn" {
   value       = aws_ecs_task_definition.portal_placeholder.arn
-  description = "Current placeholder task definition ARN"
+  description = "Current task definition ARN"
+}
+
+output "ecr_portal_api_repository_url" {
+  value       = aws_ecr_repository.portal_api.repository_url
+  description = "ECR repository URL for portal-api (E8-US12)"
 }

@@ -81,3 +81,9 @@ variable "enable_portal_logging" {
   type        = bool
   default     = false
 }
+
+variable "portal_api_image" {
+  description = "ECR image URI for FastAPI BFF (E8-US12). Empty keeps nginx placeholder."
+  type        = string
+  default     = ""
+}

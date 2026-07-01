@@ -121,5 +121,6 @@ module "portal" {
   portal_web_bucket_name   = var.portal_web_bucket_name
   additional_callback_urls = var.portal_callback_urls
   enable_portal_logging    = var.enable_portal_logging
+  portal_api_image         = var.portal_api_image
   tags                     = var.tags
 }

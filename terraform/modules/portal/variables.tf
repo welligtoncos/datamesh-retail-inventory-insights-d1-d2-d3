@@ -84,6 +84,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "portal_api_image" {
+  description = "ECR image URI for FastAPI BFF (E8-US12). Empty keeps nginx placeholder."
+  type        = string
+  default     = ""
+}
+
 variable "enable_portal_logging" {
   description = "Create CloudWatch log groups for API GW and ECS (requires logs:CreateLogGroup)"
   type        = bool
