@@ -339,7 +339,7 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** ver arquivos em `insumo/` no portal  
 - **Para** confirmar que o CSV está no data lake sem usar console S3  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US01, E8-US03
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US01, E8-US03
 
 **Critérios de aceite:**
 - [ ] `GET /insumos` lista objetos com nome, tamanho, LastModified
