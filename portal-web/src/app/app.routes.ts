@@ -4,6 +4,7 @@ import { authGuard } from './core/auth/auth.guard';
 import { AppShellComponent } from './layout/app-shell/app-shell.component';
 import { PlaceholderPageComponent } from './layout/placeholder-page/placeholder-page.component';
 import { HomeDashboardComponent } from './features/home/home-dashboard.component';
+import { InsumosListComponent } from './features/insumos/insumos-list.component';
 import { LoginComponent } from './features/login/login.component';
 
 export const routes: Routes = [
@@ -14,7 +15,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'home', component: HomeDashboardComponent },
-      { path: 'insumos', component: PlaceholderPageComponent, data: { title: 'Insumos' } },
+      { path: 'insumos', component: InsumosListComponent },
       { path: 'origem', component: PlaceholderPageComponent, data: { title: 'Origem' } },
       { path: 'enriquecido', component: PlaceholderPageComponent, data: { title: 'Enriquecido' } },
       { path: 'insights/d1', component: PlaceholderPageComponent, data: { title: 'Insight D-1 Comercial' } },

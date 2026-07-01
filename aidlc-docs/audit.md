@@ -290,10 +290,18 @@ Não implementar prod/multi-ambiente ainda."
 
 ---
 
-## W7 E8-US04 Construction — Session Start
-**Timestamp**: 2026-06-30T23:30:00Z
-**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US04 (Listar insumos M1). [prompt completo: application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
-**AI Response**: Executadas fases CONSTRUCTION design E8-US04 em aidlc-docs/construction/u8-portal-web/insumos/; plano u8-portal-insumos-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US04 in_progress
-**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+## W7 E8-US04 Code Generation Part 2
+**Timestamp**: 2026-06-30T21:25:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: Implementado E8-US04 em portal-web/: InsumosListComponent, mat-table, InsumosFacadeService mock, fileSizePipe, w7-us04-validate.ps1; ng build prod OK; 27 testes SUCCESS
+**Context**: E8-US04 checklist manual pendente
+
+---
+
+## W7 E8-US04 — Story done
+**Timestamp**: 2026-06-30T21:45:00Z
+**User Input**: "marcar E8-US04 done + commit/pus"
+**AI Response**: E8-US04 marcada done em stories.md; aidlc-state e plano atualizados; commit + push código insumos M1
+**Context**: Checklist manual E8-US04 confirmado pelo usuário
 
 ---
