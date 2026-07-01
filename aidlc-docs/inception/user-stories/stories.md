@@ -383,15 +383,15 @@
 - **Como** diretoria comercial (P5)  
 - **Quero** ranking de produtos vendidos com insight textual  
 - **Para** decidir mix e exposição com dado de ontem  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US06, E5 (Lambda D-1)
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US06, E5 (Lambda D-1)
 
 **Critérios de aceite:**
-- [ ] Seletor de `dt`; default = ontem
-- [ ] Tabela ranking por unidades e receita (agregação Product ID + Category)
-- [ ] Insight textual (produto líder, concentração top 3)
-- [ ] Download Excel via presigned URL `relatorios/D1/`
-- [ ] CTA processar se partição ausente (autenticado)
-- [ ] Rastreabilidade: RF-M4-01,02,05,06,07, RF-API-08, RF-API-11
+- [x] Seletor de `dt`; default = ontem
+- [x] Tabela ranking por unidades e receita (agregação Product ID + Category)
+- [x] Insight textual (produto líder, concentração top 3)
+- [x] Download Excel via presigned URL `relatorios/D1/`
+- [x] CTA processar se partição ausente (autenticado)
+- [x] Rastreabilidade: RF-M4-01,02,05,06,07, RF-API-08, RF-API-11
 
 ---
 

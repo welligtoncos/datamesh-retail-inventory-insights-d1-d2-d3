@@ -353,3 +353,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Aguardando resposta do usuário para Part 2
 
 ---
+
+## W7 E8-US07 — Code Generation Part 2
+**Timestamp**: 2026-06-30T24:30:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: Implementado módulo insights D-1 em portal-web/; 59 testes + build:prod OK; plano steps 1-17 [x]; w7-us07-validate.ps1; README e code-summary atualizados
+**Context**: Step 18 (stories done) aguardando checklist manual do usuário
+
+---
+
+## W7 E8-US07 — Done + Commit
+**Timestamp**: 2026-06-30T25:00:00Z
+**User Input**: "marcar E8-US07 done e fazer commit/push"
+**AI Response**: stories.md E8-US07 → done; plano step 18 [x]; commit/push feature insights D-1 portal-web
+**Context**: Checklist manual confirmado pelo usuário
+
+---

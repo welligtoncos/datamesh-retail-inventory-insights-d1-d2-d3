@@ -138,3 +138,8 @@ export function isMockEnriquecidoDt(dt: string): boolean {
   const normalized = dt.trim().slice(0, 10);
   return normalized === MOCK_ENRIQ_DT_A || normalized === MOCK_ENRIQ_DT_B;
 }
+
+export function getMockEnriquecidoRows(dt: string): Record<string, unknown>[] {
+  const normalized = dt.trim().slice(0, 10);
+  return ALL_MOCK_ROWS[normalized] ?? [];
+}
