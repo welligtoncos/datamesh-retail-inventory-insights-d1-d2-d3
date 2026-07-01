@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { buildSfnExecutionArn, PROCESSAR_DIA_SFN_ARN } from '../pipeline-console-url.util';
 import { computeDurationSeconds } from '../pipeline-duration.util';
 import {
   PipelineAuditEntry,
@@ -8,10 +9,13 @@ import {
   ProcessarDiaResponse,
 } from '../models/pipeline.model';
 
-const MOCK_SFN_ARN =
-  'arn:aws:states:us-east-1:303238378103:stateMachine:retail-inventory-insights-processar-dia-dev';
+const MOCK_SFN_ARN = PROCESSAR_DIA_SFN_ARN;
 
 const MOCK_COMPLETE_MS = 8_000;
+
+function mockExecutionArn(executionId: string): string {
+  return buildSfnExecutionArn(MOCK_SFN_ARN, executionId);
+}
 
 interface MockExecutionRecord extends PipelineExecutionSummary {
   completeTimer?: ReturnType<typeof setTimeout>;
@@ -32,7 +36,7 @@ export class PipelineExecutionMockStore {
     const now = Date.now();
     this.insertRecord({
       execution_id: 'mock-exec-001',
-      execution_arn: `${MOCK_SFN_ARN}:execution:mock-exec-001`,
+      execution_arn: mockExecutionArn('mock-exec-001'),
       dt: '2022-01-02',
       status: 'SUCCEEDED',
       started_at: new Date(now - 3600_000).toISOString(),
@@ -42,7 +46,7 @@ export class PipelineExecutionMockStore {
     });
     this.insertRecord({
       execution_id: 'mock-exec-002',
-      execution_arn: `${MOCK_SFN_ARN}:execution:mock-exec-002`,
+      execution_arn: mockExecutionArn('mock-exec-002'),
       dt: '2022-01-01',
       status: 'FAILED',
       started_at: new Date(now - 7200_000).toISOString(),
@@ -71,7 +75,7 @@ export class PipelineExecutionMockStore {
     this.seq += 1;
     const execution_id = `mock-exec-${String(this.seq).padStart(3, '0')}`;
     const started_at = new Date().toISOString();
-    const execution_arn = `${MOCK_SFN_ARN}:execution:${execution_id}`;
+    const execution_arn = mockExecutionArn(execution_id);
 
     const record: MockExecutionRecord = {
       execution_id,

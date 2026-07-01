@@ -1,8 +1,8 @@
-# Portal Web · Datamesh W7 (E8-US02 … E8-US09)
+# Portal Web · Datamesh W7 (E8-US02 … E8-US10)
 
 
 
-Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3), **Insights D-1/D-2/D-3** (M4) e **Operações** (M5 pipeline).
+Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3), **Insights D-1/D-2/D-3** (M4), **Operações** (M5 pipeline) e **status esteira** (alarme SFN + health na home).
 
 
 
@@ -97,6 +97,7 @@ Na raiz do repositório:
 .\scripts\w7-us07-validate.ps1   # insight D-1 ranking + download M4
 .\scripts\w7-us08-validate.ps1   # insights D-2 ruptura + D-3 tendencia M4
 .\scripts\w7-us09-validate.ps1   # operacoes pipeline SFN M5
+.\scripts\w7-us10-validate.ps1   # alarmes CloudWatch + health home M5
 
 ```
 
@@ -140,7 +141,7 @@ Na raiz do repositório:
 
 | `/login`                 | Pública   | Login Cognito                   |
 
-| `/home`                  | AuthGuard | Home dashboard (KPIs + atalhos) |
+| `/home`                  | AuthGuard | Home dashboard (status esteira + KPIs + atalhos) |
 
 | `/insumos`               | AuthGuard | Tabela arquivos S3 `insumo/`    |
 
@@ -174,5 +175,5 @@ Na raiz do repositório:
 
 - JWT via `authInterceptor` → API Gateway BFF
 
-- `GET /health` público (badge); KPIs, insumos, origem, enriquecido e insights mock até E8-US12 (FastAPI BFF)
+- `GET /health` público (badge shell); `GET /ops/alarms` com JWT (card esteira); demais endpoints mock até E8-US12 (FastAPI BFF)
 

@@ -10,7 +10,7 @@ import {
   displayPipelineStatus,
   isTerminalPipelineStatus,
 } from '../../core/api/models/pipeline.model';
-import { buildSfnConsoleUrl } from '../../core/api/pipeline-console-url.util';
+import { buildSfnConsoleUrl, resolveSfnConsoleUrl } from '../../core/api/pipeline-console-url.util';
 
 @Component({
   selector: 'app-pipeline-active-execution',
@@ -153,11 +153,7 @@ export class PipelineActiveExecutionComponent {
   }
 
   consoleUrl(): string | null {
-    const arn = this.execution()?.execution_arn?.trim();
-    if (!arn) {
-      return null;
-    }
-    return buildSfnConsoleUrl(arn);
+    return resolveSfnConsoleUrl(this.execution()?.execution_arn);
   }
 
   protected readonly isTerminal = isTerminalPipelineStatus;

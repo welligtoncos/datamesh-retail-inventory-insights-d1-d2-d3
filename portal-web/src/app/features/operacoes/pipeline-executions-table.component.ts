@@ -9,7 +9,7 @@ import {
   PipelineExecutionSummary,
   displayPipelineStatus,
 } from '../../core/api/models/pipeline.model';
-import { buildSfnConsoleUrl } from '../../core/api/pipeline-console-url.util';
+import { canOpenSfnConsoleUrl, resolveSfnConsoleUrl } from '../../core/api/pipeline-console-url.util';
 
 const DISPLAYED_COLUMNS = [
   'dt',
@@ -77,7 +77,7 @@ const DISPLAYED_COLUMNS = [
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let row">
-                @if (row.execution_arn) {
+                @if (canOpenConsole(row.execution_arn)) {
                   <a
                     mat-stroked-button
                     [href]="consoleUrl(row.execution_arn)"
@@ -148,7 +148,11 @@ export class PipelineExecutionsTableComponent {
     return 'failed';
   }
 
+  canOpenConsole(executionArn: string): boolean {
+    return canOpenSfnConsoleUrl(executionArn);
+  }
+
   consoleUrl(executionArn: string): string {
-    return buildSfnConsoleUrl(executionArn);
+    return resolveSfnConsoleUrl(executionArn) ?? '#';
   }
 }

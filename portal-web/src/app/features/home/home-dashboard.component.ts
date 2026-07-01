@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { DashboardSummary } from '../../core/api/models/dashboard.model';
 import { ApiErrorBannerComponent } from '../../shared/components/api-error-banner/api-error-banner.component';
 import { InsightShortcutCardComponent } from '../../shared/components/insight-shortcut-card/insight-shortcut-card.component';
 import { KpiSummaryCardComponent } from '../../shared/components/kpi-summary-card/kpi-summary-card.component';
+import { EsteiraStatusCardComponent } from './esteira-status-card.component';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -21,6 +22,7 @@ import { KpiSummaryCardComponent } from '../../shared/components/kpi-summary-car
     ApiErrorBannerComponent,
     KpiSummaryCardComponent,
     InsightShortcutCardComponent,
+    EsteiraStatusCardComponent,
   ],
   template: `
     <header class="page-header">
@@ -36,6 +38,8 @@ import { KpiSummaryCardComponent } from '../../shared/components/kpi-summary-car
         </mat-chip-set>
       }
     </header>
+
+    <app-esteira-status-card />
 
     <app-api-error-banner [message]="errorMessage()" [severity]="bannerSeverity()" />
 
@@ -105,6 +109,8 @@ import { KpiSummaryCardComponent } from '../../shared/components/kpi-summary-car
 export class HomeDashboardComponent implements OnInit {
   private readonly dashboardService = inject(DashboardService);
 
+  @ViewChild(EsteiraStatusCardComponent) private esteiraCard?: EsteiraStatusCardComponent;
+
   readonly loading = signal(true);
   readonly summary = signal<DashboardSummary | null>(null);
   readonly errorMessage = signal<string | null>(null);
@@ -115,6 +121,7 @@ export class HomeDashboardComponent implements OnInit {
   }
 
   refresh(): void {
+    this.esteiraCard?.refresh();
     this.loading.set(true);
     this.errorMessage.set(null);
     this.bannerSeverity.set('error');

@@ -429,13 +429,13 @@
 - **Como** plataforma AWS (P4)  
 - **Quero** ver estado do alarme SFN e saúde da API na home  
 - **Para** saber se a esteira falhou sem abrir console AWS  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US09, E7-US02
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US09, E7-US02
 
 **Critérios de aceite:**
-- [ ] `GET /ops/alarms` retorna estado OK/ALARM do alarme SFN
-- [ ] `GET /health` público para liveness
-- [ ] Badge na home: esteira operacional / em alarme
-- [ ] Rastreabilidade: RF-M5-04, RF-M5-05, RF-API-01, RF-API-15
+- [x] `GET /ops/alarms` retorna estado OK/ALARM do alarme SFN
+- [x] `GET /health` público para liveness
+- [x] Badge na home: esteira operacional / em alarme
+- [x] Rastreabilidade: RF-M5-04, RF-M5-05, RF-API-01, RF-API-15
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Stories:** E8-US10  
 **Unit:** U8-Portal-Web  
-**Status:** Part 1 — aguardando aprovação  
+**Status:** Part 2 concluído — E8-US10 done  
 **Data:** 2026-06-30
 
 ---
@@ -17,18 +17,18 @@
 
 ## Steps (Part 2 — após aprovação)
 
-- [ ] Step 1: Criar `models/ops-alarms.model.ts` + `esteira-status.model.ts`
-- [ ] Step 2: Criar `esteira-status.util.ts`, `cloudwatch-console-url.util.ts`
-- [ ] Step 3: Criar `ops-alarms-mock.data.ts`
-- [ ] Step 4: Criar `OpsAlarmsApiService` + `OpsAlarmsFacadeService`
-- [ ] Step 5: Criar `EsteiraStatusFacadeService` (forkJoin health + alarms)
-- [ ] Step 6: Criar `EsteiraStatusCardComponent` (card + poll 60s + `?alarm=demo`)
-- [ ] Step 7: Integrar card em `HomeDashboardComponent`
-- [ ] Step 8: Regressão `HealthService`, `HealthBadgeComponent`, `DashboardService` specs
-- [ ] Step 9: Unit tests — `esteira-status.util`, facades, console URL
-- [ ] Step 10: `scripts/w7-us10-validate.ps1`
-- [ ] Step 11: Atualizar `portal-web/README.md` e `code-summary.md`
-- [ ] Step 12: Atualizar `stories.md` E8-US10 → `done` após checklist manual
+- [x] Step 1: Criar `models/ops-alarms.model.ts` + `esteira-status.model.ts`
+- [x] Step 2: Criar `esteira-status.util.ts`, `cloudwatch-console-url.util.ts`
+- [x] Step 3: Criar `ops-alarms-mock.data.ts`
+- [x] Step 4: Criar `OpsAlarmsApiService` + `OpsAlarmsFacadeService`
+- [x] Step 5: Criar `EsteiraStatusFacadeService` (forkJoin health + alarms)
+- [x] Step 6: Criar `EsteiraStatusCardComponent` (card + poll 60s + `?alarm=demo`)
+- [x] Step 7: Integrar card em `HomeDashboardComponent`
+- [x] Step 8: Regressão `HealthService`, `HealthBadgeComponent`, `DashboardService` specs
+- [x] Step 9: Unit tests — `esteira-status.util`, facades, console URL
+- [x] Step 10: `scripts/w7-us10-validate.ps1`
+- [x] Step 11: Atualizar `portal-web/README.md` e `code-summary.md`
+- [x] Step 12: Atualizar `stories.md` E8-US10 → `done` após checklist manual
 
 ---
 

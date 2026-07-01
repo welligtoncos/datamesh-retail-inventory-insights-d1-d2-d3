@@ -16,6 +16,13 @@ describe('PipelineExecutionMockStore', () => {
     expect(list.length).toBeGreaterThanOrEqual(2);
   });
 
+  it('starts RUNNING execution with valid execution ARN', () => {
+    const started = store.startExecution('2022-01-02', buildMockAudit({ sub: 'u1' }));
+    expect(started.status).toBe('RUNNING');
+    expect(started.execution_arn).toContain(':execution:');
+    expect(started.execution_arn).not.toContain(':stateMachine:');
+  });
+
   it('starts RUNNING execution and completes on forceComplete', () => {
     const started = store.startExecution('2022-01-02', buildMockAudit({ sub: 'u1' }));
     expect(started.status).toBe('RUNNING');
