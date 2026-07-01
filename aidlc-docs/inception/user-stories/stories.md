@@ -353,7 +353,7 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** calendário de `origem/dt=` e preview do Parquet  
 - **Para** validar extração diária antes do enriquecimento  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US04
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US04
 
 **Critérios de aceite:**
 - [ ] `GET /origem/partitions` lista prefixos `dt=YYYY-MM-DD`

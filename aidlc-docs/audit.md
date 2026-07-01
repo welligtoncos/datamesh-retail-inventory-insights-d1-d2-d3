@@ -305,3 +305,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Checklist manual E8-US04 confirmado pelo usuário
 
 ---
+
+## W7 E8-US05 Construction — Session Start
+**Timestamp**: 2026-06-30T22:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US05 (Partições origem e preview M2). [prompt completo: application design, functional design, NFR, infrastructure design, code generation plan Part 1, aguardar aprovação antes de código]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US05 em aidlc-docs/construction/u8-portal-web/origem/; plano u8-portal-origem-code-generation-plan.md Part 1; aidlc-state e stories atualizados; E8-US05 in_progress
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---
