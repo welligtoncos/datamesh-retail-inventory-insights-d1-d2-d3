@@ -399,7 +399,7 @@
 - **Como** gestor de compras (P3)  
 - **Quero** ver rupturas priorizadas e tendência de consumo  
 - **Para** definir reposições e ajustar estoque mínimo  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US07, E6 (Lambda D-2/D-3)
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US07, E6 (Lambda D-2/D-3)
 
 **Critérios de aceite:**
 - [ ] D-2: tabela `_stockout==1` e `_lost>0`, ordenada por `_lost` desc

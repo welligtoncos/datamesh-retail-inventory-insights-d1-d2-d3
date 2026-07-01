@@ -8,11 +8,12 @@
 ## Project Information
 - **Project Type**: Brownfield
 - **Start Date**: 2026-06-24
-- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US08) — próxima story
+- **Current Stage**: CONSTRUCTION — U8 Portal Web (E8-US08) — Code Generation Part 1 (design)
 - **Status E8-US07**: done
+- **Status E8-US08**: in_progress — design Part 1 concluído; aguardando aprovação
 
 ## Última atualização
-- 2026-06-30 — E8-US07 done: insights D-1 M4; build + 59 testes OK; checklist manual confirmado
+- 2026-06-30 — E8-US08 design Part 1: insights D-2/D-3 M4; plano u8-portal-insights-d2-d3-code-generation-plan.md
 
 ## Decisões confirmadas
 - [x] Região AWS: **us-east-1** (N. Virginia)
@@ -50,8 +51,7 @@
 - [x] **U8 Portal Web Origem (E8-US05)** — origem M2; checklist manual OK
 - [x] **U8 Portal Web Enriquecido (E8-US06)** — enriquecido M3 + layout; checklist manual OK
 - [x] **U8 Portal Web Insights D-1 (E8-US07)** — insights D-1 M4; checklist manual OK
-
-### OPERATIONS PHASE
+- [ ] **U8 Portal Web Insights D-2/D-3 (E8-US08)** — design Part 1 concluído; aguardando aprovação Code Gen Part 2
 - [ ] Operations — PLACEHOLDER
 
 ## Entrega por onda
@@ -63,7 +63,7 @@
 | W4 | E4 Orquestração | 3 | **done** |
 | W5 | E5 Relatório D-1 | 3 | **done** |
 | W6 | E6 + E7 D-2/D-3/Ops | 4 | **done** |
-| W7 | E8 Portal Web | 12 | **construction** — E8-US07 done; próximo E8-US08 |
+| W7 | E8 Portal Web | 12 | **construction** — E8-US08 design Part 1 |
 
 ## W7 Portal Web
 - **Frontend:** Angular + Angular Material · S3 + CloudFront
@@ -81,4 +81,5 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION — W7 Portal Web
-- **Next Stage**: E8-US08 — Dashboards insights D-2 e D-3 (M4)
+- **Next Stage**: E8-US08 Code Generation Part 2 (após aprovação)
+- **Status E8-US08**: in_progress — design Part 1 aguardando aprovação
