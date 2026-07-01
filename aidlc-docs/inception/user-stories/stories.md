@@ -443,7 +443,7 @@
 - **Como** analista de estoque (P1)  
 - **Quero** executar queries pré-aprovadas sobre enriquecido  
 - **Para** validar dados sem editor SQL livre  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US06, E7-US01
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US06, E7-US01
 
 **Critérios de aceite:**
 - [ ] `POST /athena/query-template` com `template_id` da lista documentada

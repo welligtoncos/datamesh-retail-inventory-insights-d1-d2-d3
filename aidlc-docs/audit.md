@@ -473,3 +473,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Story E8-US10 encerrada; próxima E8-US11
 
 ---
+
+## W7 E8-US11 Construction — Session Start
+**Timestamp**: 2026-07-01T01:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US11 (Athena templates no portal M3). [prompt completo Part 1 design only — application-design, functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation-plan Part 1; NÃO gerar código portal-web até Continue to Next Stage; extensions Security, Resiliency, PBT]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US11 em aidlc-docs/construction/u8-portal-web/athena-templates/; plano u8-portal-athena-templates-code-generation-plan.md Part 1 (13 steps); aidlc-state e stories atualizados; E8-US11 in_progress; decisão UX opção B rota /enriquecido/athena
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---
+
+## W7 E8-US11 — Approval Prompt (Code Generation Part 1)
+**Timestamp**: 2026-07-01T01:01:00Z
+**User Input**: "(design Part 1 apresentado)"
+**AI Response**: Apresentado resumo design E8-US11 e opções Request Changes / Continue to Next Stage — sem código gerado em portal-web/
+**Context**: Aguardando resposta do usuário para Part 2
+
+---
