@@ -443,14 +443,14 @@
 - **Como** analista de estoque (P1)  
 - **Quero** executar queries pré-aprovadas sobre enriquecido  
 - **Para** validar dados sem editor SQL livre  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US06, E7-US01
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US06, E7-US01
 
 **Critérios de aceite:**
-- [ ] `POST /athena/query-template` com `template_id` da lista documentada
-- [ ] UI lista templates (ex.: de `athena-validation-queries.md`)
-- [ ] Resultado tabular com limite de linhas
-- [ ] Sem editor SQL ad hoc (fase 2)
-- [ ] Rastreabilidade: RF-M3-05, RF-API-14
+- [x] `POST /athena/query-template` com `template_id` da lista documentada
+- [x] UI lista templates (ex.: de `athena-validation-queries.md`)
+- [x] Resultado tabular com limite de linhas
+- [x] Sem editor SQL ad hoc (fase 2)
+- [x] Rastreabilidade: RF-M3-05, RF-API-14
 
 ---
 

@@ -1,8 +1,8 @@
-# Portal Web · Datamesh W7 (E8-US02 … E8-US10)
+# Portal Web · Datamesh W7 (E8-US02 … E8-US11)
 
 
 
-Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3), **Insights D-1/D-2/D-3** (M4), **Operações** (M5 pipeline) e **status esteira** (alarme SFN + health na home).
+Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3 + Athena templates), **Insights D-1/D-2/D-3** (M4), **Operações** (M5 pipeline) e **status esteira** (alarme SFN + health na home).
 
 
 
@@ -98,6 +98,7 @@ Na raiz do repositório:
 .\scripts\w7-us08-validate.ps1   # insights D-2 ruptura + D-3 tendencia M4
 .\scripts\w7-us09-validate.ps1   # operacoes pipeline SFN M5
 .\scripts\w7-us10-validate.ps1   # alarmes CloudWatch + health home M5
+.\scripts\w7-us11-validate.ps1   # Athena templates enriquecido M3
 
 ```
 
@@ -148,6 +149,7 @@ Na raiz do repositório:
 | `/origem`                | AuthGuard | Partições origem + preview M2 |
 
 | `/enriquecido`           | AuthGuard | KPIs enriquecido + comparativo M3 |
+| `/enriquecido/athena`    | AuthGuard | Consultas Athena pré-aprovadas M3 |
 
 | `/insights/d1`           | AuthGuard | Dashboard D-1 ranking + insight M4 |
 

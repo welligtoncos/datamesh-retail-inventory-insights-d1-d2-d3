@@ -2,7 +2,7 @@
 
 **Stories:** E8-US11  
 **Unit:** U8-Portal-Web  
-**Status:** Part 1 — aguardando aprovação  
+**Status:** Part 2 concluído — E8-US11 done  
 **Data:** 2026-07-01
 
 ---
@@ -18,19 +18,19 @@
 
 ## Steps (Part 2 — após aprovação)
 
-- [ ] Step 1: Criar `models/athena.model.ts`
-- [ ] Step 2: Criar `athena-templates.catalog.ts` (9 templates whitelist)
-- [ ] Step 3: Criar `athena-template-params.util.ts` + tests PBT
-- [ ] Step 4: Criar `athena-results-mock.data.ts`
-- [ ] Step 5: Criar `AthenaApiService` + `AthenaFacadeService`
-- [ ] Step 6: Criar `AthenaTemplateListComponent` + `AthenaTemplateRunFormComponent`
-- [ ] Step 7: Criar `AthenaResultsTableComponent`
-- [ ] Step 8: Criar `EnriquecidoAthenaPageComponent` + rota `/enriquecido/athena`
-- [ ] Step 9: Link “Consultas Athena” em `EnriquecidoPageComponent` com `?dt=`
-- [ ] Step 10: Regressão enriquecido, home, insights, operações specs
-- [ ] Step 11: `scripts/w7-us11-validate.ps1`
-- [ ] Step 12: Atualizar `portal-web/README.md` e `code-summary.md`
-- [ ] Step 13: Atualizar `stories.md` E8-US11 → `done` após checklist manual
+- [x] Step 1: Criar `models/athena.model.ts`
+- [x] Step 2: Criar `athena-templates.catalog.ts` (9 templates whitelist)
+- [x] Step 3: Criar `athena-template-params.util.ts` + tests PBT
+- [x] Step 4: Criar `athena-results-mock.data.ts`
+- [x] Step 5: Criar `AthenaApiService` + `AthenaFacadeService`
+- [x] Step 6: Criar `AthenaTemplateListComponent` + `AthenaTemplateRunFormComponent`
+- [x] Step 7: Criar `AthenaResultsTableComponent`
+- [x] Step 8: Criar `EnriquecidoAthenaPageComponent` + rota `/enriquecido/athena`
+- [x] Step 9: Link “Consultas Athena” em `EnriquecidoPageComponent` com `?dt=`
+- [x] Step 10: Regressão enriquecido, home, insights, operações specs
+- [x] Step 11: `scripts/w7-us11-validate.ps1`
+- [x] Step 12: Atualizar `portal-web/README.md` e `code-summary.md`
+- [x] Step 13: Atualizar `stories.md` E8-US11 → `done` após checklist manual
 
 ---
 

@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
 import { EnriquecidoFacadeService } from '../../core/api/enriquecido-facade.service';
@@ -31,6 +31,7 @@ import { EnriquecidoPreviewTableComponent } from './enriquecido-preview-table.co
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
+    RouterLink,
     ApiErrorBannerComponent,
     EnriquecidoPartitionsPanelComponent,
     EnriquecidoKpiPanelComponent,
@@ -39,12 +40,24 @@ import { EnriquecidoPreviewTableComponent } from './enriquecido-preview-table.co
   ],
   template: `
     <header class="page-header">
-      <h1>Enriquecido · métricas derivadas</h1>
-      @if (showMockChip()) {
-        <mat-chip-set>
-          <mat-chip highlighted>Dados de demonstração</mat-chip>
-        </mat-chip-set>
-      }
+      <div class="title-row">
+        <h1>Enriquecido · métricas derivadas</h1>
+        @if (showMockChip()) {
+          <mat-chip-set>
+            <mat-chip highlighted>Dados de demonstração</mat-chip>
+          </mat-chip-set>
+        }
+        @if (selectedDt()) {
+          <a
+            mat-stroked-button
+            routerLink="/enriquecido/athena"
+            [queryParams]="{ dt: selectedDt() }"
+            class="athena-link"
+          >
+            Consultas Athena
+          </a>
+        }
+      </div>
     </header>
 
     <app-api-error-banner [message]="bannerMessage()" [severity]="bannerSeverity()" />
@@ -100,6 +113,18 @@ import { EnriquecidoPreviewTableComponent } from './enriquecido-preview-table.co
       margin: 0 0 0.5rem;
       font-size: 1.5rem;
       font-weight: 500;
+    }
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .title-row h1 {
+      margin: 0;
+    }
+    .athena-link {
+      margin-left: auto;
     }
     .enr-layout {
       display: grid;

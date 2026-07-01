@@ -34,6 +34,18 @@ export const MOCK_ENRIQUECIDO_PARTITIONS: PartitionListResponse = {
   latest: MOCK_ENRIQ_DT_B,
 };
 
+/** Paridade E5-US03 / athena-validation-queries.md (preview sintético difere do parquet). */
+export const MOCK_D1_PARITY_BY_DT: Record<
+  string,
+  { produtos_distintos: number; total_unidades: number; total_receita: number }
+> = {
+  [MOCK_ENRIQ_DT_A]: {
+    produtos_distintos: 69,
+    total_unidades: 14484,
+    total_receita: 879_026.03,
+  },
+};
+
 const MOCK_KPIS_BY_DT: Record<string, EnriquecidoKpis> = {
   [MOCK_ENRIQ_DT_A]: {
     dt: MOCK_ENRIQ_DT_A,

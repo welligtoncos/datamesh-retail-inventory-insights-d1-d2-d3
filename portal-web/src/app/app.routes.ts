@@ -7,6 +7,7 @@ import { HomeDashboardComponent } from './features/home/home-dashboard.component
 import { InsumosListComponent } from './features/insumos/insumos-list.component';
 import { OrigemPageComponent } from './features/origem/origem-page.component';
 import { EnriquecidoPageComponent } from './features/enriquecido/enriquecido-page.component';
+import { EnriquecidoAthenaPageComponent } from './features/enriquecido/athena/enriquecido-athena-page.component';
 import { InsightsD1PageComponent } from './features/insights/d1/insights-d1-page.component';
 import { InsightsD2PageComponent } from './features/insights/d2/insights-d2-page.component';
 import { InsightsD3PageComponent } from './features/insights/d3/insights-d3-page.component';
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'insumos', component: InsumosListComponent },
       { path: 'origem', component: OrigemPageComponent },
       { path: 'enriquecido', component: EnriquecidoPageComponent },
+      { path: 'enriquecido/athena', component: EnriquecidoAthenaPageComponent },
       { path: 'insights/d1', component: InsightsD1PageComponent },
       { path: 'insights/d2', component: InsightsD2PageComponent },
       { path: 'insights/d3', component: InsightsD3PageComponent },

@@ -489,3 +489,13 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Aguardando resposta do usuário para Part 2
 
 ---
+
+---
+
+## W7 E8-US11 — Done + Commit
+**Timestamp**: 2026-07-01T03:30:00Z
+**User Input**: "marcar E8-US11 como done e preparar o commit e push detalhado"
+**AI Response**: stories.md E8-US11 → done; plano step 13 [x]; aidlc-state atualizado; commit feat(portal-web) E8-US11 + push
+**Context**: Story E8-US11 encerrada; próxima E8-US12
+
+---
