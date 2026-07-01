@@ -7,19 +7,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { listMockD1Partitions } from '../../../core/api/data/insights-d1-mock.data';
 import { MOCK_ENRIQUECIDO_PARTITIONS } from '../../../core/api/data/enriquecido-mock.data';
+import { DEFAULT_D3_WINDOW, D3_WINDOW_OPTIONS } from '../../../core/api/d3-trend.util';
 import { defaultD1Dt, normalizeD1Dt } from '../../../core/api/d1-date.util';
 import { EnriquecidoFacadeService } from '../../../core/api/enriquecido-facade.service';
-import { InsightsD1FacadeService } from '../../../core/api/insights-d1-facade.service';
-import { InsightsD1Response } from '../../../core/api/models/insights-d1.model';
+import { InsightsD3FacadeService } from '../../../core/api/insights-d3-facade.service';
+import { InsightsD3Response } from '../../../core/api/models/insights-d3.model';
 import { ApiErrorBannerComponent } from '../../../shared/components/api-error-banner/api-error-banner.component';
 import { InsightDateSelectorComponent } from '../shared/insight-date-selector.component';
 import { InsightDownloadButtonComponent } from '../shared/insight-download-button.component';
 import { InsightMissingPartitionBannerComponent } from '../shared/insight-missing-partition-banner.component';
 import { InsightPanelComponent } from '../shared/insight-panel.component';
-import { D1RankingTableComponent } from './d1-ranking-table.component';
+import { D3TrendTableComponent } from './d3-trend-table.component';
+import { D3WindowSelectorComponent } from './d3-window-selector.component';
 
 @Component({
-  selector: 'app-insights-d1-page',
+  selector: 'app-insights-d3-page',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -29,14 +31,15 @@ import { D1RankingTableComponent } from './d1-ranking-table.component';
     ApiErrorBannerComponent,
     InsightDateSelectorComponent,
     InsightPanelComponent,
-    D1RankingTableComponent,
+    D3WindowSelectorComponent,
+    D3TrendTableComponent,
     InsightDownloadButtonComponent,
     InsightMissingPartitionBannerComponent,
   ],
   template: `
     <header class="page-header">
       <div class="title-row">
-        <h1>Insight D-1 · Produtos vendidos</h1>
+        <h1>Insight D-3 · Tendência</h1>
         @if (showMockChip()) {
           <mat-chip-set>
             <mat-chip highlighted>Dados de demonstração</mat-chip>
@@ -45,17 +48,25 @@ import { D1RankingTableComponent } from './d1-ranking-table.component';
       </div>
 
       <div class="toolbar">
-        <app-insight-date-selector
-          [partitions]="partitions()"
-          [selectedDt]="selectedDt()"
-          [dataExecucao]="insight()?.data_execucao ?? null"
-          [loading]="loading()"
-          (dtChange)="onDtChange($event)"
-        />
+        <div class="selectors">
+          <app-insight-date-selector
+            [partitions]="partitions()"
+            [selectedDt]="selectedDt()"
+            [dataExecucao]="insight()?.data_execucao ?? null"
+            [loading]="loading()"
+            (dtChange)="onDtChange($event)"
+          />
+          <app-d3-window-selector
+            [selectedWindow]="selectedWindow()"
+            [loading]="loading()"
+            (windowChange)="onWindowChange($event)"
+          />
+        </div>
         <app-insight-download-button
           [dt]="selectedDt() ?? ''"
+          [windowDays]="selectedWindow()"
           [disabled]="!canDownload()"
-          [downloadLoader]="d1DownloadLoader"
+          [downloadLoader]="d3DownloadLoader"
           (downloadError)="onDownloadError($event)"
         />
       </div>
@@ -66,17 +77,18 @@ import { D1RankingTableComponent } from './d1-ranking-table.component';
     @if (loading()) {
       <div class="loading-wrap" aria-live="polite">
         <mat-spinner diameter="40" />
-        <p>Carregando insight D-1…</p>
+        <p>Carregando insight D-3…</p>
       </div>
     } @else if (insight()) {
       @if (!insight()!.partition_exists) {
-        <app-insight-missing-partition-banner [dt]="insight()!.dt" insightCode="D-1" />
+        <app-insight-missing-partition-banner [dt]="insight()!.dt" insightCode="D-3" />
       } @else {
-        <app-insight-panel [insightText]="insight()!.insight_text" theme="blue" />
-        <app-d1-ranking-table
-          [ranking]="insight()!.ranking"
-          [totalUnidades]="insight()!.total_unidades"
-          [totalReceita]="insight()!.total_receita"
+        <app-insight-panel [insightText]="insight()!.insight_text" theme="green" />
+        <app-d3-trend-table
+          [rows]="insight()!.rows"
+          [subindoCount]="insight()!.subindo_count"
+          [caindoCount]="insight()!.caindo_count"
+          [estavelCount]="insight()!.estavel_count"
         />
       }
     }
@@ -112,6 +124,13 @@ import { D1RankingTableComponent } from './d1-ranking-table.component';
       gap: 1rem;
       min-width: 0;
     }
+    .selectors {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
     .loading-wrap {
       display: flex;
       flex-direction: column;
@@ -138,24 +157,30 @@ import { D1RankingTableComponent } from './d1-ranking-table.component';
         flex-direction: column;
         align-items: stretch;
       }
+      .selectors {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   `,
 })
-export class InsightsD1PageComponent implements OnInit {
-  private readonly facade = inject(InsightsD1FacadeService);
+export class InsightsD3PageComponent implements OnInit {
+  private readonly facade = inject(InsightsD3FacadeService);
   private readonly enriquecidoFacade = inject(EnriquecidoFacadeService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
   readonly loading = signal(true);
-  readonly insight = signal<InsightsD1Response | null>(null);
+  readonly insight = signal<InsightsD3Response | null>(null);
   readonly selectedDt = signal<string | null>(null);
+  readonly selectedWindow = signal<number>(DEFAULT_D3_WINDOW);
   readonly partitions = signal<string[]>(listMockD1Partitions());
   readonly dataSource = signal<'api' | 'mock'>('mock');
   readonly bannerMessage = signal<string | null>(null);
   readonly bannerSeverity = signal<'error' | 'info'>('info');
 
-  readonly d1DownloadLoader = (dt: string) => this.facade.getDownload(dt);
+  readonly d3DownloadLoader = (dt: string, windowDays?: number) =>
+    this.facade.getDownload(dt, windowDays ?? this.selectedWindow());
 
   ngOnInit(): void {
     this.refresh();
@@ -174,6 +199,8 @@ export class InsightsD1PageComponent implements OnInit {
     this.bannerMessage.set(null);
     this.loading.set(true);
 
+    const queryWindow = this.parseWindow(this.route.snapshot.queryParamMap.get('window'));
+
     this.enriquecidoFacade.loadPartitions().subscribe({
       next: (result) => {
         const parts =
@@ -187,8 +214,10 @@ export class InsightsD1PageComponent implements OnInit {
             ? normalizeD1Dt(queryDt)
             : defaultD1Dt(parts, latest);
 
+        this.selectedWindow.set(queryWindow);
+
         if (initial) {
-          this.loadInsight(initial);
+          this.loadInsight(initial, queryWindow);
         } else {
           this.loading.set(false);
           this.insight.set(null);
@@ -197,8 +226,9 @@ export class InsightsD1PageComponent implements OnInit {
       error: () => {
         this.partitions.set(listMockD1Partitions());
         const initial = defaultD1Dt(listMockD1Partitions(), MOCK_ENRIQUECIDO_PARTITIONS.latest);
+        this.selectedWindow.set(queryWindow);
         if (initial) {
-          this.loadInsight(initial);
+          this.loadInsight(initial, queryWindow);
         } else {
           this.loading.set(false);
         }
@@ -209,11 +239,26 @@ export class InsightsD1PageComponent implements OnInit {
   onDtChange(dt: string): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { dt },
+      queryParams: { dt, window: this.selectedWindow() },
       queryParamsHandling: 'merge',
       replaceUrl: true,
     });
-    this.loadInsight(dt);
+    this.loadInsight(dt, this.selectedWindow());
+  }
+
+  onWindowChange(windowDays: number): void {
+    this.selectedWindow.set(windowDays);
+    const dt = this.selectedDt();
+    if (!dt) {
+      return;
+    }
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { dt, window: windowDays },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+    this.loadInsight(dt, windowDays);
   }
 
   onDownloadError(message: string): void {
@@ -221,12 +266,13 @@ export class InsightsD1PageComponent implements OnInit {
     this.bannerMessage.set(message);
   }
 
-  private loadInsight(dt: string): void {
+  private loadInsight(dt: string, windowDays: number): void {
     const normalized = normalizeD1Dt(dt);
     this.selectedDt.set(normalized);
+    this.selectedWindow.set(windowDays);
     this.loading.set(true);
 
-    this.facade.loadInsight(normalized).subscribe({
+    this.facade.loadInsight(normalized, windowDays).subscribe({
       next: (result) => {
         this.insight.set(result.insight);
         this.dataSource.set(result.data_source);
@@ -237,10 +283,18 @@ export class InsightsD1PageComponent implements OnInit {
       },
       error: () => {
         this.bannerSeverity.set('error');
-        this.bannerMessage.set('Não foi possível carregar o insight D-1.');
+        this.bannerMessage.set('Não foi possível carregar o insight D-3.');
         this.loading.set(false);
       },
     });
+  }
+
+  private parseWindow(value: string | null): number {
+    const parsed = Number(value);
+    if (D3_WINDOW_OPTIONS.includes(parsed as (typeof D3_WINDOW_OPTIONS)[number])) {
+      return parsed;
+    }
+    return DEFAULT_D3_WINDOW;
   }
 
   private setMockBanner(): void {

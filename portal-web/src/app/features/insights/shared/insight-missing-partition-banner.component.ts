@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-d1-missing-partition-banner',
+  selector: 'app-insight-missing-partition-banner',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, RouterLink],
   template: `
@@ -17,7 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
           <div class="banner-text">
             <p>
               Não há partição enriquecida para <strong>{{ dt() }}</strong>. Processe o dia para
-              gerar o insight D-1.
+              gerar o insight {{ insightCode() }}.
             </p>
             <a
               mat-stroked-button
@@ -52,6 +52,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     }
   `,
 })
-export class D1MissingPartitionBannerComponent {
+export class InsightMissingPartitionBannerComponent {
   readonly dt = input('');
+  readonly insightCode = input('D-1');
 }

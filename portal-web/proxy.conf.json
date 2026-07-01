@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://jvpw3k4mnf.execute-api.us-east-1.amazonaws.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "warn"
+  }
+}

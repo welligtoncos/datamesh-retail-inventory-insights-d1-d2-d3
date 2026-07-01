@@ -393,3 +393,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Aguardando Continue to Next Stage para Code Generation Part 2
 
 ---
+
+## W7 E8-US08 — Continue to Next Stage (Code Generation Part 2)
+**Timestamp**: 2026-06-30T23:15:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: E8-US08 Part 2 implementado — D-2/D-3 pages, shared components, API/facade/mock, 79 unit tests, build:prod OK, w7-us08-validate.ps1; plan steps 1-16 [x]; stories E8-US08 permanece in_progress até checklist manual
+**Context**: Code Generation Part 2 concluído; aguardando checklist manual do usuário
+
+---
+
+## W7 E8-US08 — Checklist Manual OK + Commit Request
+**Timestamp**: 2026-06-30T23:30:00Z
+**User Input**: "marcar E8-US08 como done e preparar commit/push"
+**AI Response**: stories.md E8-US08 → done; aidlc-state/plan/code-summary atualizados; commit feat(portal-web) E8-US08 + push
+**Context**: Story E8-US08 encerrada; próxima E8-US09
+
+---

@@ -5,8 +5,8 @@ resource "aws_apigatewayv2_api" "portal" {
 
   cors_configuration {
     allow_origins = distinct(concat(
-      var.additional_callback_urls,
-      [local.cloudfront_callback_url]
+      [for u in var.additional_callback_urls : trimsuffix(u, "/")],
+      [trimsuffix(local.cloudfront_callback_url, "/")]
     ))
     allow_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     allow_headers = ["authorization", "content-type"]

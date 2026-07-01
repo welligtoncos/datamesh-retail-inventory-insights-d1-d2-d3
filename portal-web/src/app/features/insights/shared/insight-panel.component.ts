@@ -2,12 +2,14 @@ import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
+export type InsightPanelTheme = 'blue' | 'red' | 'green';
+
 @Component({
-  selector: 'app-d1-insight-panel',
+  selector: 'app-insight-panel',
   standalone: true,
   imports: [MatCardModule, MatIconModule],
   template: `
-    <mat-card class="insight-card" appearance="outlined">
+    <mat-card class="insight-card" [class]="theme()" appearance="outlined">
       <mat-card-content>
         <div class="insight-row">
           <mat-icon class="insight-icon" aria-hidden="true">lightbulb</mat-icon>
@@ -18,8 +20,28 @@ import { MatIconModule } from '@angular/material/icon';
   `,
   styles: `
     .insight-card {
+      margin: 1rem 0;
+    }
+    .insight-card.blue {
       background: #dbeafe;
       border-color: #93c5fd;
+    }
+    .insight-card.blue .insight-icon {
+      color: #2563eb;
+    }
+    .insight-card.red {
+      background: #fee2e2;
+      border-color: #fca5a5;
+    }
+    .insight-card.red .insight-icon {
+      color: #dc2626;
+    }
+    .insight-card.green {
+      background: #d1fae5;
+      border-color: #6ee7b7;
+    }
+    .insight-card.green .insight-icon {
+      color: #059669;
     }
     .insight-row {
       display: flex;
@@ -27,7 +49,6 @@ import { MatIconModule } from '@angular/material/icon';
       gap: 0.75rem;
     }
     .insight-icon {
-      color: #2563eb;
       flex-shrink: 0;
     }
     .insight-text {
@@ -38,6 +59,7 @@ import { MatIconModule } from '@angular/material/icon';
     }
   `,
 })
-export class D1InsightPanelComponent {
+export class InsightPanelComponent {
   readonly insightText = input('');
+  readonly theme = input<InsightPanelTheme>('blue');
 }

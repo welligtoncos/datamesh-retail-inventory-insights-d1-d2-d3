@@ -3,11 +3,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
-import { InsightsD1FacadeService } from '../../../core/api/insights-d1-facade.service';
+import { InsightsDownloadResult } from '../../../core/api/models/insights-shared.model';
 
 @Component({
-  selector: 'app-d1-download-button',
+  selector: 'app-insight-download-button',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatSnackBarModule],
   template: `
@@ -42,13 +43,15 @@ import { InsightsD1FacadeService } from '../../../core/api/insights-d1-facade.se
     }
   `,
 })
-export class D1DownloadButtonComponent {
-  private readonly facade = inject(InsightsD1FacadeService);
+export class InsightDownloadButtonComponent {
   private readonly snackBar = inject(MatSnackBar);
 
   readonly dt = input.required<string>();
   readonly disabled = input(false);
-  readonly mockMode = input(false);
+  readonly windowDays = input<number | undefined>(undefined);
+  readonly downloadLoader = input.required<
+    (dt: string, windowDays?: number) => Observable<InsightsDownloadResult>
+  >();
 
   readonly downloadError = output<string>();
 
@@ -61,7 +64,7 @@ export class D1DownloadButtonComponent {
     }
 
     this.loading.set(true);
-    this.facade.getDownload(dt).subscribe({
+    this.downloadLoader()(dt, this.windowDays()).subscribe({
       next: (result) => {
         this.loading.set(false);
         const url = result.download.presigned_url?.trim();
@@ -78,8 +81,7 @@ export class D1DownloadButtonComponent {
       },
       error: () => {
         this.loading.set(false);
-        const message = 'Não foi possível obter o link de download. Tente novamente.';
-        this.downloadError.emit(message);
+        this.downloadError.emit('Não foi possível obter o link de download. Tente novamente.');
       },
     });
   }

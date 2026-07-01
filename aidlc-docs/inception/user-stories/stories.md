@@ -399,14 +399,14 @@
 - **Como** gestor de compras (P3)  
 - **Quero** ver rupturas priorizadas e tendência de consumo  
 - **Para** definir reposições e ajustar estoque mínimo  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US07, E6 (Lambda D-2/D-3)
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US07, E6 (Lambda D-2/D-3)
 
 **Critérios de aceite:**
-- [ ] D-2: tabela `_stockout==1` e `_lost>0`, ordenada por `_lost` desc
-- [ ] D-3: tendência Subindo/Caindo/Estável; janela N configurável; úteis vs FDS
-- [ ] Download Excel D-2 e D-3 via presigned URL
-- [ ] Regras de negócio alinhadas ao notebook brownfield
-- [ ] Rastreabilidade: RF-M4-03,04,05, RF-API-09, RF-API-10
+- [x] D-2: tabela `_stockout==1` e `_lost>0`, ordenada por `_lost` desc
+- [x] D-3: tendência Subindo/Caindo/Estável; janela N configurável; úteis vs FDS
+- [x] Download Excel D-2 e D-3 via presigned URL
+- [x] Regras de negócio alinhadas ao notebook brownfield
+- [x] Rastreabilidade: RF-M4-03,04,05, RF-API-09, RF-API-10
 
 ---
 

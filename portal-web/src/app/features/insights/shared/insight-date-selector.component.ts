@@ -3,18 +3,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 @Component({
-  selector: 'app-d1-date-selector',
+  selector: 'app-insight-date-selector',
   standalone: true,
   imports: [MatFormFieldModule, MatSelectModule],
   template: `
     <div class="selector-row">
       <mat-form-field appearance="outline" class="dt-field">
-        <mat-label>Dado D-1</mat-label>
+        <mat-label>{{ dateLabel() }}</mat-label>
         <mat-select
           [value]="selectedDt()"
           [disabled]="loading() || partitions().length === 0"
           (selectionChange)="onChange($event)"
-          aria-label="Selecionar data do dado D-1"
+          [attr.aria-label]="dateLabel()"
         >
           @for (dt of partitions(); track dt) {
             <mat-option [value]="dt">{{ dt }}</mat-option>
@@ -55,11 +55,12 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
     }
   `,
 })
-export class D1DateSelectorComponent {
+export class InsightDateSelectorComponent {
   readonly partitions = input<string[]>([]);
   readonly selectedDt = input<string | null>(null);
   readonly dataExecucao = input<string | null>(null);
   readonly loading = input(false);
+  readonly dateLabel = input('Dado');
 
   readonly dtChange = output<string>();
 

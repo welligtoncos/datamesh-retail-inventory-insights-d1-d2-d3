@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://jvpw3k4mnf.execute-api.us-east-1.amazonaws.com',
+  /** Relative path proxied by ng serve → API GW (evita CORS em localhost). Ver proxy.conf.json */
+  apiBaseUrl: '/api',
   cognito: {
     authority: 'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_yJLzwZgZE',
     clientId: 'co18jsioudbvk36n8a4hdih4q',

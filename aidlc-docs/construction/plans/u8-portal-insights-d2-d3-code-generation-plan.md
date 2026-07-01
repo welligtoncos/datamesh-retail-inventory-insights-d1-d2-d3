@@ -2,7 +2,7 @@
 
 **Stories:** E8-US08  
 **Unit:** U8-Portal-Web  
-**Status:** Part 1 — aguardando aprovação  
+**Status:** Part 2 concluído — E8-US08 done (checklist manual OK)  
 **Data:** 2026-06-30
 
 ---
@@ -19,23 +19,23 @@
 
 ## Steps (Part 2 — após aprovação)
 
-- [ ] Step 1: Criar `models/insights-d2.model.ts` e `insights-d3.model.ts`
-- [ ] Step 2: Criar `d2-filter.util.ts`, `d3-trend.util.ts`, `d2-report-key.util.ts`, `d3-report-key.util.ts`
-- [ ] Step 3: Criar `insights-d2-mock.data.ts` e `insights-d3-mock.data.ts`
-- [ ] Step 4: Extrair `features/insights/shared/` (date selector, insight panel, download, missing banner)
-- [ ] Step 5: Refatorar `insights/d1/` para usar shared (regressão testes D-1)
-- [ ] Step 6: Criar `InsightsD2ApiService` + `InsightsD2FacadeService`
-- [ ] Step 7: Criar `InsightsD3ApiService` + `InsightsD3FacadeService`
-- [ ] Step 8: Criar `D2RupturasTableComponent` (RF-M4-03)
-- [ ] Step 9: Criar `D3TrendTableComponent` + `D3WindowSelectorComponent` (RF-M4-04)
-- [ ] Step 10: Criar `InsightsD2PageComponent` (layout + estados + `?dt=`)
-- [ ] Step 11: Criar `InsightsD3PageComponent` (layout + `?dt=&window=`)
-- [ ] Step 12: Atualizar `app.routes.ts` — `/insights/d2`, `/insights/d3`
-- [ ] Step 13: Garantir D-1, home, enriquecido, origem inalterados (regressão specs)
-- [ ] Step 14: Unit tests — d2-filter, d3-trend PBT, facades, report keys
-- [ ] Step 15: `scripts/w7-us08-validate.ps1`
-- [ ] Step 16: Atualizar `portal-web/README.md` e `insights-d2-d3/code-summary.md`
-- [ ] Step 17: Atualizar `stories.md` E8-US08 → `done` após checklist manual
+- [x] Step 1: Criar `models/insights-d2.model.ts` e `insights-d3.model.ts`
+- [x] Step 2: Criar `d2-filter.util.ts`, `d3-trend.util.ts`, `d2-report-key.util.ts`, `d3-report-key.util.ts`
+- [x] Step 3: Criar `insights-d2-mock.data.ts` e `insights-d3-mock.data.ts`
+- [x] Step 4: Extrair `features/insights/shared/` (date selector, insight panel, download, missing banner)
+- [x] Step 5: Refatorar `insights/d1/` para usar shared (regressão testes D-1)
+- [x] Step 6: Criar `InsightsD2ApiService` + `InsightsD2FacadeService`
+- [x] Step 7: Criar `InsightsD3ApiService` + `InsightsD3FacadeService`
+- [x] Step 8: Criar `D2RupturasTableComponent` (RF-M4-03)
+- [x] Step 9: Criar `D3TrendTableComponent` + `D3WindowSelectorComponent` (RF-M4-04)
+- [x] Step 10: Criar `InsightsD2PageComponent` (layout + estados + `?dt=`)
+- [x] Step 11: Criar `InsightsD3PageComponent` (layout + `?dt=&window=`)
+- [x] Step 12: Atualizar `app.routes.ts` — `/insights/d2`, `/insights/d3`
+- [x] Step 13: Garantir D-1, home, enriquecido, origem inalterados (regressão specs)
+- [x] Step 14: Unit tests — d2-filter, d3-trend PBT, facades, report keys
+- [x] Step 15: `scripts/w7-us08-validate.ps1`
+- [x] Step 16: Atualizar `portal-web/README.md` e `insights-d2-d3/code-summary.md`
+- [x] Step 17: Atualizar `stories.md` E8-US08 → `done` após checklist manual
 
 ---
 

@@ -8,6 +8,8 @@ import { InsumosListComponent } from './features/insumos/insumos-list.component'
 import { OrigemPageComponent } from './features/origem/origem-page.component';
 import { EnriquecidoPageComponent } from './features/enriquecido/enriquecido-page.component';
 import { InsightsD1PageComponent } from './features/insights/d1/insights-d1-page.component';
+import { InsightsD2PageComponent } from './features/insights/d2/insights-d2-page.component';
+import { InsightsD3PageComponent } from './features/insights/d3/insights-d3-page.component';
 import { LoginComponent } from './features/login/login.component';
 
 export const routes: Routes = [
@@ -22,8 +24,8 @@ export const routes: Routes = [
       { path: 'origem', component: OrigemPageComponent },
       { path: 'enriquecido', component: EnriquecidoPageComponent },
       { path: 'insights/d1', component: InsightsD1PageComponent },
-      { path: 'insights/d2', component: PlaceholderPageComponent, data: { title: 'Insight D-2 Ruptura' } },
-      { path: 'insights/d3', component: PlaceholderPageComponent, data: { title: 'Insight D-3 Tendência' } },
+      { path: 'insights/d2', component: InsightsD2PageComponent },
+      { path: 'insights/d3', component: InsightsD3PageComponent },
       { path: 'operacoes', component: PlaceholderPageComponent, data: { title: 'Operações' } },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
