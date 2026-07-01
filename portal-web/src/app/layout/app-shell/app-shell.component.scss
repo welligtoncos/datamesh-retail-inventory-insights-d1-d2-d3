@@ -1,5 +1,14 @@
 .shell-container {
   height: 100vh;
+  width: 100%;
+  max-width: 100%;
+}
+
+.shell-container mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 .shell-sidenav {
@@ -16,42 +25,68 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  flex-shrink: 0;
+  min-width: 0;
+  gap: 0.25rem;
 }
 
 .toolbar-title {
   margin-left: 0.25rem;
-}
-
-.spacer {
-  flex: 1;
-}
-
-.user-email {
-  margin: 0 0.5rem;
-  font-size: 0.85rem;
-  max-width: 180px;
+  flex: 0 1 auto;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.toolbar-title--short {
+  display: none;
+}
+
+.spacer {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.user-email {
+  margin: 0 0.5rem;
+  font-size: 0.85rem;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
 .shell-content {
+  flex: 1;
   padding: 1.5rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 a.active {
   background: rgba(0, 0, 0, 0.04);
 }
 
-@media (max-width: 599px) {
-  .user-email {
+@media (max-width: 959px) {
+  .toolbar-title--full {
     display: none;
   }
 
-  .toolbar-title {
-    font-size: 0.9rem;
+  .toolbar-title--short {
+    display: inline;
+  }
+}
+
+@media (max-width: 599px) {
+  .user-email {
+    display: none;
   }
 
   .shell-content {

@@ -74,7 +74,8 @@ import { SHELL_NAV_ITEMS, ShellNavItem } from './shell-nav.config';
               <mat-icon>menu</mat-icon>
             </button>
           }
-          <span class="toolbar-title">W7 · Gestão do datamesh</span>
+          <span class="toolbar-title toolbar-title--full">W7 · Gestão do datamesh</span>
+          <span class="toolbar-title toolbar-title--short">Datamesh W7</span>
           <span class="spacer"></span>
           <app-health-badge />
           <span class="user-email">{{ email() }}</span>

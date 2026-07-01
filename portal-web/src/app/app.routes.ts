@@ -6,6 +6,7 @@ import { PlaceholderPageComponent } from './layout/placeholder-page/placeholder-
 import { HomeDashboardComponent } from './features/home/home-dashboard.component';
 import { InsumosListComponent } from './features/insumos/insumos-list.component';
 import { OrigemPageComponent } from './features/origem/origem-page.component';
+import { EnriquecidoPageComponent } from './features/enriquecido/enriquecido-page.component';
 import { LoginComponent } from './features/login/login.component';
 
 export const routes: Routes = [
@@ -18,7 +19,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeDashboardComponent },
       { path: 'insumos', component: InsumosListComponent },
       { path: 'origem', component: OrigemPageComponent },
-      { path: 'enriquecido', component: PlaceholderPageComponent, data: { title: 'Enriquecido' } },
+      { path: 'enriquecido', component: EnriquecidoPageComponent },
       { path: 'insights/d1', component: PlaceholderPageComponent, data: { title: 'Insight D-1 Comercial' } },
       { path: 'insights/d2', component: PlaceholderPageComponent, data: { title: 'Insight D-2 Ruptura' } },
       { path: 'insights/d3', component: PlaceholderPageComponent, data: { title: 'Insight D-3 Tendência' } },

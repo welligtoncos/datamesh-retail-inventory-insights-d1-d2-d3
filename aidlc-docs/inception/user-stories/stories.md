@@ -368,14 +368,14 @@
 - **Como** analista de estoque (P1)  
 - **Quero** ver KPIs por `dt` e comparar dois dias  
 - **Para** validar métricas `_revenue`, `_stockout`, `_lost`  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US05
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US05
 
 **Critérios de aceite:**
-- [ ] `GET /enriquecido/partitions` lista partições
-- [ ] `GET /enriquecido/{dt}/kpis` retorna somas e contagens corretas
-- [ ] Preview enriquecido com colunas originais + derivadas
-- [ ] UI compara dt A vs dt B com delta de KPIs
-- [ ] Rastreabilidade: RF-M3-01..04, RF-API-06, RF-API-07
+- [x] `GET /enriquecido/partitions` lista partições
+- [x] `GET /enriquecido/{dt}/kpis` retorna somas e contagens corretas
+- [x] Preview enriquecido com colunas originais + derivadas
+- [x] UI compara dt A vs dt B com delta de KPIs
+- [x] Rastreabilidade: RF-M3-01..04, RF-API-06, RF-API-07
 
 ---
 

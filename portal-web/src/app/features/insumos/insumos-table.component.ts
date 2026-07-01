@@ -53,6 +53,8 @@ import { FileSizePipe } from '../../shared/pipes/file-size.pipe';
   styles: `
     .table-wrap {
       overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
     table {
       width: 100%;

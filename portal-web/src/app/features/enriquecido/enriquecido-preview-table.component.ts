@@ -8,23 +8,23 @@ import {
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 
-import { OrigemPreviewResponse } from '../../core/api/models/origem.model';
+import { EnriquecidoPreviewResponse } from '../../core/api/models/enriquecido.model';
 
 @Component({
-  selector: 'app-origem-preview-table',
+  selector: 'app-enriquecido-preview-table',
   standalone: true,
   imports: [MatTableModule, MatPaginatorModule],
   template: `
-    <section class="preview" aria-label="Preview Parquet">
+    <section class="preview" aria-label="Preview enriquecido">
       <h3 class="preview-title">
-        Preview Parquet
+        Preview enriquecido
         @if (preview()) {
           <span class="page-hint">(pág. {{ preview()!.page }}/{{ preview()!.total_pages }})</span>
         }
       </h3>
 
       <div class="preview-scroll">
-        <table mat-table [dataSource]="rows()" aria-label="Preview dados origem">
+        <table mat-table [dataSource]="rows()" aria-label="Preview dados enriquecidos">
           @for (col of columns(); track col) {
             <ng-container [matColumnDef]="col">
               <th mat-header-cell *matHeaderCellDef>{{ col }}</th>
@@ -43,7 +43,7 @@ import { OrigemPreviewResponse } from '../../core/api/models/origem.model';
         [pageSize]="pageSize()"
         [pageSizeOptions]="[25, 50, 100]"
         (page)="onPage($event)"
-        aria-label="Paginação preview origem"
+        aria-label="Paginação preview enriquecido"
       />
     </section>
   `,
@@ -69,15 +69,15 @@ import { OrigemPreviewResponse } from '../../core/api/models/origem.model';
     }
     th.mat-mdc-header-cell {
       white-space: nowrap;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
     }
     td.mat-mdc-cell {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
   `,
 })
-export class OrigemPreviewTableComponent {
-  readonly preview = input<OrigemPreviewResponse | null>(null);
+export class EnriquecidoPreviewTableComponent {
+  readonly preview = input<EnriquecidoPreviewResponse | null>(null);
   readonly pageChange = output<{ page: number; pageSize: number }>();
 
   private readonly paginator = viewChild(MatPaginator);

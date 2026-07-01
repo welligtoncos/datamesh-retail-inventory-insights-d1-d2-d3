@@ -90,14 +90,21 @@ import { OrigemPreviewTableComponent } from './origem-preview-table.component';
     }
     .origem-layout {
       display: grid;
-      grid-template-columns: minmax(220px, 280px) 1fr;
+      grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
       gap: 1.5rem;
       align-items: start;
       margin-top: 1rem;
+      width: 100%;
+      min-width: 0;
     }
     .origem-aside {
       border-right: 1px solid rgba(0, 0, 0, 0.08);
       padding-right: 1rem;
+      min-width: 0;
+    }
+    .origem-main {
+      min-width: 0;
+      overflow: hidden;
     }
     .empty-main {
       color: rgba(0, 0, 0, 0.6);

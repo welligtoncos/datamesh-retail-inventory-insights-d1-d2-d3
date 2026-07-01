@@ -329,3 +329,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
 
 ---
+
+## W7 E8-US06 — Done + Commit
+**Timestamp**: 2026-06-30T23:40:00Z
+**User Input**: "marcar E8-US06 done e fazer commit/push detalhado."
+**AI Response**: stories.md E8-US06 → done; plano step 16 [x]; commit/push feature enriquecido M3 + ajuste layout portal-web
+**Context**: Code Generation Part 2 + layout shell concluídos; checklist manual confirmado pelo usuário
+
+---

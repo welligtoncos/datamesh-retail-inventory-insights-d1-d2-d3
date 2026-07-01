@@ -2,7 +2,20 @@ html,
 body {
   height: 100%;
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+app-root {
+  display: block;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.page-header {
+  max-width: 100%;
+  min-width: 0;
 }
 
 /* Garante renderização correta dos ícones Material (ligatures) */
