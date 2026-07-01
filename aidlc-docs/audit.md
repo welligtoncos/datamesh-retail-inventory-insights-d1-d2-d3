@@ -441,3 +441,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Story E8-US09 encerrada; próxima E8-US10
 
 ---
+
+## W7 E8-US10 Construction — Session Start
+**Timestamp**: 2026-06-30T25:00:00Z
+**User Input**: "using aidlc, siga o workflow AI-DLC na fase CONSTRUCTION para a unidade U8-Portal-Web — story E8-US10 (Alarmes CloudWatch e health na UI M5). [prompt completo: Part 1 design only — application-design, functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation-plan Part 1; NÃO gerar código portal-web até Continue to Next Stage; extensions Security, Resiliency, PBT]"
+**AI Response**: Executadas fases CONSTRUCTION design E8-US10 em aidlc-docs/construction/u8-portal-web/ops-alarms-health/; plano u8-portal-ops-alarms-health-code-generation-plan.md Part 1 (12 steps); aidlc-state e stories atualizados; E8-US10 in_progress
+**Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
+
+---
+
+## W7 E8-US10 — Approval Prompt (Code Generation Part 1)
+**Timestamp**: 2026-06-30T25:01:00Z
+**User Input**: "(design Part 1 apresentado)"
+**AI Response**: Apresentado resumo design E8-US10 e opções Request Changes / Continue to Next Stage — sem código gerado em portal-web/
+**Context**: Aguardando resposta do usuário para Part 2
+
+---

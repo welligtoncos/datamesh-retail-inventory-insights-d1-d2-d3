@@ -429,7 +429,7 @@
 - **Como** plataforma AWS (P4)  
 - **Quero** ver estado do alarme SFN e saúde da API na home  
 - **Para** saber se a esteira falhou sem abrir console AWS  
-- **Status:** backlog · **Onda:** W7 · **Depende:** E8-US09, E7-US02
+- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US09, E7-US02
 
 **Critérios de aceite:**
 - [ ] `GET /ops/alarms` retorna estado OK/ALARM do alarme SFN
