@@ -33,6 +33,14 @@ export class AuthService {
     return claims?.['email'] ?? null;
   }
 
+  getIdentityClaims(): Record<string, string> | null {
+    return (this.oauth.getIdentityClaims() as Record<string, string> | null) ?? null;
+  }
+
+  getUserSub(): string | null {
+    return this.getIdentityClaims()?.['sub'] ?? null;
+  }
+
   getAccessToken(): string | null {
     return this.oauth.getAccessToken() ?? null;
   }

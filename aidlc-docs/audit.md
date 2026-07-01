@@ -425,3 +425,19 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Aguardando aprovação usuário
 
 ---
+
+## W7 E8-US09 — Continue to Next Stage (Code Generation Part 2)
+**Timestamp**: 2026-06-30T23:40:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: E8-US09 Part 2 implementado — OperacoesPage, pipeline facade/mock, polling, banner deep-link, 94 specs, w7-us09-validate.ps1; plan steps 1-14 [x]
+**Context**: Aguardando checklist manual do usuário
+
+---
+
+## W7 E8-US09 — Checklist Manual OK + Commit Request
+**Timestamp**: 2026-06-30T24:00:00Z
+**User Input**: "marcar E8-US09 como done e preparar commit/push"
+**AI Response**: stories.md E8-US09 → done; plano step 15 [x]; commit feat(portal-web) E8-US09 + push
+**Context**: Story E8-US09 encerrada; próxima E8-US10
+
+---

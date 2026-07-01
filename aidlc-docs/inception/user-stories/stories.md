@@ -414,14 +414,14 @@
 - **Como** usuário autenticado  
 - **Quero** processar um `dt` e ver status da Step Function  
 - **Para** reprocessar dia sem script PowerShell  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US05, E4 (SFN)
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US05, E4 (SFN)
 
 **Critérios de aceite:**
-- [ ] `POST /pipeline/processar-dia` com body `{dt}` inicia SFN
-- [ ] UI mostra RUNNING / SUCCEEDED / FAILED
-- [ ] Histórico últimas 20 execuções (dt, duração, status)
-- [ ] Log de auditoria com `sub` Cognito + timestamp
-- [ ] Rastreabilidade: RF-M5-01..03, RF-M6-04, RF-API-12, RF-API-13
+- [x] `POST /pipeline/processar-dia` com body `{dt}` inicia SFN
+- [x] UI mostra RUNNING / SUCCEEDED / FAILED
+- [x] Histórico últimas 20 execuções (dt, duração, status)
+- [x] Log de auditoria com `sub` Cognito + timestamp
+- [x] Rastreabilidade: RF-M5-01..03, RF-M6-04, RF-API-12, RF-API-13
 
 ---
 

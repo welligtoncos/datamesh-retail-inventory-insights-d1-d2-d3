@@ -3,12 +3,11 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-insight-missing-partition-banner',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, RouterLink],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, RouterLink],
   template: `
     <mat-card class="missing-card" appearance="outlined">
       <mat-card-content>
@@ -21,8 +20,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
             </p>
             <a
               mat-stroked-button
-              routerLink="/operacoes"
-              matTooltip="Disparo do pipeline estará disponível em E8-US09"
+              [routerLink]="['/operacoes']"
+              [queryParams]="{ dt: dt() }"
             >
               Ir para Operações
             </a>

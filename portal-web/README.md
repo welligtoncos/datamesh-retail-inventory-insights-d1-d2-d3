@@ -1,8 +1,8 @@
-# Portal Web · Datamesh W7 (E8-US02 … E8-US08)
+# Portal Web · Datamesh W7 (E8-US02 … E8-US09)
 
 
 
-Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3) e **Insights D-1/D-2/D-3** (M4).
+Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulos **Insumos** (M1), **Origem** (M2), **Enriquecido** (M3), **Insights D-1/D-2/D-3** (M4) e **Operações** (M5 pipeline).
 
 
 
@@ -96,6 +96,7 @@ Na raiz do repositório:
 
 .\scripts\w7-us07-validate.ps1   # insight D-1 ranking + download M4
 .\scripts\w7-us08-validate.ps1   # insights D-2 ruptura + D-3 tendencia M4
+.\scripts\w7-us09-validate.ps1   # operacoes pipeline SFN M5
 
 ```
 
@@ -152,6 +153,8 @@ Na raiz do repositório:
 | `/insights/d2`           | AuthGuard | Dashboard D-2 ruptura + venda perdida M4 |
 
 | `/insights/d3`           | AuthGuard | Dashboard D-3 tendência janela N M4 |
+
+| `/operacoes`             | AuthGuard | Disparo pipeline SFN + histórico M5 |
 
 
 
