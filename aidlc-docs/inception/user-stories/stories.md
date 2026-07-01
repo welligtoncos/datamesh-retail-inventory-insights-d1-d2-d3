@@ -353,14 +353,14 @@
 - **Como** engenheiro de dados (P2)  
 - **Quero** calendário de `origem/dt=` e preview do Parquet  
 - **Para** validar extração diária antes do enriquecimento  
-- **Status:** in_progress · **Onda:** W7 · **Depende:** E8-US04
+- **Status:** done · **Onda:** W7 · **Depende:** E8-US04
 
 **Critérios de aceite:**
-- [ ] `GET /origem/partitions` lista prefixos `dt=YYYY-MM-DD`
-- [ ] `GET /origem/{dt}/preview` retorna ≤ 500 linhas paginadas
-- [ ] Detalhe: row count, lojas e produtos distintos
-- [ ] Indicador visual para `dt` sem partição
-- [ ] Rastreabilidade: RF-M2-01..04, RF-API-04, RF-API-05
+- [x] `GET /origem/partitions` lista prefixos `dt=YYYY-MM-DD`
+- [x] `GET /origem/{dt}/preview` retorna ≤ 500 linhas paginadas
+- [x] Detalhe: row count, lojas e produtos distintos
+- [x] Indicador visual para `dt` sem partição
+- [x] Rastreabilidade: RF-M2-01..04, RF-API-04, RF-API-05
 
 ---
 

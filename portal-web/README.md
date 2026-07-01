@@ -1,6 +1,6 @@
-# Portal Web · Datamesh W7 (E8-US02 + E8-US03 + E8-US04)
+# Portal Web · Datamesh W7 (E8-US02 + E8-US03 + E8-US04 + E8-US05)
 
-Angular SPA com autenticação **Amazon Cognito**, **app shell** e módulo **Insumos** (M1).
+Angular SPA com autenticação **Amazon Cognito**, **app shell**, módulo **Insumos** (M1) e **Origem** (M2).
 
 ## Pré-requisitos
 
@@ -16,7 +16,7 @@ npm ci
 npm start
 ```
 
-Abra http://localhost:4200 — callback Cognito registrado: `http://localhost:4200/`
+Abra [http://localhost:4200](http://localhost:4200) — callback Cognito registrado: `http://localhost:4200/`
 
 ## Build
 
@@ -31,8 +31,10 @@ Artefatos em `dist/portal-web/browser/`.
 Na raiz do repositório:
 
 ```powershell
-.\scripts\w7-deploy-portal-web.ps1
+
 ```
+
+
 
 ## Validação
 
@@ -40,28 +42,41 @@ Na raiz do repositório:
 .\scripts\w7-us02-validate.ps1   # auth Cognito
 .\scripts\w7-us03-validate.ps1   # shell + home dashboard
 .\scripts\w7-us04-validate.ps1   # listar insumos M1
+.\scripts\w7-us05-validate.ps1   # particoes origem + preview M2
 ```
+
+
 
 ## Configuração
 
-| Arquivo | Uso |
-|---------|-----|
-| `src/environments/environment.ts` | Local (`ng serve`) |
-| `src/environments/environment.production.ts` | CloudFront build |
+
+| Arquivo                                      | Uso                |
+| -------------------------------------------- | ------------------ |
+| `src/environments/environment.ts`            | Local (`ng serve`) |
+| `src/environments/environment.production.ts` | CloudFront build   |
+
+
+
 
 ## Rotas
 
-| Rota | Proteção | Descrição |
-|------|----------|-----------|
-| `/login` | Pública | Login Cognito |
-| `/home` | AuthGuard | Home dashboard (KPIs + atalhos) |
-| `/insumos` | AuthGuard | Tabela arquivos S3 `insumo/` |
-| `/origem` … `/operacoes` | AuthGuard | Placeholder até E8-US05+ |
-| `/insights/d1` … `d3` | AuthGuard | Placeholder insights |
+
+| Rota                     | Proteção  | Descrição                       |
+| ------------------------ | --------- | ------------------------------- |
+| `/login`                 | Pública   | Login Cognito                   |
+| `/home`                  | AuthGuard | Home dashboard (KPIs + atalhos) |
+| `/insumos`               | AuthGuard | Tabela arquivos S3 `insumo/`    |
+| `/origem`                | AuthGuard | Partições origem + preview M2 |
+| `/enriquecido` …         | AuthGuard | Placeholder até E8-US06+        |
+| `/insights/d1` … `d3`    | AuthGuard | Placeholder insights            |
+
+
+
 
 ## Stack
 
 - Angular 19 · Angular Material · CDK Layout
 - `angular-oauth2-oidc` 19
 - JWT via `authInterceptor` → API Gateway BFF
-- `GET /health` público (badge); KPIs e insumos mock até E8-US12 (FastAPI BFF)
+- `GET /health` público (badge); KPIs, insumos e origem mock até E8-US12 (FastAPI BFF)
+

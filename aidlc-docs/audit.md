@@ -313,3 +313,11 @@ Não implementar prod/multi-ambiente ainda."
 **Context**: Code Generation Part 1 — aguardando aprovação explícita do usuário
 
 ---
+
+## W7 E8-US05 — Done + Commit
+**Timestamp**: 2026-06-30T22:45:00Z
+**User Input**: "o Step 15 marca E8-US05 como done em stories.md. e faça  commit/push detalhado dessa feature"
+**AI Response**: stories.md E8-US05 → done; plano step 15 [x]; aidlc-state atualizado; commit/push feature origem M2 portal-web
+**Context**: Code Generation Part 2 concluído; checklist manual confirmado pelo usuário
+
+---

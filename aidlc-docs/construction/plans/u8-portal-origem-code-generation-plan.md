@@ -2,7 +2,7 @@
 
 **Stories:** E8-US05  
 **Unit:** U8-Portal-Web  
-**Status:** Part 1 — aguardando aprovação  
+**Status:** Part 2 — concluído (E8-US05 done)  
 **Data:** 2026-06-30
 
 ---
@@ -10,7 +10,7 @@
 ## Unit Context
 
 - Brownfield: `portal-web/` com insumos E8-US04 (commit `da40b09`)
-- Rota `/origem` = `PlaceholderPageComponent`
+- Rota `/origem` = `OrigemPageComponent`
 - Mock: `dt=2022-01-01`, 100 rows, 15 cols SCHEMA
 - Design: `aidlc-docs/construction/u8-portal-web/origem/`
 
@@ -18,21 +18,21 @@
 
 ## Steps (Part 2 — após aprovação)
 
-- [ ] Step 1: Criar `core/api/models/origem.model.ts`
-- [ ] Step 2: Criar `core/api/data/origem-mock.data.ts` (partitions + preview sintético)
-- [ ] Step 3: Implementar `OrigemApiService` (partitions + preview com query params)
-- [ ] Step 4: Implementar `OrigemFacadeService` (API + mock fallback)
-- [ ] Step 5: Criar `origem-partition.util.ts` (sort, normalize dt)
-- [ ] Step 6: Criar `OrigemPartitionsPanelComponent` + `OrigemMissingDtChipComponent`
-- [ ] Step 7: Criar `OrigemPartitionDetailComponent` (3 KPI cards)
-- [ ] Step 8: Criar `OrigemPreviewTableComponent` (mat-table + mat-paginator)
-- [ ] Step 9: Criar `OrigemPageComponent` (layout master-detail + estados)
-- [ ] Step 10: Atualizar `app.routes.ts` — `/origem` → `OrigemPageComponent`
-- [ ] Step 11: `MatPaginatorIntl` PT-BR (opcional provider)
-- [ ] Step 12: Unit tests — facade, partition util, preview cap 500
-- [ ] Step 13: `scripts/w7-us05-validate.ps1`
-- [ ] Step 14: Atualizar `portal-web/README.md` e `origem/code-summary.md`
-- [ ] Step 15: Atualizar `stories.md` E8-US05 → `done` após checklist manual
+- [x] Step 1: Criar `core/api/models/origem.model.ts`
+- [x] Step 2: Criar `core/api/data/origem-mock.data.ts` (partitions + preview sintético)
+- [x] Step 3: Implementar `OrigemApiService` (partitions + preview com query params)
+- [x] Step 4: Implementar `OrigemFacadeService` (API + mock fallback)
+- [x] Step 5: Criar `origem-partition.util.ts` (sort, normalize dt)
+- [x] Step 6: Criar `OrigemPartitionsPanelComponent` + `OrigemMissingDtChipComponent`
+- [x] Step 7: Criar `OrigemPartitionDetailComponent` (3 KPI cards)
+- [x] Step 8: Criar `OrigemPreviewTableComponent` (mat-table + mat-paginator)
+- [x] Step 9: Criar `OrigemPageComponent` (layout master-detail + estados)
+- [x] Step 10: Atualizar `app.routes.ts` — `/origem` → `OrigemPageComponent`
+- [x] Step 11: `MatPaginatorIntl` PT-BR (opcional provider)
+- [x] Step 12: Unit tests — facade, partition util, preview cap 500
+- [x] Step 13: `scripts/w7-us05-validate.ps1`
+- [x] Step 14: Atualizar `portal-web/README.md` e `origem/code-summary.md`
+- [x] Step 15: Atualizar `stories.md` E8-US05 → `done` após checklist manual
 
 ---
 

@@ -6,9 +6,12 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 
+import { MatPaginatorIntl } from '@angular/material/paginator';
+
 import { routes } from './app.routes';
 import { AuthService } from './core/auth/auth.service';
 import { authInterceptor } from './core/auth/auth.interceptor';
+import { providePtBrMatPaginatorIntl } from './shared/i18n/mat-paginator-intl.pt-br';
 
 registerLocaleData(localePt);
 
@@ -24,6 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideOAuthClient(),
     provideAnimationsAsync(),
     { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: MatPaginatorIntl, useFactory: providePtBrMatPaginatorIntl },
     {
       provide: APP_INITIALIZER,
       useFactory: initAuth,

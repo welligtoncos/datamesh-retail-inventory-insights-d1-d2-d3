@@ -5,6 +5,7 @@ import { AppShellComponent } from './layout/app-shell/app-shell.component';
 import { PlaceholderPageComponent } from './layout/placeholder-page/placeholder-page.component';
 import { HomeDashboardComponent } from './features/home/home-dashboard.component';
 import { InsumosListComponent } from './features/insumos/insumos-list.component';
+import { OrigemPageComponent } from './features/origem/origem-page.component';
 import { LoginComponent } from './features/login/login.component';
 
 export const routes: Routes = [
@@ -16,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeDashboardComponent },
       { path: 'insumos', component: InsumosListComponent },
-      { path: 'origem', component: PlaceholderPageComponent, data: { title: 'Origem' } },
+      { path: 'origem', component: OrigemPageComponent },
       { path: 'enriquecido', component: PlaceholderPageComponent, data: { title: 'Enriquecido' } },
       { path: 'insights/d1', component: PlaceholderPageComponent, data: { title: 'Insight D-1 Comercial' } },
       { path: 'insights/d2', component: PlaceholderPageComponent, data: { title: 'Insight D-2 Ruptura' } },
